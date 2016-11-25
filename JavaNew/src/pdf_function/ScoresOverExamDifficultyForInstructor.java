@@ -42,14 +42,22 @@ public class ScoresOverExamDifficultyForInstructor extends Application {
  @Override
     public void start(Stage primaryStage) throws Exception {
         BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
-        Random rng = new Random();
-        Series<String, Number> series = new Series<>();
-        series.setName("Scores over difficulty");
-        series.getData().add(new XYChart.Data<>("easy", rng.nextDouble()));
-        series.getData().add(new XYChart.Data<>("Medium", rng.nextDouble()));
-        series.getData().add(new XYChart.Data<>("Hard", rng.nextDouble()));
-        series.getData().add(new XYChart.Data<>("Mix", rng.nextDouble()));
-        chart.getData().add(series);
+       DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
+        int[] array=new int[8];
+       array=resultDao.getScoreOverDiffLevel();
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series1.setName("highest and lowest scores over deifficulty level ");
+            series1.getData().add(new XYChart.Data<>("Easy", array[0]));
+            series1.getData().add(new XYChart.Data<>("Medium", array[1]));
+            series1.getData().add(new XYChart.Data<>("Hard",array[2]));
+            series1.getData().add(new XYChart.Data<>("Mix",array[3]));
+        //series2.setName("Pass and Fail during the last month,last quarter and over the last year");
+            series2.getData().add(new XYChart.Data<>("Easy", array[4]));
+            series2.getData().add(new XYChart.Data<>("Medium", array[5]));
+            series1.getData().add(new XYChart.Data<>("Hard",array[6]));
+            series2.getData().add(new XYChart.Data<>("Mix",array[7]));
+        chart.getData().addAll(series1,series2);
 
         Button save = new Button("Save to pdf");
         FileChooser chooser = new FileChooser();
