@@ -37,15 +37,23 @@ public class PassAndFail extends Application {
 
      @Override
     public void start(Stage primaryStage) throws Exception {
-        BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
-        Random rng = new Random();
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Pass and Fail during the last month,last quarter and over the last year");
-            series.getData().add(new XYChart.Data<>("Last month", rng.nextDouble()));
-            series.getData().add(new XYChart.Data<>("Last quater", rng.nextDouble()));
-            series.getData().add(new XYChart.Data<>("Last year", rng.nextDouble()));
         
-        chart.getData().add(series);
+        BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
+        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
+        int[] array=new int[6];
+       array=resultDao.getPassandFall();
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series1.setName("Pass and Fail during the last month,last quarter and over the last year");
+            series1.getData().add(new XYChart.Data<>("Last month", array[0]));
+            series1.getData().add(new XYChart.Data<>("Last quater", array[2]));
+            series1.getData().add(new XYChart.Data<>("Last year",array[4]));
+        //series2.setName("Pass and Fail during the last month,last quarter and over the last year");
+            series2.getData().add(new XYChart.Data<>("Last month", array[1]));
+            series2.getData().add(new XYChart.Data<>("Last quater", array[3]));
+            series2.getData().add(new XYChart.Data<>("Last year",array[5]));
+        
+        chart.getData().addAll(series1,series2);
 
         Button save = new Button("Save to pdf");
         FileChooser chooser = new FileChooser();

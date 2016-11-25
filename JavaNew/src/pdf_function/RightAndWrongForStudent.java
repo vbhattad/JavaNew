@@ -47,13 +47,16 @@ public class RightAndWrongForStudent extends Application {
  @Override
     public void start(Stage primaryStage) throws Exception {
         DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
-        resultDao.getRightandWrong("10");
+       int[] array=new int[2];
+       array=resultDao.getRightandWrong("2");
         BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
-        Random rng = new Random();
         Series<String, Number> series = new Series<>();
         series.setName("right and wrong numbers");
-        series.getData().add(new XYChart.Data<>("right", rng.nextDouble()));
-        series.getData().add(new XYChart.Data<>("wrong", rng.nextDouble()));
+        series.getData().add(new XYChart.Data<>("right",array[0]));
+        series.getData().add(new XYChart.Data<>("wrong", array[1]));
+        //System.out.print(array[0]);
+         //System.out.print(array[1]);
+        
         
         chart.getData().add(series);
 
