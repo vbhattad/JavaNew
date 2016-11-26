@@ -17,9 +17,9 @@ public class UserSignUp {
     People user;
     PeopleDAOImpl dao;
     
-    public void addUser(String firstName, String lastName, String password, String andrewId,char userType) {
+    public boolean addUser(String firstName, String lastName, String password, String andrewId,char userType) {
         user = new People(firstName, lastName, password, andrewId, userType);
-        dao.addUser(user);
+        return dao.addUser(user);
     }
     
 }

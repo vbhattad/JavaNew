@@ -37,8 +37,10 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
         return user;
     }
     
-    public void addUser(People user){
-    // addd user to DB
+    public boolean addUser(People user){
+    // add user to DB
+    // return true if success; false if user already present
+    return true;
     }
 
     @Override
