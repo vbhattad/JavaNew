@@ -5,24 +5,37 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author katha
  */
 public class Question {
 
-    public Question(String questionType, char difficulty, String questionDesc, String options) {
+    public Question(String questionType, char difficulty, String questionDesc, ArrayList<AnswerOption> optionList) {
         this.questionType = questionType;
         this.difficulty = difficulty;
         this.questionDesc = questionDesc;
-        this.options = options;
+        this.optionList = optionList;
     }
 
     private String questionType;
     private char difficulty;
     private String questionDesc;
-    private char iscorrect;
+    private boolean iscorrect;
+    private boolean isAnswered;
     private String options;
+    private ArrayList<AnswerOption> optionList;
+    
+    public boolean getIsAnswered() {
+        return isAnswered;
+    }
+
+    public void setIsAnswered(boolean isAnswered) {
+        this.isAnswered = isAnswered;
+    }
+    
 
     public String getQuestionType() {
         return questionType;
@@ -49,11 +62,11 @@ public class Question {
     }
 
   
-    public char getIscorrect() {
+    public boolean getIscorrect() {
         return iscorrect;
     }
 
-    public void setIscorrect(char iscorrect) {
+    public void setIscorrect(boolean iscorrect) {
         this.iscorrect = iscorrect;
     }
 
@@ -64,9 +77,15 @@ public class Question {
     public void setOptions(String options) {
         this.options = options;
     }
+
+
+    public ArrayList<AnswerOption> getOptionList() {
+        return optionList;
+    }
+
+    public void setOptionList(ArrayList<AnswerOption> optionList) {
+        this.optionList = optionList;
+    }
 }
 
-class Option{
-String optionDesc;
-boolean isCorrect;
-}
+
