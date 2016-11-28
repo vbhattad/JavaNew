@@ -6,7 +6,6 @@
 package DAO;
 
 import Model.People;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,7 +57,7 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
         return user;
     }
     
-    public boolean addUser(People user) throws NoSuchAlgorithmException{
+    public boolean addUser(People user) {
     // add user to DB
     // return true if success; false if user already present
         String andrewID = user.getAndrewId();
