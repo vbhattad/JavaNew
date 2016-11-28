@@ -5,6 +5,7 @@
  */
 package StudentQuizTest;
 
+import DAO.ResultDAOImpl;
 import Model.Question;
 import Model.AnswerOption;
 import Model.Result;
@@ -374,28 +375,9 @@ public class QuizTest extends Application {
         2. move to student dashboard
         3. show graph for quiz performance
          */
-
-      String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        String insertResult = "INSERT INTO TABLE Quizapp.Result VALUES ('" + quizResult.getAndrewId() + "','" +
-                                                                             quizResult.getNoOfCorrectEasy() + "','" +
-                                                                             quizResult.getNoOfCorrectMedium() + "','" +
-                                                                             quizResult.getTotalNoOfHard() + "','" +
-                                                                             quizResult.getTotalNoOfEasy() + "','" +
-                                                                             quizResult.getTotalNoOfMedium() + "','" +
-                                                                             quizResult.getTotalNoOfHard() + "','" +
-                                                                             timeStamp + "'," +
-                                                                             quizResult.getGrade() + ",'" +
-                                                                             quizResult.getDifficultyLevel() + "','" +
-                                                                             quizResult.getScore() + ")" ;
-        
-       
-//        try {
-//            Connection connect = DriverManager.getConnection(url); //Create connection
-//            Statement statement = connect.createStatement(); //Connect to DB
-//            statement.executeQuery(insertResult);
-//         }catch (SQLException e){
-//             System.out.println("SQL Exception: " +e);
-//         }
+        ResultDAOImpl res = new ResultDAOImpl();
+        res.insertResults(quizResult);
+      
                                                                              
     }
 

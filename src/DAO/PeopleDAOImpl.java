@@ -6,8 +6,7 @@
 package DAO;
 
 import Model.People;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -59,7 +58,7 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
         return user;
     }
     
-    public boolean addUser(People user){
+    public boolean addUser(People user) throws NoSuchAlgorithmException{
     // add user to DB
     // return true if success; false if user already present
         String andrewID = user.getAndrewId();
@@ -73,14 +72,14 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
            }else{
                String firstname = user.getFirstName();
                String lastname = user.getLastName();
-               String password = user.getPassword();
-               char memberType = user.getMemberType();
-               char courseType = user.getCourseType();
-               String insertQuery = "INSERT INTO QUIZAPP.PEOPLE VALUES ('" + andrewID + "','" + firstname + "','" + lastname + "','" + password
-                       + "','" + memberType + "','" + courseType + "')";
-               statement.execute(insertQuery);
-                       }
-        }catch(SQLException e){
+                String password = user.getPassword();
+                char memberType = user.getMemberType();
+                char courseType = user.getCourseType();
+                String insertQuery = "INSERT INTO QUIZAPP.PEOPLE VALUES ('" + andrewID + "','" + firstname + "','" + lastname + "','" + password
+                        + "','" + memberType + "','" + courseType + "')";
+                statement.execute(insertQuery);
+            }
+        } catch (SQLException e) {
             System.out.println("SQL Exception" + e);
         }
     return true;

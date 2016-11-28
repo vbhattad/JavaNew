@@ -5,12 +5,17 @@
  */
 package DAO;
 
+import Model.Result;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 /**
  *
@@ -286,5 +291,29 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         String decrementedDate = (year - yearDecrement) + "-" + (month - monthDecrement) + "-" + day + " " + split[1];
 
         return decrementedDate;
+    }
+
+    public void insertResults(Result quizResult) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        String insertResult = "INSERT INTO TABLE Quizapp.Result VALUES ('" + quizResult.getAndrewId() + "','" +
+                                                                             quizResult.getNoOfCorrectEasy() + "','" +
+                                                                             quizResult.getNoOfCorrectMedium() + "','" +
+                                                                             quizResult.getTotalNoOfHard() + "','" +
+                                                                             quizResult.getTotalNoOfEasy() + "','" +
+                                                                             quizResult.getTotalNoOfMedium() + "','" +
+                                                                             quizResult.getTotalNoOfHard() + "','" +
+                                                                             timeStamp + "'," +
+                                                                             quizResult.getGrade() + ",'" +
+                                                                             quizResult.getDifficultyLevel() + "','" +
+                                                                             quizResult.getScore() + ")" ;
+        
+       
+        try {
+           // Connection connect = DriverManager.getConnection(url); //Create connection
+            Statement statement = con.createStatement(); //Connect to DB
+            statement.executeQuery(insertResult);
+         }catch (SQLException e){
+             System.out.println("SQL Exception: " +e);
+         }
     }
 }
