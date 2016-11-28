@@ -22,7 +22,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
     public void createTable() {
         try (Statement stmt = con.createStatement()) {
             String query = "create table Result("
-                    + "andrewid varchar(255) NOT NULL PRIMARY KEY,"
+                    + "andrewid varchar(255) NOT NULL,"
                     + "CorrectEasy int,"
                     + "CorrectMedium int,"
                     + "CorrectHard int,"

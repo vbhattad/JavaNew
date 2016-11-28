@@ -17,7 +17,7 @@ public abstract class DAOJDBCImpl implements ICommonDAO {
     Connection con = null;
 
     public DAOJDBCImpl() {
-        String url = "jdbc:mysql://javaproject.cafk9dtwufvd.us-west-2.rds.amazonaws.com:3306/java_project";
+        String url = "jdbc:mysql://java.cvxefrn7yc6n.us-west-2.rds.amazonaws.com:3306/quizapp";
         String username = "admin";
         String password = "admin123";
         try {

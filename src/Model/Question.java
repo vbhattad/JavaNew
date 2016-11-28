@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Question {
 
-    public Question(String questionType, char difficulty, String questionDesc, ArrayList<AnswerOption> optionList) {
+    public Question(String questionType, String difficulty, String questionDesc, ArrayList<AnswerOption> optionList) {
         this.questionType = questionType;
         this.difficulty = difficulty;
         this.questionDesc = questionDesc;
@@ -21,7 +21,7 @@ public class Question {
     }
 
     private String questionType;
-    private char difficulty;
+    private String difficulty;
     private String questionDesc;
     private boolean iscorrect;
     private boolean isAnswered;
@@ -45,11 +45,11 @@ public class Question {
         this.questionType = questionType;
     }
 
-    public char getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(char difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 

@@ -8,7 +8,15 @@ package StudentQuizTest;
 import Model.Question;
 import Model.AnswerOption;
 import Model.Result;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,19 +61,19 @@ public class QuizTest extends Application {
         optionlist.add(new AnswerOption("option2", true));
         optionlist.add(new AnswerOption("option3", false));
         optionlist.add(new AnswerOption("option4", false));
-        questionlist.add(new Question("MC", 'H', "Que1", optionlist));
+        questionlist.add(new Question("MC", "H", "Que1", optionlist));
         optionlist = new ArrayList<>();
         optionlist.add(new AnswerOption("option1", true));
         optionlist.add(new AnswerOption("option2", true));
         optionlist.add(new AnswerOption("option3", false));
-        questionlist.add(new Question("MA", 'H', "Que2", optionlist));
+        questionlist.add(new Question("MA", "H", "Que2", optionlist));
         optionlist = new ArrayList<>();
         optionlist.add(new AnswerOption("option", true));
-        questionlist.add(new Question("FIB", 'H', "Que3", optionlist));
+        questionlist.add(new Question("FIB", "H", "Que3", optionlist));
         optionlist = new ArrayList<>();
         optionlist.add(new AnswerOption("option1", true));
         optionlist.add(new AnswerOption("option2", false));
-        questionlist.add(new Question("TF", 'H', "Que4", optionlist));
+        questionlist.add(new Question("TF", "H", "Que4", optionlist));
         return questionlist;
     }
 
@@ -343,16 +351,16 @@ public class QuizTest extends Application {
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
             case "Mix":
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == 'E').count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == 'E').count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == 'M').count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == 'E').count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "M").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == 'H').count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == 'E').count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "H").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
@@ -366,6 +374,29 @@ public class QuizTest extends Application {
         2. move to student dashboard
         3. show graph for quiz performance
          */
+
+      String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        String insertResult = "INSERT INTO TABLE Quizapp.Result VALUES ('" + quizResult.getAndrewId() + "','" +
+                                                                             quizResult.getNoOfCorrectEasy() + "','" +
+                                                                             quizResult.getNoOfCorrectMedium() + "','" +
+                                                                             quizResult.getTotalNoOfHard() + "','" +
+                                                                             quizResult.getTotalNoOfEasy() + "','" +
+                                                                             quizResult.getTotalNoOfMedium() + "','" +
+                                                                             quizResult.getTotalNoOfHard() + "','" +
+                                                                             timeStamp + "'," +
+                                                                             quizResult.getGrade() + ",'" +
+                                                                             quizResult.getDifficultyLevel() + "','" +
+                                                                             quizResult.getScore() + ")" ;
+        
+       
+//        try {
+//            Connection connect = DriverManager.getConnection(url); //Create connection
+//            Statement statement = connect.createStatement(); //Connect to DB
+//            statement.executeQuery(insertResult);
+//         }catch (SQLException e){
+//             System.out.println("SQL Exception: " +e);
+//         }
+                                                                             
     }
 
     void calculateGrade() {
