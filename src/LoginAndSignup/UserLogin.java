@@ -17,14 +17,9 @@ public class UserLogin {
     People user;
     PeopleDAOImpl dao;
 
-    public char authenticateUser(String username, String password) {
+    public People authenticateUser(String username, String password) {
         user = dao.authenticateUser(username, password); // check DB for user credentials
-        char memberType = 'I'; // I is for Invalid Member
-        if (!user.getAndrewId().isEmpty()) { // If andrew id is empty, authentication failed
-            // Aunthentication successful. 
-            memberType = user.getMemberType();
-        }
-        return memberType;
+        return user;
     }
     
     

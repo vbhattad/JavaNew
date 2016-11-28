@@ -34,11 +34,14 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
     public People authenticateUser(String username, String password) {
         People user = new People();
         // Insert Query
+        
         return user;
     }
     
-    public void addUser(People user){
-    // addd user to DB
+    public boolean addUser(People user){
+    // add user to DB
+    // return true if success; false if user already present
+    return true;
     }
 
     @Override
