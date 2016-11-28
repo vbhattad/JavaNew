@@ -34,6 +34,7 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
     public People authenticateUser(String username, String password) {
         People user = new People();
         // Insert Query
+        
         return user;
     }
     
