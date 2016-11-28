@@ -15,7 +15,7 @@ import DAO.PeopleDAOImpl;
 public class UserLogin {
 
     People user;
-    PeopleDAOImpl dao;
+    PeopleDAOImpl dao = new PeopleDAOImpl();
 
     public People authenticateUser(String username, String password) {
         user = dao.authenticateUser(username, password); // check DB for user credentials

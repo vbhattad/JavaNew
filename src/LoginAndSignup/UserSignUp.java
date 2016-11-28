@@ -15,10 +15,11 @@ import DAO.PeopleDAOImpl;
 public class UserSignUp {
     
     People user;
-    PeopleDAOImpl dao;
+    PeopleDAOImpl dao = new PeopleDAOImpl();
     
     public boolean addUser(String firstName, String lastName, String password, String andrewId,char userType) {
         user = new People(firstName, lastName, password, andrewId, userType);
+        System.out.println("Here! UserSignUp");
         return dao.addUser(user);
     }
     

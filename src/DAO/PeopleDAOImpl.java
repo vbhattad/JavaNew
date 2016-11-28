@@ -35,19 +35,23 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
 
     public People authenticateUser(String username, String password) {
         People user = new People();
+        System.out.println("Here!" + username);
         String query = "SELECT * FROM PEOPLE WHERE andrewid = '" + username + "'";
         try {
             //Connection connect = DriverManager.getConnection(url); //Create connection
             Statement statement = con.createStatement(); //Connect to DB
             ResultSet rs = statement.executeQuery(query);
-            while(rs.next()){
-                if(password == rs.getString("password")){
+            
+            if(rs.next()){
+                System.out.println(rs.getString("password"));
+                if(password.equals(rs.getString("password"))){
+                    
                     user.setAndrewId(rs.getString("andrewid"));
                     user.setFirstName(rs.getString("firstname"));
                     user.setLastName(rs.getString("lastname"));
                     user.setPassword(rs.getString("password"));
                     user.setMemberType(rs.getString("membertype").charAt(0));
-                    
+                    System.out.println(user.getAndrewId());
                 }
             }
         }catch(SQLException e){
@@ -60,7 +64,9 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
     public boolean addUser(People user) {
     // add user to DB
     // return true if success; false if user already present
+        
         String andrewID = user.getAndrewId();
+        System.out.println("Here!" + andrewID);
         String query = "SELECT * from quizapp.PEOPLE where andrewid = '" + andrewID + "'";
         try {
             //Connection connect = DriverManager.getConnection(url); //Create connection
@@ -74,7 +80,7 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
                 String password = user.getPassword();
                 char memberType = user.getMemberType();
                 char courseType = user.getCourseType();
-                String insertQuery = "INSERT INTO QUIZAPP.PEOPLE VALUES ('" + andrewID + "','" + firstname + "','" + lastname + "','" + password
+                String insertQuery = "INSERT INTO PEOPLE VALUES ('" + andrewID + "','" + firstname + "','" + lastname + "','" + password
                         + "','" + memberType + "','" + courseType + "')";
                 statement.execute(insertQuery);
             }

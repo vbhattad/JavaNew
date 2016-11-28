@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 28, 2016, 12:39:03 AM
+    Author     : darshanmohan
+*/
+
+.anchorpane {
+    -fx-background-color: whitesmoke;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: black;
+    -fx-opacity: 0.8;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-color: dimgray;
+    -fx-opacity: 0.8;
+    
+
+}
+
+.tab .tab-label { 
+    -fx-text-fill: darkgray;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:605px;
+    -fx-tab-min-height: 600px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: whitesmoke;
+}
+
+.Tab {
+    
+}

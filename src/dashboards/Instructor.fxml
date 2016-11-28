@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Add Quiz">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField layoutX="226.0" layoutY="279.0" prefHeight="77.0" prefWidth="842.0" promptText="Supports .csv files" style="-fx-background-radius: 10 10 10 10;">
+                     <font>
+                        <Font name="Helvetica Neue Light" size="36.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="425.0" layoutY="190.0" prefHeight="86.0" prefWidth="465.0" text="Add a file from your computer" textAlignment="CENTER">
+                     <font>
+                        <Font name="Helvetica Neue Light" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="808.0" layoutY="279.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Browse" textFill="WHITE">
+                     <font>
+                        <Font name="Helvetica Neue" size="36.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="428.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Media/File_Added.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="510.0" layoutY="555.0" text="File added successfully.">
+                     <font>
+                        <Font name="Helvetica Neue UltraLight" size="41.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="585.0" layoutY="419.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="Helvetica Neue" size="36.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="440.0" layoutY="39.0" text="Welcome, Murli">
+                     <font>
+                        <Font name="Helvetica Neue Light" size="64.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Graphs">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <BarChart layoutX="131.0" layoutY="53.0" prefHeight="296.0" prefWidth="483.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <BarChart layoutX="131.0" layoutY="403.0" prefHeight="275.0" prefWidth="488.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+                  <BarChart layoutX="750.0" layoutY="58.0" prefHeight="297.0" prefWidth="469.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+                  <BarChart layoutX="752.0" layoutY="400.0" prefHeight="279.0" prefWidth="480.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

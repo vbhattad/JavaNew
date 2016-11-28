@@ -9,6 +9,7 @@ import DAO.ResultDAOImpl;
 import Model.Question;
 import Model.AnswerOption;
 import Model.Result;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -20,8 +21,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +34,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -94,6 +98,7 @@ public class QuizTest extends Application {
     static Button bNext = new Button("Next");
     static Button bPrevious = new Button("Previous");
 
+    static Button bEndQuiz = new Button("End Quiz");
     static Scene scene;
 
     @Override
@@ -115,6 +120,26 @@ public class QuizTest extends Application {
 
         hbButtons.setAlignment(Pos.CENTER);
         hbButtons.getChildren().addAll(bPrevious, bNext);
+        bEndQuiz.setOnAction(e -> {
+
+            AnchorPane page;
+            try {
+
+                page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Student.fxml"));
+                Scene scene = new Scene(page);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+
+        });
+
+        HBox endQuizBox = new HBox(85);
+        bEndQuiz.setAlignment(Pos.BASELINE_RIGHT);
+        endQuizBox.setAlignment(Pos.TOP_RIGHT);
+        endQuizBox.getChildren().add(bEndQuiz);
 
         displayQuestion(allQuestions.get(questionNumber));
 
@@ -122,7 +147,7 @@ public class QuizTest extends Application {
 
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.setPadding(new Insets(50, 50, 50, 50));
-
+        vbox.getChildren().add(endQuizBox);
         vbox.getChildren().addAll(question, options);
         vbox.getChildren().add(hbox);
         vbox.getChildren().add(hbButtons);
@@ -371,14 +396,13 @@ public class QuizTest extends Application {
         calculateGrade();
 
         /* Things to Implement
-        1. Insert code to save the quiz result in database
-        2. move to student dashboard
-        3. show graph for quiz performance
+         1. Insert code to save the quiz result in database
+         2. move to student dashboard
+         3. show graph for quiz performance
          */
         ResultDAOImpl res = new ResultDAOImpl();
         res.insertResults(quizResult);
-      
-                                                                             
+
     }
 
     void calculateGrade() {

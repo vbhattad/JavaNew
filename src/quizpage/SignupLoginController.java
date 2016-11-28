@@ -10,6 +10,7 @@ import StudentQuizTest.QuizTest;
 import LoginAndSignup.UserSignUp;
 import LoginAndSignup.UserLogin;
 import Model.People;
+import dashboards.StudentController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,11 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -93,16 +97,20 @@ public class SignupLoginController implements Initializable {
             String pass = pfTypePassword.getText();
             String repass = pfReTypePassword.getText();
             String andrewId = tfAndrewID.getText();
+            System.out.println(fName.length());
             boolean isSuccess = true;
             if (fName.trim().isEmpty() || lName.trim().isEmpty() || pass.trim().isEmpty() || repass.trim().isEmpty() || andrewId.trim().isEmpty()) {
+                System.out.println(fName);
                 lblSignupWarning.setText("* All the fields are required");
             } else if (!pass.equals(repass)) {
                 lblSignupWarning.setText("* The passwords do not match");
             } else {
-                isSuccess = objsignup.addUser(tfFirstname.getText(), tfLastname.getText(), pfPassword.getText(), tfAndrewID.getText(), 'S');
+                isSuccess = objsignup.addUser(tfFirstname.getText(), tfLastname.getText(), pfTypePassword.getText(), tfAndrewID.getText(), 'S');
                 if (isSuccess) {
+                    System.out.println("I got True from the DB");
                     // move to student dashboard
                 } else {
+                    System.out.println("I got false from the DB");
                     lblSignupWarning.setText("* The user is already present");
                 }
             }
@@ -126,12 +134,49 @@ public class SignupLoginController implements Initializable {
                 lblLoginWarning.setText("* All the fields are required");
             } else {
                 People user = objlogin.authenticateUser(userName, pass);
+                System.out.println(user.getAndrewId());
                 switch (user.getMemberType()) {
-                    case 'S': // move to student dash
-                    case 'A': // move to admin dashboard
-                        break;
-                    case 'F': // move to Faculty dashboard
-                        break;
+                    case 'S': {
+                        Stage stage = (Stage) btLogin.getScene().getWindow();
+                        AnchorPane page;
+                        try {
+                            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Student.fxml"));
+                            Scene scene = new Scene(page);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } break;
+                    case 'A': // move to admin dashboard{
+                    {
+                        Stage stage = (Stage) btLogin.getScene().getWindow();
+                        AnchorPane page;
+                        try {
+                            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Admin.fxml"));
+                            Scene scene = new Scene(page);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                } 
+                break;
+                    case 'F': {
+                            // move to Faculty dashboard
+                        Stage stage = (Stage) btLogin.getScene().getWindow();
+                        AnchorPane page;
+                        try {
+                            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
+                            Scene scene = new Scene(page);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
                     default:
                         lblLoginWarning.setText("* Invalid UserName/Password");
                         break;
