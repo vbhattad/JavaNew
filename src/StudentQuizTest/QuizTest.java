@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 import javafx.application.Application;
@@ -38,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import quizpage.SignupLoginController;
 
 /**
  *
@@ -51,9 +54,11 @@ public class QuizTest extends Application {
     ArrayList<Question> allQuestions;
     Result quizResult = new Result();
     int counter = 0;
+    private int totalNoOfQuestions;
 
     public void setAllQuestions(int totalQuestions, String diffLevel) {
         difficultyLevel = diffLevel;
+        totalNoOfQuestions = totalQuestions;
         DAO.QuestionDAOImpl dao = new DAO.QuestionDAOImpl();
         allQuestions = dao.getQuestions(totalQuestions, difficultyLevel);
         //allQuestions = getquestions();
@@ -384,6 +389,7 @@ public class QuizTest extends Application {
         int totalQuestions = allQuestions.size();
         int totalCorrect = 0;
         quizResult.setDifficultyLevel(difficultyLevel);
+        quizResult.setAndrewId(SignupLoginController.user.getAndrewId());
         switch (difficultyLevel.toLowerCase()) {
             case "easy":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
@@ -439,6 +445,42 @@ public class QuizTest extends Application {
         } else {
             quizResult.setGrade(1);
         }
+    }
+
+    int secUnit = 9;
+    int secTens = 5;
+    int minUnit = (totalNoOfQuestions % 10) - 1;
+    int minTens = totalNoOfQuestions / 10;
+    int i = totalNoOfQuestions * 60;
+
+    void setTimer() {
+
+        Timer otimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if (i == 0) {
+                    otimer.cancel();
+                } else {
+                    if (secUnit == -1) {
+                        secUnit = 9;
+                        secTens--;
+                    }
+                    if (secTens == -1) {
+                        secTens = 5;
+                        minUnit--;
+                    }
+                    if (minUnit == -1) {
+                        minUnit = 9;
+                        minTens--;
+                    }
+                    System.out.println(minTens + "" + minUnit + " : " + secTens + "" + secUnit);
+                    secUnit--;
+                    i--;
+                }
+            }
+        };
+        otimer.scheduleAtFixedRate(task, 0, 1000l);
     }
 
 }

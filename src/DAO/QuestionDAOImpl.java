@@ -7,6 +7,11 @@ package DAO;
 
 import Model.AnswerOption;
 import Model.Question;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,7 +19,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 /**
  *
@@ -43,22 +53,39 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
             System.out.println(se.toString());
         }
     }
+    
+    public void addQuestions(String filepath) throws FileNotFoundException, IOException {
+        System.out.println("Hello");
+           try(Statement stmt = con.createStatement()) {
+             Reader in = new FileReader(filepath); //Read from the CSV
+            Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+    
 
-    public void addQuestions(String filepath) {
-        String insertQuestions = "LOAD DATA INFILE '" + filepath + "'"
-                + "INTO TABLE questions"
-                + "FIELDS TERMINATED BY ','"
-                + "LINES TERMINATED BY '\\n'"
-                + "IGNORE 1 ROWS";
-
-        try {
-            // Connection connect = DriverManager.getConnection(url,username, password); //Create connection
-            Statement statement = con.createStatement(); //Connect to DB
-            statement.execute(insertQuestions);
-
-        } catch (SQLException e) {
-            System.out.println("SQL EXCEPTION : " + e);
-        }
+            System.out.println("Inside");
+            for (CSVRecord record : records) {
+                System.out.println("Inside1");
+                String query = "Insert into Question values ('" + record.get(0) + "' ,'" 
+                        + record.get(1) + "' ,'"
+                        + record.get(2) + "' ,'" 
+                        + record.get(3) + "' ,'" 
+                        + record.get(4) + "' ,'" 
+                        + record.get(5) + "' ,'" 
+                        + record.get(6) + "' ,'" 
+                        + record.get(7) + "' ,'" 
+                        + record.get(8) + "' ,'" 
+                        + record.get(9) + "' ,'" 
+                        + record.get(10) + "')";;
+                System.out.println(query);
+               stmt.execute(query);
+            }
+            System.out.println("Records inserted successfully!");
+           }catch(SQLException e){
+               System.out.println("SQL Exception" + e);
+           }
+        
+   
+       
+    
     }
 
     public ArrayList<Question> getQuestions(int totalQuestions, String difficultyLevel) {

@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -36,6 +37,8 @@ public class SignupLoginController implements Initializable {
 
     //private Quiz quiz;
     private QuizTest quiz = new QuizTest();
+    
+    public static People user;
 
     @FXML
     private Label label;
@@ -107,8 +110,7 @@ public class SignupLoginController implements Initializable {
             } else {
                 isSuccess = objsignup.addUser(tfFirstname.getText(), tfLastname.getText(), pfTypePassword.getText(), tfAndrewID.getText(), 'S');
                 if (isSuccess) {
-                    System.out.println("I got True from the DB");
-                    // move to student dashboard
+                    lblSignupWarning.setText("Sign Up Successful ! Please login to continue.");
                 } else {
                     System.out.println("I got false from the DB");
                     lblSignupWarning.setText("* The user is already present");
@@ -133,7 +135,7 @@ public class SignupLoginController implements Initializable {
             if (userName.trim().isEmpty() || pass.trim().isEmpty()) {
                 lblLoginWarning.setText("* All the fields are required");
             } else {
-                People user = objlogin.authenticateUser(userName, pass);
+                user = objlogin.authenticateUser(userName, pass);
                 System.out.println(user.getAndrewId());
                 switch (user.getMemberType()) {
                     case 'S': {
@@ -166,9 +168,9 @@ public class SignupLoginController implements Initializable {
                     case 'F': {
                             // move to Faculty dashboard
                         Stage stage = (Stage) btLogin.getScene().getWindow();
-                        AnchorPane page;
+                        TabPane page;
                         try {
-                            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
+                            page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
                             Scene scene = new Scene(page);
                             stage.setScene(scene);
                             stage.show();

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.InstructorController">
   <tabs>
     <Tab text="Add Quiz">
       <content>
@@ -25,7 +25,7 @@
                         <Font name="Helvetica Neue Light" size="36.0" />
                      </font>
                   </Label>
-                  <Button layoutX="808.0" layoutY="279.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Browse" textFill="WHITE">
+                  <Button fx:id="browse" layoutX="808.0" layoutY="279.0" mnemonicParsing="false" onAction="#browseFile" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Browse" textFill="WHITE">
                      <font>
                         <Font name="Helvetica Neue" size="36.0" />
                      </font>
@@ -40,7 +40,7 @@
                         <Font name="Helvetica Neue UltraLight" size="41.0" />
                      </font>
                   </Label>
-                  <Button layoutX="585.0" layoutY="419.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
+                  <Button fx:id="add" layoutX="585.0" layoutY="419.0" mnemonicParsing="false" onAction="#addFile" prefHeight="77.0" prefWidth="150.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
                      <font>
                         <Font name="Helvetica Neue" size="36.0" />
                      </font>
@@ -53,42 +53,15 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Graphs">
+    <Tab fx:id="Graph" text="Graphs">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane fx:id="GraphScene" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <BarChart layoutX="131.0" layoutY="53.0" prefHeight="296.0" prefWidth="483.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
-                  <BarChart layoutX="131.0" layoutY="403.0" prefHeight="275.0" prefWidth="488.0">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" />
-                     </yAxis>
-                  </BarChart>
-                  <BarChart layoutX="750.0" layoutY="58.0" prefHeight="297.0" prefWidth="469.0">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" />
-                     </yAxis>
-                  </BarChart>
-                  <BarChart layoutX="752.0" layoutY="400.0" prefHeight="279.0" prefWidth="480.0">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" />
-                     </yAxis>
-                  </BarChart>
+                  <Button fx:id="ButtonPDF" layoutX="600.0" layoutY="692.0" mnemonicParsing="false" onAction="#savePDF" prefHeight="27.0" prefWidth="80.0" text="Save PDF" />
+                  <Pane fx:id="Diff" layoutX="69.0" layoutY="30.0" prefHeight="320.0" prefWidth="500.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="681.0" AnchorPane.topAnchor="30.0" />
+                  <Pane fx:id="Num" layoutX="731.0" layoutY="55.0" prefHeight="276.0" prefWidth="469.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                  <Pane fx:id="Pass" layoutX="780.0" layoutY="379.0" prefHeight="269.0" prefWidth="447.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="380.0" />
+                  <Pane fx:id="Ave" layoutX="93.0" layoutY="352.0" prefHeight="320.0" prefWidth="500.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="681.0" AnchorPane.topAnchor="380.0" />
                </children></AnchorPane>
       </content>
     </Tab>

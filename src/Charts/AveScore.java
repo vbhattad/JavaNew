@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdf_function;
-//Reference:http://docs.oracle.com/javafx/2/charts/jfxpub-charts.html
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+package Charts;
+// reference:http://docs.oracle.com/javafx/2/charts/jfxpub-charts.html
+/**
+ *
+ * @author mac
  */
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +20,6 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,25 +36,29 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-/**
-/**
- *
- * @author mac
- */
-public class RightAndWrongForStudent extends Application {
- @Override
+//Number of tests taken during the last month,last quarter and over the last year.
+// Average student scores over last month, quarter and year.
+//Scoresbylevelofdifficulty(eachquestionhasadifficulty
+   //  level – easy, medium and hard).
+// Students passing and failing over different periods.
+//Any other statistic you might find interesting.
+public class AveScore extends Application {
+
+    @Override
     public void start(Stage primaryStage) throws Exception {
         //Creat a new barchart and name it chart
         BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         //creat a new DAO.resultDAOImpl 
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
-        int[] array=new int[2];
-        array=resultDao.getRightandWrong("2");
+        double [] array=new double[3];
+        //get the vlaue from database via a method:getAveScore and pass the value to an int array
+        array=resultDao.getAveScore();
         Series<String, Number> series = new Series<>();
-        series.setName("right and wrong numbers");
-        //set the series column names as right and wrong and pass the value 
-        series.getData().add(new XYChart.Data<>("right",array[0]));
-        series.getData().add(new XYChart.Data<>("wrong", array[1]));
+        //set the series column names as last month,last quarter and last year and pass the value 
+        series.setName("Average student score over last month, quarter and year");
+         series.getData().add(new XYChart.Data<>("Last month", array[0]));
+            series.getData().add(new XYChart.Data<>("Last quater", array[1]));
+            series.getData().add(new XYChart.Data<>("Last year", array[2]));
         chart.getData().add(series);
 
         //creat a button
@@ -94,20 +96,16 @@ public class RightAndWrongForStudent extends Application {
         BorderPane root = new BorderPane(chart, null, null, save, null);
         //set a new scenc with the root inside it
         Scene scene = new Scene(root, 600, 600);
+        Image img = root.snapshot(null,null);
         //add the scene into this stage
         primaryStage.setScene(scene);
         //show this stage
         primaryStage.show();
+
 
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-  
 }
-

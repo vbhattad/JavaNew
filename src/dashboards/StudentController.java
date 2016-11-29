@@ -5,6 +5,7 @@
  */
 package dashboards;
 
+import Model.People;
 import StudentQuizTest.QuizTest;
 import quizpage.*;
 
@@ -97,10 +98,8 @@ public class StudentController implements Initializable {
 
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         rbEasy.setUserData("easy");
         rbEasy.setSelected(true);
         rbMedium.setUserData("medium");
