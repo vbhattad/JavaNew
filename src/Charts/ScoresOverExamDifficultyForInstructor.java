@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pdf_function;
+package Charts;
 //Reference:http://docs.oracle.com/javafx/2/charts/jfxpub-charts.html
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -43,22 +38,31 @@ import javafx.stage.Stage;
  *
  * @author mac
  */
-public class RightAndWrongForStudent extends Application {
+public class ScoresOverExamDifficultyForInstructor extends Application {
  @Override
     public void start(Stage primaryStage) throws Exception {
         //Creat a new barchart and name it chart
         BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         //creat a new DAO.resultDAOImpl 
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
-        int[] array=new int[2];
-        array=resultDao.getRightandWrong("2");
-        Series<String, Number> series = new Series<>();
-        series.setName("right and wrong numbers");
-        //set the series column names as right and wrong and pass the value 
-        series.getData().add(new XYChart.Data<>("right",array[0]));
-        series.getData().add(new XYChart.Data<>("wrong", array[1]));
-        chart.getData().add(series);
-
+        int[] array=new int[8];
+        //access to the method getScoreOverDiffLevel via resultDao and return an int array that contains the highest and lowest score for difficulty levels
+       array=resultDao.getScoreOverDiffLevel();
+       //creat two series,series1 display highest scores and series2 display lowest scores
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series1.setName("highest scores over deifficulty level ");
+        // set column name as easy,medium,hard and mix and pass all the value to it
+            series1.getData().add(new XYChart.Data<>("Easy", array[0]));
+            series1.getData().add(new XYChart.Data<>("Medium", array[1]));
+            series1.getData().add(new XYChart.Data<>("Hard",array[2]));
+            series1.getData().add(new XYChart.Data<>("Mix",array[3]));
+        series2.setName("lowest scores over deifficulty level");
+            series2.getData().add(new XYChart.Data<>("Easy", array[4]));
+            series2.getData().add(new XYChart.Data<>("Medium", array[5]));
+            series1.getData().add(new XYChart.Data<>("Hard",array[6]));
+            series2.getData().add(new XYChart.Data<>("Mix",array[7]));
+        chart.getData().addAll(series1,series2);
         //creat a button
         Button save = new Button("Save to pdf");
         FileChooser chooser = new FileChooser();
@@ -99,6 +103,7 @@ public class RightAndWrongForStudent extends Application {
         //show this stage
         primaryStage.show();
 
+
     }
 
     public static void main(String[] args) {
@@ -110,4 +115,3 @@ public class RightAndWrongForStudent extends Application {
      */
   
 }
-
