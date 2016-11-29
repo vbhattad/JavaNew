@@ -39,7 +39,7 @@ public class StudentController implements Initializable {
     QuizTest quiz = new QuizTest();
 
     String choosenDiff = "easy";
-    int totalQuestions = 0;
+    int totalQuestions = 10;
 
     @FXML
     private Button bStartQuiz;
@@ -61,6 +61,9 @@ public class StudentController implements Initializable {
 
     @FXML
     Label lLogout;
+
+    @FXML
+    Label ltotalQuestions;
 
     @FXML
     ToggleGroup difficultyLevel;
@@ -86,13 +89,14 @@ public class StudentController implements Initializable {
 
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         try {
-            quiz.setAllQuestions(2, choosenDiff);
+            quiz.setAllQuestions(totalQuestions, choosenDiff);
             quiz.start(stage);
         } catch (Exception ex) {
             Logger.getLogger(SignupLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -103,9 +107,19 @@ public class StudentController implements Initializable {
         rbHard.setUserData("hard");
         rbMixed.setUserData("mixed");
 
-        sNumberOfQuestions.setMin(0);
-        sNumberOfQuestions.setMax(20);
-        sNumberOfQuestions.setValue(14);
+        sNumberOfQuestions.setMin(10);
+        ltotalQuestions.setText(Integer.toString(10));
+        sNumberOfQuestions.setMax(30);
+        sNumberOfQuestions.setValue(10);
+        sNumberOfQuestions.setShowTickLabels(true);
+        sNumberOfQuestions.setShowTickMarks(true);
+        sNumberOfQuestions.setMajorTickUnit(10);
+
+        sNumberOfQuestions.valueProperty().addListener((ov, old_val, new_val) -> {
+            totalQuestions = new_val.intValue();
+            ltotalQuestions.setText(Integer.toString(totalQuestions));
+        });
+        //sNumberOfQuestions.setBlockIncrement(0.1f);
 
         difficultyLevel.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (difficultyLevel.getSelectedToggle() != null) {

@@ -124,7 +124,7 @@ public class QuizTest extends Application {
 
             AnchorPane page;
             try {
-
+                endQuiz();
                 page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Student.fxml"));
                 Scene scene = new Scene(page);
                 stage.setScene(scene);
@@ -244,18 +244,28 @@ public class QuizTest extends Application {
                 } else {
                     RadioButtons = new ArrayList<>();
                     togglegroup = new ToggleGroup();
-                    for (AnswerOption option : que.getOptionList()) {
-                        radio = new RadioButton(option.getOptionDesc());
-                        radio.setToggleGroup(togglegroup);
-                        radio.setUserData(option.getOptionDesc());
-                        radio.selectedProperty().addListener((obs, oldval, newval) -> {
-                            if (newval) {
-                                computeRadiobtnAns();
-                            }
-                        });
-                        RadioButtons.add(radio);
-                        hbox.getChildren().add(radio);
-                    }
+
+                    radio = new RadioButton("True");
+                    radio.setToggleGroup(togglegroup);
+                    radio.setUserData("True");
+                    radio.selectedProperty().addListener((obs, oldval, newval) -> {
+                        if (newval) {
+                            computeTF();
+                        }
+                    });
+                    RadioButtons.add(radio);
+                    hbox.getChildren().add(radio);
+                    radio = new RadioButton("False");
+                    radio.setToggleGroup(togglegroup);
+                    radio.setUserData("False");
+                    radio.selectedProperty().addListener((obs, oldval, newval) -> {
+                        if (newval) {
+                            computeTF();
+                        }
+                    });
+                    RadioButtons.add(radio);
+                    hbox.getChildren().add(radio);
+
                     mapRadioButtons.put(questionNumber, RadioButtons);
                 }
                 break;
@@ -296,7 +306,7 @@ public class QuizTest extends Application {
         Question que = allQuestions.get(questionNumber);
         que.setIsAnswered(true);
         String correctAns = que.getOptionList().get(0).getOptionDesc();
-        if (correctAns.equals(inputAnswer)) {
+        if (correctAns.equalsIgnoreCase(inputAnswer)) {
             allQuestions.get(questionNumber).setIscorrect(true);
         } else {
             allQuestions.get(questionNumber).setIscorrect(false);
@@ -331,7 +341,7 @@ public class QuizTest extends Application {
         que.setIsAnswered(true);
         String correctAns = que.getOptionList().stream().filter(option -> option.getIsCorrect() == true).findFirst().get().getOptionDesc();
         mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
-            if (correctAns.equals(rb.getUserData())) {
+            if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
                 allQuestions.get(questionNumber).setIscorrect(true);
                 System.out.println("Radio correct");
             } else {
@@ -339,7 +349,21 @@ public class QuizTest extends Application {
                 System.out.println("Radio InCorrect");
             }
         });
+    }
 
+    void computeTF() {
+        Question que = allQuestions.get(questionNumber);
+        que.setIsAnswered(true);
+        String correctAns = que.getOptionList().stream().findFirst().get().getOptionDesc();
+        mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
+            if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
+                allQuestions.get(questionNumber).setIscorrect(true);
+                System.out.println("Radio correct");
+            } else {
+                allQuestions.get(questionNumber).setIscorrect(false);
+                System.out.println("Radio InCorrect");
+            }
+        });
     }
 
     void enableDisableButton() {
@@ -360,33 +384,33 @@ public class QuizTest extends Application {
         int totalQuestions = allQuestions.size();
         int totalCorrect = 0;
         quizResult.setDifficultyLevel(difficultyLevel);
-        switch (difficultyLevel) {
-            case "Easy":
+        switch (difficultyLevel.toLowerCase()) {
+            case "easy":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
                 break;
-            case "Medium":
+            case "medium":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
                 break;
-            case "Hard":
+            case "hard":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
-            case "Mix":
+            case "mixed":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "E").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "E".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "M").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "M".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "H").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "H".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;

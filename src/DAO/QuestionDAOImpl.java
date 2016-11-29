@@ -99,7 +99,7 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
                 for (int j = 1; j < 5; j++) {
                     String optionNumber = "option" + Integer.toString(j);
                     String optionIsCorrect = "iscorrect" + Integer.toString(j);
-                    answerOption = new AnswerOption(rs.getString(optionNumber), Boolean.parseBoolean(rs.getString(optionIsCorrect)));
+                    answerOption = new AnswerOption(rs.getString(optionNumber), "correct".equals(rs.getString(optionIsCorrect)));
                     options.add(answerOption);
                 }
                 question = new Question(questionType, questionDifficulty, questionDESC, options);
