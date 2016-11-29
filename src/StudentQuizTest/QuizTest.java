@@ -45,7 +45,7 @@ import javafx.stage.Stage;
  */
 public class QuizTest extends Application {
 
-    String difficultyLevelOptions[] = {"Easy", "Medium", "Hard", "Mix"}; // options for dropdown
+    String difficultyLevelOptions[] = {"easy", "medium", "hard", "mixed"}; // options for dropdown
     int totalQuestionOptions[] = {10, 15, 20}; // options for dropdown
     String difficultyLevel;
     ArrayList<Question> allQuestions;
@@ -55,8 +55,8 @@ public class QuizTest extends Application {
     public void setAllQuestions(int totalQuestions, String diffLevel) {
         difficultyLevel = diffLevel;
         DAO.QuestionDAOImpl dao = new DAO.QuestionDAOImpl();
-        //allQuestions = dao.getQuestions(totalQuestions, difficultyLevel);
-        allQuestions = getquestions();
+        allQuestions = dao.getQuestions(totalQuestions, difficultyLevel);
+        //allQuestions = getquestions();
     }
 
     ArrayList<Question> getquestions() {
@@ -103,7 +103,7 @@ public class QuizTest extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        allQuestions = getquestions();
+
         question.setPadding(new Insets(50, 50, 50, 50));
         options.setPadding(new Insets(50, 50, 50, 50));
         hbButtons = new HBox(75);
