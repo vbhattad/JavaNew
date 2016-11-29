@@ -53,39 +53,35 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
             System.out.println(se.toString());
         }
     }
-    
+
     public void addQuestions(String filepath) throws FileNotFoundException, IOException {
         System.out.println("Hello");
-           try(Statement stmt = con.createStatement()) {
-             Reader in = new FileReader(filepath); //Read from the CSV
+        try (Statement stmt = con.createStatement()) {
+            Reader in = new FileReader(filepath); //Read from the CSV
             Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
-    
 
             System.out.println("Inside");
             for (CSVRecord record : records) {
                 System.out.println("Inside1");
-                String query = "Insert into Question values ('" + record.get(0) + "' ,'" 
+                String query = "Insert into Question values ('" + record.get(0) + "' ,'"
                         + record.get(1) + "' ,'"
-                        + record.get(2) + "' ,'" 
-                        + record.get(3) + "' ,'" 
-                        + record.get(4) + "' ,'" 
-                        + record.get(5) + "' ,'" 
-                        + record.get(6) + "' ,'" 
-                        + record.get(7) + "' ,'" 
-                        + record.get(8) + "' ,'" 
-                        + record.get(9) + "' ,'" 
+                        + record.get(2) + "' ,'"
+                        + record.get(3) + "' ,'"
+                        + record.get(4) + "' ,'"
+                        + record.get(5) + "' ,'"
+                        + record.get(6) + "' ,'"
+                        + record.get(7) + "' ,'"
+                        + record.get(8) + "' ,'"
+                        + record.get(9) + "' ,'"
                         + record.get(10) + "')";;
                 System.out.println(query);
-               stmt.execute(query);
+                stmt.execute(query);
             }
             System.out.println("Records inserted successfully!");
-           }catch(SQLException e){
-               System.out.println("SQL Exception" + e);
-           }
-        
-   
-       
-    
+        } catch (SQLException e) {
+            System.out.println("SQL Exception" + e);
+        }
+
     }
 
     public ArrayList<Question> getQuestions(int totalQuestions, String difficultyLevel) {
@@ -156,5 +152,44 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
         } catch (Exception se) {
             System.out.println("Exception closing Connection: " + se.toString());
         }
+    }
+
+    public int getTotalNumberOfQuestions(String difficulty) {
+        int totalQuestions = 0;
+        String query = "";
+        ResultSet rs;
+        try (Statement stmt = con.createStatement()) {
+            switch (difficulty) {
+
+                case "easy":
+                    query = "SELECT * from Question where difficulty='E'";
+
+                    break;
+
+                case "medium":
+                    query = "SELECT * from Question where difficulty='M'";
+
+                    break;
+                case "hard":
+                    query = "SELECT * from Question where difficulty='H'";
+
+                    break;
+
+                default:
+
+                    query = "SELECT * from Question";
+
+                    break;
+
+            }
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                totalQuestions++;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception" + e);
+        }
+        System.out.println("Total Questions = " + totalQuestions);
+        return totalQuestions;
     }
 }

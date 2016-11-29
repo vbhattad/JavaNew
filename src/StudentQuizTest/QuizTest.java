@@ -436,7 +436,7 @@ public class QuizTest extends Application {
     }
 
     void calculateGrade() {
-        int totalCorrectAns = quizResult.getTotalNoOfEasy() + quizResult.getTotalNoOfMedium() + quizResult.getTotalNoOfHard();
+        int totalCorrectAns = quizResult.getNoOfCorrectEasy()+ quizResult.getNoOfCorrectMedium()+ quizResult.getNoOfCorrectHard();
         quizResult.setScore(totalCorrectAns);
         int totalQues = allQuestions.size();
         double percentage = totalCorrectAns / (double) totalQues;

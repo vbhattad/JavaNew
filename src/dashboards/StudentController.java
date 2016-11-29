@@ -8,6 +8,7 @@ package dashboards;
 import Model.People;
 import StudentQuizTest.QuizTest;
 import quizpage.*;
+import DAO.QuestionDAOImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +42,7 @@ public class StudentController implements Initializable {
 
     String choosenDiff = "easy";
     int totalQuestions = 10;
-
+    int availableLimit;
     @FXML
     private Button bStartQuiz;
 
@@ -74,7 +75,7 @@ public class StudentController implements Initializable {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         AnchorPane page;
         try {
-            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/FXMLDocument.fxml"));
+            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/HomePage.fxml"));
             Scene scene = new Scene(page);
             stage.setScene(scene);
             stage.show();
@@ -105,14 +106,19 @@ public class StudentController implements Initializable {
         rbMedium.setUserData("medium");
         rbHard.setUserData("hard");
         rbMixed.setUserData("mixed");
-
-        sNumberOfQuestions.setMin(10);
-        ltotalQuestions.setText(Integer.toString(10));
-        sNumberOfQuestions.setMax(30);
-        sNumberOfQuestions.setValue(10);
+        QuestionDAOImpl dao = new QuestionDAOImpl();
+        availableLimit = dao.getTotalNumberOfQuestions(choosenDiff);
+        
+        sNumberOfQuestions.setMin(5);
+        sNumberOfQuestions.setValue(5);
+        sNumberOfQuestions.setMax(availableLimit);
+        
+        ltotalQuestions.setText(Integer.toString(5));
+        
+        
         sNumberOfQuestions.setShowTickLabels(true);
         sNumberOfQuestions.setShowTickMarks(true);
-        sNumberOfQuestions.setMajorTickUnit(10);
+        sNumberOfQuestions.setMajorTickUnit(5);
 
         sNumberOfQuestions.valueProperty().addListener((ov, old_val, new_val) -> {
             totalQuestions = new_val.intValue();
@@ -124,6 +130,8 @@ public class StudentController implements Initializable {
             if (difficultyLevel.getSelectedToggle() != null) {
                 System.out.println("selected " + difficultyLevel.getSelectedToggle().getUserData());
                 choosenDiff = difficultyLevel.getSelectedToggle().getUserData().toString();
+                availableLimit = dao.getTotalNumberOfQuestions(choosenDiff);
+                sNumberOfQuestions.setMax(availableLimit);
             }
         });
 

@@ -7,40 +7,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="dashboards.AdminController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.AdminController">
    <children>
-      <TextField layoutX="294.0" layoutY="306.0" prefHeight="68.0" prefWidth="674.0" promptText="Password" style="-fx-background-radius: 10 10 10 10;">
+      <TextField fx:id="insPassword" layoutX="513.0" layoutY="384.0" prefHeight="77.0" prefWidth="255.0" promptText="Password" style="-fx-background-radius: 10 10 10 10;">
          <font>
             <Font name="Helvetica Neue Light" size="36.0" />
          </font>
       </TextField>
-      <Button layoutX="551.0" layoutY="404.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="#fffbfb">
+      <Button fx:id="instructorAddButton" layoutX="554.0" layoutY="475.0" mnemonicParsing="false" onAction="#instructorAdd" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="#fffbfb">
          <font>
             <Font name="Helvetica Neue Light" size="35.0" />
          </font>
       </Button>
-      <TextField layoutX="299.0" layoutY="569.0" prefHeight="68.0" prefWidth="674.0" promptText="Username or Andrew ID" style="-fx-background-radius: 10 10 10 10;">
+      <TextField fx:id="removePeopleTextBox" layoutX="301.0" layoutY="644.0" prefHeight="68.0" prefWidth="674.0" promptText="Username or Andrew ID" style="-fx-background-radius: 10 10 10 10;">
          <font>
             <Font name="Helvetica Neue Light" size="36.0" />
          </font>
       </TextField>
-      <Button layoutX="800.0" layoutY="569.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Remove" textFill="#fffbfb">
+      <Button fx:id="peopleRemoveButton" layoutX="801.0" layoutY="645.0" mnemonicParsing="false" onAction="#peopleRemove" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Remove" textFill="#fffbfb">
          <font>
             <Font name="Helvetica Neue Light" size="35.0" />
          </font>
       </Button>
-      <Label layoutX="316.0" layoutY="521.0" text="Remove Instructors or Students">
+      <Label layoutX="301.0" layoutY="595.0" text="Remove Instructors or Students">
          <font>
             <Font name="Helvetica Neue Light" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="388.0" layoutY="63.0" text="Welcome, Admin">
+      <Label layoutX="397.0" layoutY="78.0" text="Welcome, Admin">
          <font>
             <Font name="Helvetica Neue Light" size="64.0" />
          </font>
       </Label>
-      <TextField layoutX="299.0" layoutY="192.0" prefHeight="68.0" prefWidth="674.0" promptText="Username" style="-fx-background-radius: 10 10 10 10;">
+      <TextField fx:id="insAndrewId" layoutX="513.0" layoutY="288.0" prefHeight="77.0" prefWidth="255.0" promptText="Andrew" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font name="Helvetica Neue Light" size="36.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="insFirstName" layoutX="351.0" layoutY="192.0" prefHeight="77.0" prefWidth="255.0" promptText="First Name" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font name="Helvetica Neue Light" size="36.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="insLastName" layoutX="687.0" layoutY="192.0" prefHeight="77.0" prefWidth="255.0" promptText="Last Name" style="-fx-background-radius: 10 10 10 10;">
          <font>
             <Font name="Helvetica Neue Light" size="36.0" />
          </font>

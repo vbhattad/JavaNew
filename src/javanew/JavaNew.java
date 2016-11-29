@@ -21,7 +21,7 @@ public class JavaNew extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
