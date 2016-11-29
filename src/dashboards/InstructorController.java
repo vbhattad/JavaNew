@@ -50,12 +50,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -125,15 +127,11 @@ public class InstructorController implements Initializable {
     }
     
     @FXML
-    private void addFile() throws FileNotFoundException{
+    private void addFile() throws FileNotFoundException, IOException{
         QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
         questionsDAO.addQuestions(chosenFile);
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+   
     
     
     @Override

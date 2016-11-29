@@ -223,4 +223,52 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
             System.out.println("Exception closing Connection: " + se.toString());
         }
     }
+    
+    public int totoalNumberOfQuestions(String difficulty){
+        int totalQuestions = 0;
+        String query = "";
+        ResultSet rs;
+            try(Statement stmt = con.createStatement()){
+        switch(difficulty){
+        
+            case "easy":
+                query = "SELECT count(*) from Question where difficulty='E'";
+                rs = stmt.executeQuery(query);
+                rs.last();
+                totalQuestions = rs.getRow();
+                rs.beforeFirst();
+                 break;
+               
+            case "medium":
+                query = "SELECT count(*) from Question where difficulty='M'";
+                 rs = stmt.executeQuery(query);
+                rs.last();
+                totalQuestions = rs.getRow();
+                rs.beforeFirst();
+                 break;
+            case "hard":
+                query = "SELECT count(*) from Question where difficulty='H'";
+                rs = stmt.executeQuery(query);
+                rs.last();
+                totalQuestions = rs.getRow();
+                rs.beforeFirst();
+                 break;
+                
+            default: 
+                
+                query = "SELECT count(*) from Question";
+                rs = stmt.executeQuery(query);
+                rs.last();
+                totalQuestions = rs.getRow();
+                rs.beforeFirst();
+                 break;
+                
+                
+        }
+                }catch(SQLException e){
+                System.out.println("SQL Exception" + e);
+    }
+            System.out.println("Total Questions = " + totalQuestions);
+        return totalQuestions;
+    }
 }
