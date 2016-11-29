@@ -1,0 +1,27 @@
+QuestionNumber,QuestionType,DifficultyLevel,Description,Option A,Correct/Wrong,Option B,Correct/Wrong,Option C,Correct/Wrong,Option D,Correct/Wrong
+1,MC,E,"what does this code print: System.out.print(""Java is great"");",Java is great,correct,"""Java is great""",incorrect,null,incorrect,it does not compile,incorrect
+2,MA,E,what key words generate loops in java,for,correct,as,incorrect,while,correct,do,correct
+3,TF,E,every java class has a main method,FALSE,,,,,,,
+4,FIB,M,the result of 5/2 is?,2,,,,,,,
+5,MC,M,"int i=0,whats the value of i++ + 3",1,incorrect,2,incorrect,3,correct,4,incorrect
+6,MA,M,javaDB has what mode database,embedded,correct,network,correct,remote,incorrect,static,incorrect
+7,TF,H,all local data have defult value,FALSE,,,,,,,
+8,FIB,H,what data type this method return: public int methodname,int,,,,,,,
+9,TF,H,you can call private method from another class,FALSE,,,,,,,
+10,FIB,E,what do we call classes defined in another class,inner class,,,,,,,
+11,MC,E,Which of the following expression results in 45.37?,(int)(45.378 * 100) / 100.0,correct,(int)(45.378 * 100) / 100,incorrect,(int)(45.378 * 100 / 100),incorrect,(int)(45.378) * 100 / 100.0,incorrect
+12,MC,H,Consider a method defined with the header: public void foo(int a int b). Which of the following method calls is legal?,foo(0 0.1);,incorrect,foo(0 / 1 2 * 3);,correct,foo(0);,incorrect,foo( );,incorrect
+13,FIB,H,Suppose that you would like to create an instance of a new Map that has an iteration order that is the same as the iteration order of an existing instance of a Map. Which concrete implementation of the Map interface should be used for the new instance?,LinkedHashMap,,,,,,,
+14,MC,M,"Which class does not override the equals() and hashCode() methods, inheriting them directly from class Object?",java.lang.String,incorrect,java.lang.Character,incorrect,java.lang.StringBuffer,correct,java.lang.Double,incorrect
+15,MC,M,"Which collection class allows you to grow or shrink its size and provides indexed access to its elements, but whose methods are not synchronized?",java.util.HashSet,incorrect,java.util.LinkedHashSet,incorrect,java.util.ArrayList,correct,java.util.Array,incorrect
+16,MC,M,You need to store elements in a collection that guarantees that no duplicates are stored and all elements can be accessed in natural order. Which interface provides that capability?,java.util.Map,incorrect,java.util.Set,correct,java.util.List,incorrect,java.util.Collection,incorrect
+17,FIB,H,Which interface does java.util.Hashtable implement?,Java.util.Map,,,,,,,
+18,FIB,H,Which interface provides the capability to store objects using a key-value pair?,Java.util.Map,,,,,,,
+19,MC ,M,"Which collection class allows you to associate its elements with key values, and allows you to retrieve objects in FIFO (first-in, first-out) sequence?",java.util.ArrayList,incorrect,java.util.LinkedHashMap,correct,java.util.HashMap,incorrect,java.util.TreeMap,incorrect
+20,MC,M,"Which collection class allows you to access its elements by associating a key with an element's value, and provides synchronization?",java.util.SortedMap,incorrect,java.util.TreeMap,incorrect,java.util.TreeSet,incorrect,java.util.HashTable,correct
+21,MA,H,Which is valid declaration of a float?,float f = 1F;,correct,float f = 1.0f;,correct,"float f = ""1"";",incorrect,float f = 1.0d;,incorrect
+22,MA,M,What is the numerical range of char?,0 to 2^16 - 1,correct,0 to 65535,incorrect,-256 to 255,correct,-32768 to 32767,incorrect
+23,MC,M,"Which of the following are Java reserved words?
+1.run  2. import   3. default  4.implement",1 and 2,incorrect,2 and 3,correct,1 and 4,incorrect,2 and 4,incorrect
+24,FIB,E,The elements in java.util.HashSet are guaranteed to be ,unique,,,,,,,
+25,FIB,E,Java is an ______________ oriented language,object,,,,,,,

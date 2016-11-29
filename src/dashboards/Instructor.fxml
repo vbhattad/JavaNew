@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.InstructorController">
   <tabs>
     <Tab text="Add Quiz">
       <content>
@@ -25,7 +25,7 @@
                         <Font name="Helvetica Neue Light" size="36.0" />
                      </font>
                   </Label>
-                  <Button layoutX="808.0" layoutY="279.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Browse" textFill="WHITE">
+                  <Button fx:id="browse" layoutX="808.0" layoutY="279.0" mnemonicParsing="false" onAction="#browseFile" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Browse" textFill="WHITE">
                      <font>
                         <Font name="Helvetica Neue" size="36.0" />
                      </font>
@@ -40,7 +40,7 @@
                         <Font name="Helvetica Neue UltraLight" size="41.0" />
                      </font>
                   </Label>
-                  <Button layoutX="585.0" layoutY="419.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
+                  <Button fx:id="add" layoutX="585.0" layoutY="419.0" mnemonicParsing="false" onAction="#addFile" prefHeight="77.0" prefWidth="150.0" style="-fx-background-color: #35B084; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
                      <font>
                         <Font name="Helvetica Neue" size="36.0" />
                      </font>

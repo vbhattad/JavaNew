@@ -311,7 +311,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         try {
            // Connection connect = DriverManager.getConnection(url); //Create connection
             Statement statement = con.createStatement(); //Connect to DB
-            statement.executeQuery(insertResult);
+            statement.execute(insertResult);
          }catch (SQLException e){
              System.out.println("SQL Exception: " +e);
          }

@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -166,9 +167,9 @@ public class SignupLoginController implements Initializable {
                     case 'F': {
                             // move to Faculty dashboard
                         Stage stage = (Stage) btLogin.getScene().getWindow();
-                        AnchorPane page;
+                        TabPane page;
                         try {
-                            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
+                            page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
                             Scene scene = new Scene(page);
                             stage.setScene(scene);
                             stage.show();
