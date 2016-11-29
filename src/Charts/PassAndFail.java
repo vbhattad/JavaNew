@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdf_function;
+package Charts;
 //Reference:http://docs.oracle.com/javafx/2/charts/jfxpub-charts.html
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Random;
-
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,40 +23,45 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 /**
  *
  * @author mac
  */
-public class NumOfTestDuringTime extends Application{
+public class PassAndFail extends Application {
 
      @Override
     public void start(Stage primaryStage) throws Exception {
+        
         //Creat a new barchart and name it chart
         BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         //creat a new DAO.resultDAOImpl 
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
-        int[] array=new int[3];
-       array=resultDao.getNumOfTestDuringTime();
-        Series<String, Number> series = new Series<>();
+        int[] array=new int[6];
+       array=resultDao.getPassandFall();
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
         //set the series column names as last month,last quarter and last year and pass the value 
-        series.setName("Number of tests taken during the last month,last quarter and over the last year");
-         series.getData().add(new XYChart.Data<>("Last month", array[0]));
-            series.getData().add(new XYChart.Data<>("Last quater", array[1]));
-            series.getData().add(new XYChart.Data<>("Last year", array[2]));
-        chart.getData().add(series);
+        series1.setName("Pass during the last month,last quarter and over the last year");
+            series1.getData().add(new XYChart.Data<>("Last month", array[0]));
+            series1.getData().add(new XYChart.Data<>("Last quater", array[2]));
+            series1.getData().add(new XYChart.Data<>("Last year",array[4]));
+        series2.setName("Fail during the last month,last quarter and over the last year");
+            series2.getData().add(new XYChart.Data<>("Last month", array[1]));
+            series2.getData().add(new XYChart.Data<>("Last quater", array[3]));
+            series2.getData().add(new XYChart.Data<>("Last year",array[5]));
+        
+        chart.getData().addAll(series1,series2);
 
         //creat a button
         Button save = new Button("Save to pdf");
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new ExtensionFilter("PDF files", "*.pdf"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files", "*.pdf"));
         //use lambda expression to set the button to listen to an action
         save.setOnAction(e -> {
             // creat a file that save the entire stage to a pdf file
@@ -93,11 +97,12 @@ public class NumOfTestDuringTime extends Application{
         primaryStage.setScene(scene);
         //show this stage
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    
     
 }
