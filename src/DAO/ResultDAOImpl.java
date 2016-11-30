@@ -63,11 +63,11 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         }
     }
 
-    public int[] getRightandWrong(String id) {
+    public int[] getRightandWrong(String id,String date) {
         ResultSet results = null;
         int[] intArray = new int[2];
         try (Statement stmt = con.createStatement()) {
-            String query = "select CorrectEasy,CorrectMedium,CorrectHard,TotalEasy,TotalMedium,TotalHard from Result where andrewid='" + id + "'";
+            String query = "select CorrectEasy,CorrectMedium,CorrectHard,TotalEasy,TotalMedium,TotalHard from Result where andrewid='" + id + "',DT='"+date+"'";
             results = stmt.executeQuery(query);
             if (results.next()) {
                 int CorrectEasy = results.getInt(1);
@@ -134,6 +134,59 @@ public class ResultDAOImpl extends DAOJDBCImpl {
                 intArray[3] = count3 - pass3;
             }
             results = stmt.executeQuery("select SUM(pass) from Result where DT> '" + date3 + "'");
+            if (results.next()) {
+                pass12 = results.getInt(1);
+                intArray[4] = pass12;
+                intArray[5] = count12 - pass12;
+            }
+
+        } catch (Exception se) {
+            System.out.println(se.toString());
+        }
+        return intArray;
+    }
+    public int[] getPassandFallForStu(String id) {
+        String date1 = getDate(1);
+        String date2 = getDate(3);
+        String date3 = getDate(12);
+        ResultSet results = null;
+        ResultSet results1 = null;
+        ResultSet results3 = null;
+        ResultSet results12 = null;
+        int[] intArray = new int[6];
+        int pass1;
+        int pass3;
+        int pass12;
+        try (Statement stmt = con.createStatement()) {
+            results1 = stmt.executeQuery("select pass from Result where DT> '" + date1 + "',andrewid='" + id + "'");
+            int count1 = 0;
+            while (results1.next()) {
+                ++count1;
+            }
+            results3 = stmt.executeQuery("select pass from Result where DT> '" + date2 + "',andrewid='" + id + "'");
+            int count3 = 0;
+            while (results3.next()) {
+                ++count3;
+            }
+            results12 = stmt.executeQuery("select pass from Result where DT> '" + date3 + "',andrewid='" + id + "'");
+            int count12 = 0;
+            while (results12.next()) {
+                ++count12;
+            }
+
+            results = stmt.executeQuery("select SUM(pass) from Result where DT> '" + date1 + "',andrewid='" + id + "'");
+            if (results.next()) {
+                pass1 = results.getInt(1);
+                intArray[0] = pass1;
+                intArray[1] = count1 - pass1;
+            }
+            results = stmt.executeQuery("select SUM(pass) from Result where DT> '" + date2 + "',andrewid='" + id + "'");
+            if (results.next()) {
+                pass3 = results.getInt(1);
+                intArray[2] = pass3;
+                intArray[3] = count3 - pass3;
+            }
+            results = stmt.executeQuery("select SUM(pass) from Result where DT> '" + date3 + "',andrewid='" + id + "'");
             if (results.next()) {
                 pass12 = results.getInt(1);
                 intArray[4] = pass12;

@@ -51,7 +51,7 @@ public class RightAndWrongForStudent extends Application {
         //creat a new DAO.resultDAOImpl 
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
         int[] array=new int[2];
-        array=resultDao.getRightandWrong("2");
+        array=resultDao.getRightandWrong("2","date");
         Series<String, Number> series = new Series<>();
         series.setName("right and wrong numbers");
         //set the series column names as right and wrong and pass the value 
