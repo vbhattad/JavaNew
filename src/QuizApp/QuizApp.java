@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quizpage;
+package QuizApp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +15,12 @@ import javafx.stage.Stage;
  *
  * @author darshanmohan
  */
-public class QuizPage extends Application {
+public class QuizApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
         
-        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("SignupLogin.fxml"));
+        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         Scene scene = new Scene(page);
         stage.setScene(scene);
 

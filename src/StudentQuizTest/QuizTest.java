@@ -40,7 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import quizpage.SignupLoginController;
+import LoginAndSignup.SignupLoginController;
 
 /**
  *
@@ -105,6 +105,7 @@ public class QuizTest extends Application {
 
     static Button bEndQuiz = new Button("End Quiz");
     static Scene scene;
+    static Label lblTimer = new Label();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -156,7 +157,7 @@ public class QuizTest extends Application {
         vbox.getChildren().addAll(question, options);
         vbox.getChildren().add(hbox);
         vbox.getChildren().add(hbButtons);
-
+        setTimer();
         scene = new Scene(vbox, 1280, 768);
 
         stage.setScene(scene);
@@ -436,7 +437,7 @@ public class QuizTest extends Application {
     }
 
     void calculateGrade() {
-        int totalCorrectAns = quizResult.getNoOfCorrectEasy()+ quizResult.getNoOfCorrectMedium()+ quizResult.getNoOfCorrectHard();
+        int totalCorrectAns = quizResult.getNoOfCorrectEasy() + quizResult.getNoOfCorrectMedium() + quizResult.getNoOfCorrectHard();
         quizResult.setScore(totalCorrectAns);
         int totalQues = allQuestions.size();
         double percentage = totalCorrectAns / (double) totalQues;
@@ -474,7 +475,7 @@ public class QuizTest extends Application {
                         minUnit = 9;
                         minTens--;
                     }
-                    System.out.println(minTens + "" + minUnit + " : " + secTens + "" + secUnit);
+                    lblTimer.setText(minTens + "" + minUnit + ":" + secTens + "" + secUnit);
                     secUnit--;
                     i--;
                 }

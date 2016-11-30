@@ -5,9 +5,9 @@
  */
 package dashboards;
 
+import LoginAndSignup.SignupLoginController;
 import Model.People;
 import StudentQuizTest.QuizTest;
-import quizpage.*;
 import DAO.QuestionDAOImpl;
 
 import java.io.IOException;
