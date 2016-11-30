@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 import javafx.application.Application;
@@ -38,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import quizpage.SignupLoginController;
 
 /**
  *
@@ -45,19 +48,20 @@ import javafx.stage.Stage;
  */
 public class QuizTest extends Application {
 
-    String difficultyLevelOptions[] = {"Easy", "Medium", "Hard", "Mix"}; // options for dropdown
+    String difficultyLevelOptions[] = {"easy", "medium", "hard", "mixed"}; // options for dropdown
     int totalQuestionOptions[] = {10, 15, 20}; // options for dropdown
     String difficultyLevel;
     ArrayList<Question> allQuestions;
     Result quizResult = new Result();
     int counter = 0;
+    private int totalNoOfQuestions;
 
     public void setAllQuestions(int totalQuestions, String diffLevel) {
         difficultyLevel = diffLevel;
+        totalNoOfQuestions = totalQuestions;
         DAO.QuestionDAOImpl dao = new DAO.QuestionDAOImpl();
-        
-        //allQuestions = dao.getQuestions(totalQuestions, difficultyLevel);
-        allQuestions = getquestions();
+        allQuestions = dao.getQuestions(totalQuestions, difficultyLevel);
+        //allQuestions = getquestions();
     }
 
     ArrayList<Question> getquestions() {
@@ -104,8 +108,7 @@ public class QuizTest extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
-        allQuestions = getquestions();
+
         question.setPadding(new Insets(50, 50, 50, 50));
         options.setPadding(new Insets(50, 50, 50, 50));
         hbButtons = new HBox(75);
@@ -126,7 +129,7 @@ public class QuizTest extends Application {
 
             AnchorPane page;
             try {
-
+                endQuiz();
                 page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Student.fxml"));
                 Scene scene = new Scene(page);
                 stage.setScene(scene);
@@ -246,18 +249,28 @@ public class QuizTest extends Application {
                 } else {
                     RadioButtons = new ArrayList<>();
                     togglegroup = new ToggleGroup();
-                    for (AnswerOption option : que.getOptionList()) {
-                        radio = new RadioButton(option.getOptionDesc());
-                        radio.setToggleGroup(togglegroup);
-                        radio.setUserData(option.getOptionDesc());
-                        radio.selectedProperty().addListener((obs, oldval, newval) -> {
-                            if (newval) {
-                                computeRadiobtnAns();
-                            }
-                        });
-                        RadioButtons.add(radio);
-                        hbox.getChildren().add(radio);
-                    }
+
+                    radio = new RadioButton("True");
+                    radio.setToggleGroup(togglegroup);
+                    radio.setUserData("True");
+                    radio.selectedProperty().addListener((obs, oldval, newval) -> {
+                        if (newval) {
+                            computeTF();
+                        }
+                    });
+                    RadioButtons.add(radio);
+                    hbox.getChildren().add(radio);
+                    radio = new RadioButton("False");
+                    radio.setToggleGroup(togglegroup);
+                    radio.setUserData("False");
+                    radio.selectedProperty().addListener((obs, oldval, newval) -> {
+                        if (newval) {
+                            computeTF();
+                        }
+                    });
+                    RadioButtons.add(radio);
+                    hbox.getChildren().add(radio);
+
                     mapRadioButtons.put(questionNumber, RadioButtons);
                 }
                 break;
@@ -298,7 +311,7 @@ public class QuizTest extends Application {
         Question que = allQuestions.get(questionNumber);
         que.setIsAnswered(true);
         String correctAns = que.getOptionList().get(0).getOptionDesc();
-        if (correctAns.equals(inputAnswer)) {
+        if (correctAns.equalsIgnoreCase(inputAnswer)) {
             allQuestions.get(questionNumber).setIscorrect(true);
         } else {
             allQuestions.get(questionNumber).setIscorrect(false);
@@ -333,7 +346,7 @@ public class QuizTest extends Application {
         que.setIsAnswered(true);
         String correctAns = que.getOptionList().stream().filter(option -> option.getIsCorrect() == true).findFirst().get().getOptionDesc();
         mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
-            if (correctAns.equals(rb.getUserData())) {
+            if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
                 allQuestions.get(questionNumber).setIscorrect(true);
                 System.out.println("Radio correct");
             } else {
@@ -341,7 +354,21 @@ public class QuizTest extends Application {
                 System.out.println("Radio InCorrect");
             }
         });
+    }
 
+    void computeTF() {
+        Question que = allQuestions.get(questionNumber);
+        que.setIsAnswered(true);
+        String correctAns = que.getOptionList().stream().findFirst().get().getOptionDesc();
+        mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
+            if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
+                allQuestions.get(questionNumber).setIscorrect(true);
+                System.out.println("Radio correct");
+            } else {
+                allQuestions.get(questionNumber).setIscorrect(false);
+                System.out.println("Radio InCorrect");
+            }
+        });
     }
 
     void enableDisableButton() {
@@ -362,33 +389,34 @@ public class QuizTest extends Application {
         int totalQuestions = allQuestions.size();
         int totalCorrect = 0;
         quizResult.setDifficultyLevel(difficultyLevel);
-        switch (difficultyLevel) {
-            case "Easy":
+        quizResult.setAndrewId(SignupLoginController.user.getAndrewId());
+        switch (difficultyLevel.toLowerCase()) {
+            case "easy":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
                 break;
-            case "Medium":
+            case "medium":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
                 break;
-            case "Hard":
+            case "hard":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect()).count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
-            case "Mix":
+            case "mixed":
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "E").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "E".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "M").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "M".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
                 totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "H").count();
-                totalQuestions = (int) allQuestions.stream().filter(que -> que.getDifficulty() == "E").count();
+                totalQuestions = (int) allQuestions.stream().filter(que -> "H".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
@@ -408,7 +436,7 @@ public class QuizTest extends Application {
     }
 
     void calculateGrade() {
-        int totalCorrectAns = quizResult.getTotalNoOfEasy() + quizResult.getTotalNoOfMedium() + quizResult.getTotalNoOfHard();
+        int totalCorrectAns = quizResult.getNoOfCorrectEasy()+ quizResult.getNoOfCorrectMedium()+ quizResult.getNoOfCorrectHard();
         quizResult.setScore(totalCorrectAns);
         int totalQues = allQuestions.size();
         double percentage = totalCorrectAns / (double) totalQues;
@@ -417,6 +445,42 @@ public class QuizTest extends Application {
         } else {
             quizResult.setGrade(1);
         }
+    }
+
+    int secUnit = 9;
+    int secTens = 5;
+    int minUnit = (totalNoOfQuestions % 10) - 1;
+    int minTens = totalNoOfQuestions / 10;
+    int i = totalNoOfQuestions * 60;
+
+    void setTimer() {
+
+        Timer otimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if (i == 0) {
+                    otimer.cancel();
+                } else {
+                    if (secUnit == -1) {
+                        secUnit = 9;
+                        secTens--;
+                    }
+                    if (secTens == -1) {
+                        secTens = 5;
+                        minUnit--;
+                    }
+                    if (minUnit == -1) {
+                        minUnit = 9;
+                        minTens--;
+                    }
+                    System.out.println(minTens + "" + minUnit + " : " + secTens + "" + secUnit);
+                    secUnit--;
+                    i--;
+                }
+            }
+        };
+        otimer.scheduleAtFixedRate(task, 0, 1000l);
     }
 
 }

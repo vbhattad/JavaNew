@@ -93,5 +93,6 @@
             <Font name="Helvetica Neue Light" size="26.0" />
          </font>
       </Label>
+      <Label fx:id="ltotalQuestions" layoutX="1168.0" layoutY="483.0" text="label" />
    </children>
 </AnchorPane>

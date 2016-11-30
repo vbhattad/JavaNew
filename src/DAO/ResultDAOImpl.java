@@ -295,16 +295,16 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     public void insertResults(Result quizResult) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        String insertResult = "INSERT INTO TABLE Quizapp.Result VALUES ('" + quizResult.getAndrewId() + "','" +
-                                                                             quizResult.getNoOfCorrectEasy() + "','" +
-                                                                             quizResult.getNoOfCorrectMedium() + "','" +
-                                                                             quizResult.getTotalNoOfHard() + "','" +
-                                                                             quizResult.getTotalNoOfEasy() + "','" +
-                                                                             quizResult.getTotalNoOfMedium() + "','" +
-                                                                             quizResult.getTotalNoOfHard() + "','" +
+        String insertResult = "INSERT INTO Result VALUES ('" + quizResult.getAndrewId() + "'," +
+                                                                             quizResult.getNoOfCorrectEasy() + "," +
+                                                                             quizResult.getNoOfCorrectMedium() + "," +
+                                                                             quizResult.getNoOfCorrectHard()+ "," +
+                                                                             quizResult.getTotalNoOfEasy() + "," +
+                                                                             quizResult.getTotalNoOfMedium() + "," +
+                                                                             quizResult.getTotalNoOfHard() + ",'" +
                                                                              timeStamp + "'," +
                                                                              quizResult.getGrade() + ",'" +
-                                                                             quizResult.getDifficultyLevel() + "','" +
+                                                                             quizResult.getDifficultyLevel() + "'," +
                                                                              quizResult.getScore() + ")" ;
         
        

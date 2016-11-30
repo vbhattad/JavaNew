@@ -39,6 +39,7 @@ import Charts.AveScoreC;
 import Charts.NumOfTestDuringTimeC;
 import Charts.PassAndFailC;
 import Charts.ScoreOverDiffLevelC;
+import Model.People;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -59,6 +60,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -73,7 +75,7 @@ public class InstructorController implements Initializable {
     private AnchorPane GraphScene;
     @FXML
     private Button ButtonPDF;
-    
+
     @FXML
     private Pane Diff;
     @FXML
@@ -87,16 +89,16 @@ public class InstructorController implements Initializable {
      * Initializes the controller class.
      */
     private String chosenFile;
-    
+
     @FXML
     public Button browse;
-    
+
     @FXML
     public Button bStartQuiz;
-    
+
     @FXML
     public Button add;
-    
+
     @FXML
     private void logout() {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
@@ -110,10 +112,10 @@ public class InstructorController implements Initializable {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
-    private void browseFile(){
-         FileChooser fileChooser = new FileChooser();
+    private void browseFile() {
+        FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = null;
@@ -123,36 +125,39 @@ public class InstructorController implements Initializable {
         } catch (Exception e) {
             System.out.println("");
         }
-       chosenFile = file.getAbsolutePath();
+        chosenFile = file.getAbsolutePath();
     }
-    
+
     @FXML
-    private void addFile() throws FileNotFoundException, IOException{
-        QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
-        questionsDAO.addQuestions(chosenFile);
+    private void addFile() throws FileNotFoundException {
+        try {
+            QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
+            questionsDAO.addQuestions(chosenFile);
+        } catch (IOException ex) {
+            Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-   
-    
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        AveScoreC a=new AveScoreC();
-        NumOfTestDuringTimeC n=new NumOfTestDuringTimeC();
-        PassAndFailC p=new PassAndFailC();
-        ScoreOverDiffLevelC s=new ScoreOverDiffLevelC();
-        
-        try {Ave.getChildren().add(a.getChart());
-        Num.getChildren().add(n.getChart());
-            
+        AveScoreC a = new AveScoreC();
+        NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
+        PassAndFailC p = new PassAndFailC();
+        ScoreOverDiffLevelC s = new ScoreOverDiffLevelC();
+
+        try {
+            Ave.getChildren().add(a.getChart());
+            Num.getChildren().add(n.getChart());
+
             Pass.getChildren().add(p.getChart());
-        
+
             Diff.getChildren().add(s.getChart());
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
         }
-}  
+    }
+
     @FXML
     public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
         Image img1 = Ave.snapshot(null, null);
@@ -164,7 +169,7 @@ public class InstructorController implements Initializable {
         PdfWriter writer = new PdfWriter(new FileOutputStream(file));
         PdfDocument pdfDoc = new PdfDocument(writer);
         Document doc = new Document(pdfDoc);
-           
+
         ImageData imgData1 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img1, null), null);
         ImageData imgData2 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img2, null), null);
         ImageData imgData3 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img3, null), null);
@@ -174,13 +179,11 @@ public class InstructorController implements Initializable {
         com.itextpdf.layout.element.Image pdfImg3 = new com.itextpdf.layout.element.Image(imgData3);
         com.itextpdf.layout.element.Image pdfImg4 = new com.itextpdf.layout.element.Image(imgData4);
         // add the page to the document object
-       doc.add(pdfImg1);
+        doc.add(pdfImg1);
         doc.add(pdfImg2);
-         doc.add(pdfImg3);
-          doc.add(pdfImg4);
-       doc.close();
+        doc.add(pdfImg3);
+        doc.add(pdfImg4);
+        doc.close();
 
-        }
     }
-    
-
+}
