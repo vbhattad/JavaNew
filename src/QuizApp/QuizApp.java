@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javanew;
+package QuizApp;
 
-import quizpage.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author darshanmohan
  */
-public class JavaNew extends Application {
+public class QuizApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
