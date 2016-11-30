@@ -21,7 +21,7 @@ public class RightAndWrongC {
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
         int[] array=new int[2];
         public BarChart<String, Number> getChart(){
-        array=resultDao.getRightandWrong("2");
+        array=resultDao.getRightandWrong("2","date");
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("right and wrong numbers");
         //set the series column names as right and wrong and pass the value 
