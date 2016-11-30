@@ -20,7 +20,7 @@
             <Font name="Helvetica Neue Light" size="24.0" />
          </font>
       </TextField>
-      <Button fx:id="instructorAddButton" layoutX="554.0" layoutY="475.0" mnemonicParsing="false" onAction="#instructorAdd" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #319e76; -fx-background-radius: 10 10 10 10;" text="Add" textFill="#fffbfb">
+      <Button fx:id="instructorAddButton" layoutX="554.0" layoutY="475.0" mnemonicParsing="false" onAction="#instructorAdd" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Add" textFill="#fffbfb">
          <font>
             <Font name="Helvetica Neue Light" size="35.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font name="Helvetica Neue Light" size="24.0" />
          </font>
       </TextField>
-      <Button fx:id="peopleRemoveButton" layoutX="801.0" layoutY="645.0" mnemonicParsing="false" onAction="#peopleRemove" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #319e76; -fx-background-radius: 10 10 10 10;" text="Remove" textFill="#fffbfb">
+      <Button fx:id="peopleRemoveButton" layoutX="801.0" layoutY="645.0" mnemonicParsing="false" onAction="#peopleRemove" prefHeight="67.0" prefWidth="173.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Remove" textFill="#fffbfb">
          <font>
             <Font name="Helvetica Neue Light" size="35.0" />
          </font>
