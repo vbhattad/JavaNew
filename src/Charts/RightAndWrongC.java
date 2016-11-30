@@ -5,9 +5,12 @@
  */
 package Charts;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 /**
@@ -15,20 +18,18 @@ import javafx.scene.chart.XYChart;
  * @author mac
  */
 public class RightAndWrongC {
-    //Creat a new barchart and name it chart
-        BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
+    
         //creat a new DAO.resultDAOImpl 
        DAO.ResultDAOImpl resultDao=new DAO.ResultDAOImpl();
         int[] array=new int[2];
-        public BarChart<String, Number> getChart(){
-        array=resultDao.getRightandWrong("2","date");
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("right and wrong numbers");
-        //set the series column names as right and wrong and pass the value 
-        series.getData().add(new XYChart.Data<>("right",array[0]));
-        series.getData().add(new XYChart.Data<>("wrong", array[1]));
-        chart.getData().add(series);
-        
+        public PieChart getChart(){
+            array=resultDao.getRightandWrong("2","date");
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                new PieChart.Data("right",array[0]),
+                new PieChart.Data("wrong", array[1]));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("right and wrong numbers"); 
         return chart;}
 
 }
