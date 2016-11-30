@@ -31,7 +31,7 @@ and open the template in the editor.
 
 .tab-pane
 {
-    -fx-tab-min-width:605px;
+    -fx-tab-min-width:615px;
     -fx-tab-min-height: 70px;
 }
 

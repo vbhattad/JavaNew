@@ -27,6 +27,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -75,9 +76,9 @@ public class StudentController implements Initializable {
     @FXML
     private void logout() {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
-        AnchorPane page;
+        TabPane page;
         try {
-            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/HomePage.fxml"));
+            page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/HomePage.fxml"));
             Scene scene = new Scene(page);
             stage.setScene(scene);
             stage.show();

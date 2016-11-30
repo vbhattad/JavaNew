@@ -14,62 +14,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.StudentController">
    <children>
-      <ImageView fitHeight="808.0" fitWidth="1290.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Media/Instructor.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="bStartQuiz" layoutX="900.0" layoutY="564.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
-         <font>
-            <Font name="Helvetica Neue Bold" size="27.0" />
-         </font>
-      </Button>
-      <RadioButton fx:id="rbEasy" layoutX="739.0" layoutY="333.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
-         <font>
-            <Font name="Helvetica Neue" size="20.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="difficultyLevel" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="rbMedium" layoutX="856.0" layoutY="333.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-         <font>
-            <Font name="Helvetica Neue" size="20.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rbHard" layoutX="1006.0" layoutY="332.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-         <font>
-            <Font name="Helvetica Neue" size="20.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="rbMixed" layoutX="1136.0" layoutY="333.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-         <font>
-            <Font name="Helvetica Neue" size="20.0" />
-         </font>
-      </RadioButton>
-      <Label layoutX="909.0" layoutY="262.0" prefHeight="36.0" prefWidth="163.0" text="Difficulty Level" textFill="#dadada">
-         <font>
-            <Font name="Helvetica Neue Light" size="26.0" />
-         </font>
-      </Label>         
-      <Label layoutX="847.0" layoutY="425.0" prefHeight="34.0" prefWidth="272.0" text="Number of Questions: 0" textFill="#dadada">
-         <font>
-            <Font name="Helvetica Neue Light" size="26.0" />
-         </font>
-      </Label>
-      <BarChart layoutX="41.0" layoutY="182.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <Label layoutX="792.0" layoutY="97.0" prefHeight="91.0" prefWidth="388.0" text="Quiz Settings" textFill="WHITESMOKE">
-         <font>
-            <Font name="Helvetica Neue" size="64.0" />
-         </font>
-      </Label>
       <Line endX="500.0" layoutX="441.0" layoutY="373.0" rotate="90.0" startX="-100.0" />
       <Label layoutY="-1.0" opacity="0.79" prefHeight="71.0" prefWidth="1289.0" style="-fx-background-color: black;" text="Label" />
       <Label fx:id="lLogout" layoutX="1182.0" layoutY="15.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="81.0" text="Logout" textFill="WHITESMOKE">
@@ -92,12 +36,88 @@
             <Font name="Helvetica Neue Light" size="40.0" />
          </font>
       </Label>
-      <Slider fx:id="sNumberOfQuestions" layoutX="807.0" layoutY="476.0" min="1.0" opacity="0.85" prefHeight="30.0" prefWidth="336.0" stylesheets="@Student.css" />
-      <Label fx:id="lWarning" alignment="CENTER" layoutX="733.0" layoutY="638.0" prefHeight="156.0" prefWidth="500.0" textAlignment="CENTER" textFill="WHITESMOKE">
-         <font>
-            <Font name="Helvetica Neue Light" size="26.0" />
-         </font>
-      </Label>
       <Label fx:id="ltotalQuestions" layoutX="1168.0" layoutY="473.0" prefHeight="39.0" prefWidth="56.0" textFill="#dadada" />
+      <TabPane layoutX="191.0" layoutY="-440.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Take Quiz">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="808.0" fitWidth="1290.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Media/Instructor.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="bStartQuiz" layoutX="558.0" layoutY="456.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
+                           <font>
+                              <Font name="Helvetica Neue Bold" size="27.0" />
+                           </font>
+                        </Button>
+                        <RadioButton fx:id="rbEasy" layoutX="357.0" layoutY="251.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
+                           <font>
+                              <Font name="Helvetica Neue" size="20.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="difficultyLevel" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbMedium" layoutX="506.0" layoutY="252.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                           <font>
+                              <Font name="Helvetica Neue" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbHard" layoutX="670.0" layoutY="252.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                           <font>
+                              <Font name="Helvetica Neue" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbMixed" layoutX="805.0" layoutY="251.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                           <font>
+                              <Font name="Helvetica Neue" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <Label layoutX="557.0" layoutY="170.0" prefHeight="36.0" prefWidth="163.0" text="Difficulty Level" textFill="#dadada">
+                           <font>
+                              <Font name="Helvetica Neue Light" size="26.0" />
+                           </font>
+                        </Label>         
+                        <Label layoutX="505.0" layoutY="325.0" prefHeight="34.0" prefWidth="272.0" text="Number of Questions: 0" textFill="#dadada">
+                           <font>
+                              <Font name="Helvetica Neue Light" size="26.0" />
+                           </font>
+                        </Label>
+                        <Slider fx:id="sNumberOfQuestions" layoutX="466.0" layoutY="385.0" min="1.0" opacity="0.85" prefHeight="30.0" prefWidth="336.0" stylesheets="@Student.css" />
+                        <Label fx:id="lWarning" alignment="CENTER" layoutX="390.0" layoutY="513.0" prefHeight="156.0" prefWidth="500.0" textAlignment="CENTER" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Helvetica Neue Light" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="449.0" layoutY="43.0" prefHeight="91.0" prefWidth="388.0" text="Quiz Settings" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Helvetica Neue" size="64.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="View Results">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <BarChart>
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
