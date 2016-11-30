@@ -13,9 +13,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizpage.SignupLoginController">
    <children>
-      <ImageView fitHeight="832.0" fitWidth="1287.0" layoutX="1.0" layoutY="-64.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="857.0" fitWidth="1297.0" layoutX="1.0" layoutY="-89.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Media/background.jpg" />
+            <Image url="@../Media/SignupLogin.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="-1.0" opacity="0.15" prefHeight="142.0" prefWidth="1277.0" style="-fx-background-color: black;">
@@ -23,28 +23,34 @@
             <Font name="Helvetica Neue UltraLight" size="64.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUsername" layoutX="796.0" layoutY="296.0" prefHeight="60.0" prefWidth="350.0" promptText="Username" />
-      <PasswordField fx:id="pfPassword" layoutX="795.0" layoutY="410.0" prefHeight="60.0" prefWidth="350.0" promptText="Password">
+      <TextField fx:id="tfUsername" layoutX="796.0" layoutY="296.0" opacity="0.85" prefHeight="60.0" prefWidth="350.0" promptText="Username" style="-fx-background-radius: 10 10 10 10;" />
+      <PasswordField fx:id="pfPassword" layoutX="795.0" layoutY="410.0" opacity="0.85" prefHeight="60.0" prefWidth="350.0" promptText="Password" style="-fx-background-radius: 10 10 10 10;">
          <padding>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </padding></PasswordField>
-      <Button fx:id="btLogin" layoutX="890.0" layoutY="535.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="48.0" prefWidth="159.0" text="Login" textAlignment="JUSTIFY" />
+      <Button fx:id="btLogin" layoutX="890.0" layoutY="535.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="48.0" prefWidth="159.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #35b084;" text="Login" textAlignment="JUSTIFY" textFill="WHITESMOKE">
+         <font>
+            <Font name="Helvetica Neue" size="20.0" />
+         </font></Button>
       
-      <TextField fx:id="tfFirstname" layoutX="83.0" layoutY="227.0" prefHeight="50.0" prefWidth="200.0" promptText="Firstname">
+      <TextField fx:id="tfFirstname" layoutX="87.0" layoutY="228.0" opacity="0.85" prefHeight="50.0" prefWidth="200.0" promptText="Firstname" style="-fx-background-radius: 10 10 10 10;">
          <font>
             <Font name="Helvetica Neue Light" size="13.0" />
          </font>
       </TextField>
       <Line endX="600.0" layoutX="327.0" layoutY="476.0" opacity="0.3" rotate="90.0" strokeWidth="5.0" />
-      <TextField fx:id="tfLastname" layoutX="318.0" layoutY="225.0" prefHeight="50.0" prefWidth="200.0" promptText="Lastname" />
-      <TextField fx:id="tfAndrewID" layoutX="88.0" layoutY="321.0" prefHeight="50.0" prefWidth="429.0" promptText="Andrew ID" />
+      <TextField fx:id="tfLastname" layoutX="318.0" layoutY="225.0" opacity="0.85" prefHeight="50.0" prefWidth="200.0" promptText="Lastname" style="-fx-background-radius: 10 10 10 10;" />
+      <TextField fx:id="tfAndrewID" layoutX="88.0" layoutY="321.0" opacity="0.85" prefHeight="50.0" prefWidth="429.0" promptText="Andrew ID" style="-fx-background-radius: 10 10 10 10;" />
       
-      <PasswordField fx:id="pfTypePassword" layoutX="85.0" layoutY="410.0" prefHeight="50.0" prefWidth="429.0" promptText="Create Password" />
-      <PasswordField fx:id="pfReTypePassword" layoutX="84.0" layoutY="493.0" prefHeight="50.0" prefWidth="429.0" promptText="Re-type Password" />
-      <Button fx:id="btSignup" layoutX="190.0" layoutY="584.0" mnemonicParsing="false" onAction="#SignupButtonAction" prefHeight="54.0" prefWidth="237.0" text="Student Signup" textAlignment="JUSTIFY" textFill="#464040" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="9.0" prefHeight="142.0" prefWidth="1277.0" text="Andrew Quizapp">
+      <PasswordField fx:id="pfTypePassword" layoutX="85.0" layoutY="410.0" opacity="0.85" prefHeight="50.0" prefWidth="429.0" promptText="Create Password" style="-fx-background-radius: 10 10 10 10;" />
+      <PasswordField fx:id="pfReTypePassword" layoutX="84.0" layoutY="493.0" opacity="0.85" prefHeight="50.0" prefWidth="429.0" promptText="Re-type Password" style="-fx-background-radius: 10 10 10 10;" />
+      <Button fx:id="btSignup" layoutX="190.0" layoutY="584.0" mnemonicParsing="false" onAction="#SignupButtonAction" prefHeight="54.0" prefWidth="237.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #35b084;" text="Student Signup" textAlignment="JUSTIFY" textFill="WHITESMOKE">
          <font>
-            <Font name="Helvetica Neue UltraLight" size="64.0" />
+            <Font name="Helvetica Neue" size="20.0" />
+         </font></Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="9.0" prefHeight="142.0" prefWidth="1277.0" text="ANDREW QUIZAPP" textFill="WHITE">
+         <font>
+            <Font name="Helvetica Neue Medium" size="60.0" />
          </font>
       </Label>
       <ImageView fitHeight="86.0" fitWidth="158.0" layoutX="67.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
@@ -57,7 +63,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblLoginWarning" layoutX="890.0" layoutY="638.0" style="-fx-background-color: white;" textFill="#ff0000eb" text="">
+      <Label fx:id="lblLoginWarning" layoutX="890.0" layoutY="638.0" style="-fx-background-color: white;" text="" textFill="#ff0000eb">
           <font>
             <Font name="System Bold" size="18.0" />
          </font>

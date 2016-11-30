@@ -26,7 +26,8 @@ public class JavaNew extends Application {
         stage.getIcons().add(new Image("Media/icon_quiz.png"));
         Scene scene = new Scene(page);
         stage.setScene(scene);
-
+        stage.setMaxWidth(1280);
+        stage.setHeight(760);
         stage.show();
 
     }
