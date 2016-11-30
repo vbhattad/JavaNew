@@ -69,6 +69,8 @@ public class StudentController implements Initializable {
 
     @FXML
     ToggleGroup difficultyLevel;
+    @FXML
+    private Label lWarning;
 
     @FXML
     private void logout() {

@@ -28,7 +28,7 @@ public class RightAndWrongC {
         series.getData().add(new XYChart.Data<>("right",array[0]));
         series.getData().add(new XYChart.Data<>("wrong", array[1]));
         chart.getData().add(series);
-        chart.setMaxSize(500, 300);
+        
         return chart;}
 
 }

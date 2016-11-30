@@ -36,7 +36,7 @@ public class StuPassAndFailC {
             series2.getData().add(new XYChart.Data<>("Last year",array[5]));
         
         chart.getData().addAll(series1,series2);
-        chart.setMaxSize(500, 300);
+        
         return chart;}
 
     
