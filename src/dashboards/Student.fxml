@@ -44,7 +44,7 @@
       </RadioButton>
       <Label layoutX="909.0" layoutY="262.0" prefHeight="36.0" prefWidth="163.0" text="Difficulty Level">
          <font>
-            <Font name="Helvetica Neue Light" size="26.0" />
+            <Font size="25.0" />
          </font>
       </Label>         
       <Label layoutX="847.0" layoutY="425.0" prefHeight="34.0" prefWidth="272.0" text="Number of Questions: 0">
@@ -62,7 +62,7 @@
       </BarChart>
       <Label layoutX="796.0" layoutY="104.0" prefHeight="91.0" prefWidth="341.0" text="Quiz Settings">
          <font>
-            <Font name="Helvetica Neue UltraLight" size="64.0" />
+            <Font size="57.0" />
          </font>
       </Label>
       <Line endX="500.0" layoutX="441.0" layoutY="373.0" rotate="90.0" startX="-100.0" />
@@ -82,7 +82,7 @@
             <Font name="Helvetica Neue Light" size="42.0" />
          </font>
       </Label>
-      <Label layoutX="16.0" layoutY="82.0" text="Welcome, Simpson">
+      <Label fx:id="welcome" layoutX="16.0" layoutY="82.0" text="Welcome">
          <font>
             <Font name="Helvetica Neue Light" size="40.0" />
          </font>

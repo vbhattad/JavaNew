@@ -9,6 +9,7 @@ import quizpage.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class JavaNew extends Application {
     public void start(Stage stage) throws Exception {
         
         AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        stage.getIcons().add(new Image("Media/icon_quiz.png"));
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
