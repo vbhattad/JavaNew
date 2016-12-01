@@ -177,45 +177,49 @@ public class InstructorController implements Initializable {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    @FXML
-    public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
-        lFile.setText("");
-        //imgFile.setImage(new Image(""));
-
-        Image img1 = Ave.snapshot(null, null);
-        Image img2 = Num.snapshot(null, null);
-        Image img3 = Diff.snapshot(null, null);
-        Image img4 = Pass.snapshot(null, null);
-        File file = new File("chart.pdf");
-        // Read the image as BufferedImage object
-        PdfWriter writer = new PdfWriter(new FileOutputStream(file));
-        PdfDocument pdfDoc = new PdfDocument(writer);
-        Document doc = new Document(pdfDoc);
-
-        ImageData imgData1 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img1, null), null);
-        ImageData imgData2 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img2, null), null);
-        ImageData imgData3 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img3, null), null);
-        ImageData imgData4 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img4, null), null);
-        com.itextpdf.layout.element.Image pdfImg1 = new com.itextpdf.layout.element.Image(imgData1);
-        com.itextpdf.layout.element.Image pdfImg2 = new com.itextpdf.layout.element.Image(imgData2);
-        com.itextpdf.layout.element.Image pdfImg3 = new com.itextpdf.layout.element.Image(imgData3);
-        com.itextpdf.layout.element.Image pdfImg4 = new com.itextpdf.layout.element.Image(imgData4);
-        // add the page to the document object
-        doc.add(pdfImg1);
-        doc.add(pdfImg2);
-        doc.add(pdfImg3);
-        doc.add(pdfImg4);
-        doc.close();
-
-    }
+//    @FXML
+//    public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
+//        lFile.setText("");
+//        //imgFile.setImage(new Image(""));
+//
+//        Image img1 = Ave.snapshot(null, null);
+//        Image img2 = Num.snapshot(null, null);
+//        Image img3 = Diff.snapshot(null, null);
+//        Image img4 = Pass.snapshot(null, null);
+//        File file = new File("chart.pdf");
+//        // Read the image as BufferedImage object
+//        PdfWriter writer = new PdfWriter(new FileOutputStream(file));
+//        PdfDocument pdfDoc = new PdfDocument(writer);
+//        Document doc = new Document(pdfDoc);
+//
+//        ImageData imgData1 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img1, null), null);
+//        ImageData imgData2 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img2, null), null);
+//        ImageData imgData3 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img3, null), null);
+//        ImageData imgData4 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img4, null), null);
+//        com.itextpdf.layout.element.Image pdfImg1 = new com.itextpdf.layout.element.Image(imgData1);
+//        com.itextpdf.layout.element.Image pdfImg2 = new com.itextpdf.layout.element.Image(imgData2);
+//        com.itextpdf.layout.element.Image pdfImg3 = new com.itextpdf.layout.element.Image(imgData3);
+//        com.itextpdf.layout.element.Image pdfImg4 = new com.itextpdf.layout.element.Image(imgData4);
+//        // add the page to the document object
+//        doc.add(pdfImg1);
+//        doc.add(pdfImg2);
+//        doc.add(pdfImg3);
+//        doc.add(pdfImg4);
+//        doc.close();
+//
+//    }
     /**
      * Show the four different charts on the Reports Tab of the Instructor.
      */
     @FXML
     private BarChart barChart;
+    
+    @FXML
+    private Button ButtonPDF1;
 
     @FXML
     private void showChart1(ActionEvent event) throws SQLException {
+        ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         series1 = a.getSeries();
@@ -228,6 +232,7 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void showChart2(ActionEvent event) throws SQLException {
+         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         series1 = n.getSeries();
@@ -240,6 +245,7 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void showChart3(ActionEvent event) throws SQLException {
+         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         List<XYChart.Series> seriesList = new ArrayList<>();
         seriesList = p.getSeries();
@@ -251,6 +257,7 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void showChart4(ActionEvent event) throws SQLException {
+         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         List<XYChart.Series> seriesList = new ArrayList<>();
