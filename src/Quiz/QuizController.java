@@ -10,6 +10,7 @@ import LoginAndSignup.SignupLoginController;
 import Model.AnswerOption;
 import Model.Question;
 import Model.Result;
+import dashboards.StudentController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -28,14 +29,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -65,6 +71,21 @@ public class QuizController implements Initializable {
 
     @FXML
     private VBox vbox;
+
+    @FXML
+    private PieChart chart;
+
+    @FXML
+    private Label lblGrade;
+
+    @FXML
+    private Label lblGradeRes;
+
+    @FXML
+    private Label lblScore;
+
+    @FXML
+    private Label lblScoreRes;
 
     QuizTest test;
 
@@ -112,11 +133,7 @@ public class QuizController implements Initializable {
     }
 
     private void start() {
-
         vbox = new VBox(25);
-
-        //vbox.setAlignment(Pos.TOP_CENTER);
-        //vbox.setPadding(new Insets(10, 10, 10, 10));
         setTimer();
         displayQuestion(allQuestions.get(questionNumber));
 
@@ -127,7 +144,7 @@ public class QuizController implements Initializable {
         vbox.getChildren().clear();
         pOptions.getChildren().clear();
 
-        lQuestion.setText(que.getQuestionDesc());
+        lQuestion.setText((questionNumber + 1) + ". " + que.getQuestionDesc());
 
         RadioButton radio;
         ArrayList<CheckBox> MACheckBoxes;
@@ -222,12 +239,12 @@ public class QuizController implements Initializable {
             case "FIB":
 
                 TextField tfAnswer = new TextField();
-                tfAnswer.setPadding(new Insets(15, 15, 40, 0));
-
-                tfAnswer.setMinHeight(50);
-                tfAnswer.setMaxHeight(100);
-                tfAnswer.alignmentProperty();
-
+                tfAnswer.setPrefSize(150, 20);
+                
+                tfAnswer.setAlignment(Pos.CENTER);
+                Label ans = new Label("Answer: ");
+                HBox ltf = new HBox(20);
+                ltf.getChildren().addAll(ans,tfAnswer);
                 if (que.getIsAnswered()) {
                     tfAnswer.setText(mapFIB.get(questionNumber));
                 }
@@ -235,7 +252,7 @@ public class QuizController implements Initializable {
                 tfAnswer.textProperty().addListener((observable, oldValue, newValue) -> {
                     computeTextAns(newValue);
                 });
-                vbox.getChildren().add(tfAnswer);
+                vbox.getChildren().add(ltf);
                 pOptions.getChildren().add(vbox);
                 break;
 
@@ -350,6 +367,7 @@ public class QuizController implements Initializable {
                 Platform.runLater(() -> {
                     if (timeCounter == 0) {
                         otimer.cancel();
+                        lTime.setText("Time's up !");
                         endQuiz();
                     } else {
                         if (secUnit == -1) {
@@ -397,15 +415,15 @@ public class QuizController implements Initializable {
                 quizResult.setTotalNoOfHard(totalQuestions);
                 break;
             case "mixed":
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "E").count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && "E".equals(que.getDifficulty())).count();
                 totalQuestions = (int) allQuestions.stream().filter(que -> "E".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectEasy(totalCorrect);
                 quizResult.setTotalNoOfEasy(totalQuestions);
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "M").count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && "M".equals(que.getDifficulty())).count();
                 totalQuestions = (int) allQuestions.stream().filter(que -> "M".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectMedium(totalCorrect);
                 quizResult.setTotalNoOfMedium(totalQuestions);
-                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && que.getDifficulty() == "H").count();
+                totalCorrect = (int) allQuestions.stream().filter(que -> que.getIscorrect() && "H".equals(que.getDifficulty())).count();
                 totalQuestions = (int) allQuestions.stream().filter(que -> "H".equals(que.getDifficulty())).count();
                 quizResult.setNoOfCorrectHard(totalCorrect);
                 quizResult.setTotalNoOfHard(totalQuestions);
@@ -414,15 +432,69 @@ public class QuizController implements Initializable {
                 break;
         }
         calculateGrade();
-
-        /* Things to Implement
-         1. Insert code to save the quiz result in database
-         2. move to student dashboard
-         3. show graph for quiz performance
-         */
         ResultDAOImpl res = new ResultDAOImpl();
         res.insertResults(quizResult);
-        movetoStudentDashboard();
+        showResult();
+    }
+
+    private void showResult() {
+        StudentController.quizPane.getChildren().remove(bNext);
+        StudentController.quizPane.getChildren().remove(bPrevious);
+        StudentController.quizPane.getChildren().remove(lQuestion);
+        StudentController.quizPane.getChildren().remove(lTime);
+        StudentController.quizPane.getChildren().remove(pOptions);
+        changeBtnFunction();
+        showGrade();
+        showChart();
+    }
+
+    public void showGrade() {
+        lblGrade = new Label("Grade :");
+        lblGrade.setLayoutX(395.0);
+        lblGrade.setLayoutY(91.0);
+        lblGrade.setStyle("-fx-text-fill: orange;");
+        lblGradeRes = new Label();
+        if (quizResult.getGrade() == 1) {
+            lblGradeRes.setText("Pass");
+            lblGradeRes.setStyle("-fx-text-fill: green;");
+        } else {
+            lblGradeRes.setText("Fail");
+            lblGradeRes.setStyle("-fx-text-fill: red;");
+        }
+        lblGradeRes.setLayoutX(443.0);
+        lblGradeRes.setLayoutY(91.0);
+        lblScore = new Label("Score :");
+        lblScore.setLayoutX(709);
+        lblScore.setLayoutY(91);
+        lblScore.setStyle("-fx-text-fill: orange;");
+        lblScoreRes = new Label(quizResult.getScore() + "/" + totalNoOfQuestions);
+        lblScoreRes.setLayoutX(755);
+        lblScoreRes.setLayoutY(91);
+        lblScoreRes.setStyle("-fx-text-fill: blue;");
+        StudentController.quizPane.getChildren().addAll(lblGrade, lblGradeRes, lblScore, lblScoreRes);
+
+    }
+
+    public void showChart() {
+
+        ObservableList<PieChart.Data> pieChartData
+                = FXCollections.observableArrayList(
+                        new PieChart.Data("Right", quizResult.getScore()),
+                        new PieChart.Data("Wrong", (totalNoOfQuestions - quizResult.getScore())));
+        chart.setData(pieChartData);
+        chart.setTitle("Your Quiz Result");
+        chart.setLayoutX(377);
+        chart.setLayoutY(139);
+        chart.setPrefSize(441, 282);
+        chart.setAnimated(true);
+    }
+
+    private void changeBtnFunction() {
+        bSubmit.setText("Home");
+        bSubmit.setStyle("-fx-background-color: green;");
+        bSubmit.setOnAction(e -> {
+            movetoStudentDashboard();
+        });
     }
 
     private void movetoStudentDashboard() {
