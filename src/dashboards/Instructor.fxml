@@ -9,30 +9,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.InstructorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="960.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.InstructorController">
   <tabs>
     <Tab text="Add Quiz">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="Tab" stylesheets="@Instructor.css">
                <children>
-                  <ImageView fitHeight="816.0" fitWidth="1280.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="602.0" fitWidth="1054.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Media/Instructor.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="tfFile" layoutX="226.0" layoutY="279.0" opacity="0.71" prefHeight="47.0" prefWidth="842.0" promptText="Supports .csv files" style="-fx-background-radius: 10 10 10 10; -fx-background-color: black;">
+                  <TextField fx:id="tfFile" layoutX="228.0" layoutY="249.0" opacity="0.71" prefHeight="41.0" prefWidth="441.0" promptText="Supports .csv files" style="-fx-background-radius: 10 10 10 10; -fx-background-color: black;">
                      <font>
-                        <Font name="Helvetica Neue Light" size="36.0" />
+                        <Font name="Helvetica Neue Light" size="21.0" />
                      </font>
                   </TextField>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="184.0" prefHeight="86.0" prefWidth="500.0" text="Add a file from your computer" textAlignment="CENTER" textFill="#c9c9c9">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="209.0" prefHeight="35.0" prefWidth="280.0" text="Add a file from your computer" textAlignment="CENTER" textFill="#c9c9c9">
                      <font>
-                        <Font name="Helvetica Neue Light" size="36.0" />
+                        <Font name="Helvetica Neue Light" size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="browse" layoutX="808.0" layoutY="279.0" mnemonicParsing="false" onAction="#browseFile" prefHeight="61.0" prefWidth="260.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 0 10 10 0;" text="Browse" textFill="WHITE">
+                  <Button fx:id="browse" layoutX="617.0" layoutY="249.0" mnemonicParsing="false" onAction="#browseFile" prefHeight="41.0" prefWidth="128.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 0 10 10 0;" text="Browse" textFill="WHITE">
                      <font>
-                        <Font name="Helvetica Neue" size="36.0" />
+                        <Font name="Helvetica Neue Light" size="21.0" />
                      </font>
                   </Button>
                   <ImageView fx:id="imgFile" fitHeight="50.0" fitWidth="50.0" layoutX="428.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
@@ -45,17 +45,17 @@
                         <Font name="Helvetica Neue Thin" size="41.0" />
                      </font>
                   </Label>
-                  <Button fx:id="add" layoutX="583.0" layoutY="401.0" mnemonicParsing="false" onAction="#addFile" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
+                  <Button fx:id="add" layoutX="421.0" layoutY="337.0" mnemonicParsing="false" onAction="#addFile" prefHeight="41.0" prefWidth="126.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
                      <font>
-                        <Font name="Helvetica Neue" size="36.0" />
+                        <Font name="Helvetica Neue Light" size="21.0" />
                      </font>
                   </Button>
-                  <Label layoutX="440.0" layoutY="39.0" text="Welcome, Murli" textFill="WHITESMOKE">
+                  <Label fx:id="lProfessor" layoutX="270.0" layoutY="80.0" text="Welcome, Murli" textFill="WHITESMOKE">
                      <font>
                         <Font name="Helvetica Neue Light" size="64.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1194.0" layoutY="17.0" text="Logout" textFill="#c6c6c6">
+                  <Label layoutX="868.0" layoutY="24.0" text="Logout" textFill="#b9b9b9">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -63,44 +63,40 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="Graph1" text="Charts">
+      <Tab fx:id="Graph1" text="Reports">
          <content>
             <AnchorPane fx:id="GraphScene1" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1280.0">
                <children>
-                  <Button fx:id="ButtonPDF1" layoutX="36.0" layoutY="545.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="52.0" prefWidth="182.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Export to PDF" textFill="WHITESMOKE">
-                     <font>
-                        <Font name="Comic Sans MS Bold" size="21.0" />
-                     </font></Button>
                   <Label fx:id="logout" layoutX="869.0" layoutY="22.0" onMouseClicked="#logout" text="Logout" textFill="#282828">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Pane layoutX="31.0" layoutY="102.0" prefHeight="436.0" prefWidth="195.0" style="-fx-background-color: Black; -fx-background-radius: 10 10 10 10;">
+                  <Pane layoutX="-5.0" layoutY="-20.0" prefHeight="515.0" prefWidth="228.0" style="-fx-background-color: #af001a; -fx-background-radius: 10 10 10 10;">
                      <children>
-                        <Button fx:id="chart1Button" layoutX="7.0" layoutY="44.0" mnemonicParsing="false" onAction="#showChart1" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 1" textFill="#fcf9f9" textOverrun="CENTER_WORD_ELLIPSIS">
+                        <Button fx:id="chart1Button" layoutX="-2.0" layoutY="98.0" mnemonicParsing="false" onAction="#showChart1" opacity="0.66" prefHeight="39.0" prefWidth="231.0" style="-fx-background-color: black;" text="AVG. STUDENT SCORE" textFill="#fcf9f9" textOverrun="CENTER_WORD_ELLIPSIS">
                            <font>
-                              <Font name="Comic Sans MS Bold" size="33.0" />
+                              <Font name="Helvetica Neue Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="chart2Button" layoutX="7.0" layoutY="138.0" mnemonicParsing="false" onAction="#showChart2" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 2" textFill="WHITESMOKE">
+                        <Button fx:id="chart2Button" layoutX="1.0" layoutY="208.0" mnemonicParsing="false" onAction="#showChart2" opacity="0.66" prefHeight="39.0" prefWidth="229.0" style="-fx-background-color: black;" text="TESTS TAKEN" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Comic Sans MS Bold" size="33.0" />
+                              <Font name="Helvetica Neue Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="chart2Button1" layoutX="7.0" layoutY="238.0" mnemonicParsing="false" onAction="#showChart3" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 3" textFill="WHITESMOKE">
+                        <Button fx:id="chart2Button1" layoutX="3.0" layoutY="306.0" mnemonicParsing="false" onAction="#showChart3" opacity="0.66" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: black;" text="PASS / FAIL" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Comic Sans MS Bold" size="33.0" />
+                              <Font name="Helvetica Neue Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="chart2Button11" layoutX="7.0" layoutY="333.0" mnemonicParsing="false" onAction="#showChart4" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 4" textFill="WHITESMOKE">
+                        <Button fx:id="chart2Button11" layoutX="5.0" layoutY="405.0" mnemonicParsing="false" onAction="#showChart4" opacity="0.66" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: black;" text="SCORES BASED ON DIFFICULTY" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Comic Sans MS Bold" size="33.0" />
+                              <Font name="Helvetica Neue Medium" size="12.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneToPDF" layoutX="226.0" layoutY="101.0" prefHeight="448.0" prefWidth="748.0">
+                  <Pane fx:id="paneToPDF" layoutX="238.0" layoutY="72.0" prefHeight="394.0" prefWidth="708.0">
                      <children>
                         <BarChart fx:id="barChart" layoutX="-1.0" layoutY="4.0" prefHeight="433.0" prefWidth="735.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent;" visible="false">
                           <xAxis>
@@ -112,26 +108,14 @@
                         </BarChart>
                      </children>
                   </Pane>
+                  <Button fx:id="ButtonPDF1" layoutX="241.0" layoutY="20.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="39.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save as PDF" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Helvetica Neue Light" size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>
       </Tab>
-    <Tab fx:id="Graph" text="Graphs">
-      <content>
-        <AnchorPane fx:id="GraphScene" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1280.0">
-               <children>
-                  <Button fx:id="ButtonPDF" layoutX="592.0" layoutY="619.0" mnemonicParsing="false" onAction="#savePDF" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save PDF" textFill="WHITESMOKE" />
-                  <Pane fx:id="Diff" layoutX="69.0" layoutY="30.0" prefHeight="320.0" prefWidth="500.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="681.0" AnchorPane.topAnchor="30.0" />
-                  <Pane fx:id="Num" layoutX="731.0" layoutY="55.0" prefHeight="276.0" prefWidth="469.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
-                  <Pane fx:id="Pass" layoutX="780.0" layoutY="379.0" prefHeight="269.0" prefWidth="447.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="380.0" />
-                  <Pane fx:id="Ave" layoutX="93.0" layoutY="352.0" prefHeight="320.0" prefWidth="500.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="681.0" AnchorPane.topAnchor="380.0" />
-                  <Label layoutX="1201.0" layoutY="16.0" text="Logout" textFill="#282828">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children></AnchorPane>
-      </content>
-    </Tab>
   </tabs>
 </TabPane>
