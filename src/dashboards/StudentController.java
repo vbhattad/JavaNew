@@ -148,9 +148,11 @@ public class StudentController implements Initializable {
     /*
      * Implementing the real tim slider andthe home page.
      */
-    
+    @FXML
+    private Label lStudent;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lStudent.setText("Welcome, " + SignupLoginController.user.getFirstName());
         rbEasy.setUserData("easy");
         rbEasy.setSelected(true);
         rbMedium.setUserData("medium");
