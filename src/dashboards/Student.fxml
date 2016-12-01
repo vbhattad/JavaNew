@@ -12,25 +12,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.StudentController">
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.StudentController">
    <children>
-      <TabPane layoutX="-9.0" layoutY="-4.0" prefHeight="781.0" prefWidth="1289.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-3.0" layoutY="-4.0" prefHeight="525.0" prefWidth="964.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Take Quiz">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="843.0" fitWidth="1284.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="623.0" fitWidth="972.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Media/Instructor.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="bStartQuiz" layoutX="559.0" layoutY="480.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
+                        <Label layoutX="-2.0" layoutY="-9.0" opacity="0.9" prefHeight="56.0" prefWidth="979.0" style="-fx-background-color: darkslategray;" />
+                        <Button fx:id="bStartQuiz" layoutX="432.0" layoutY="407.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
                            <font>
-                              <Font name="Helvetica Neue Bold" size="27.0" />
+                              <Font name="Helvetica Neue Bold" size="20.0" />
                            </font>
                         </Button>
-                        <RadioButton fx:id="rbEasy" layoutX="358.0" layoutY="284.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
+                        <RadioButton fx:id="rbEasy" layoutX="228.0" layoutY="225.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
                            <font>
                               <Font name="Helvetica Neue" size="20.0" />
                            </font>
@@ -38,53 +39,56 @@
                               <ToggleGroup fx:id="difficultyLevel" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="rbMedium" layoutX="507.0" layoutY="285.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                        <RadioButton fx:id="rbMedium" layoutX="377.0" layoutY="226.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
                            <font>
                               <Font name="Helvetica Neue" size="20.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbHard" layoutX="671.0" layoutY="285.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                        <RadioButton fx:id="rbHard" layoutX="541.0" layoutY="226.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
                            <font>
                               <Font name="Helvetica Neue" size="20.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbMixed" layoutX="806.0" layoutY="284.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                        <RadioButton fx:id="rbMixed" layoutX="676.0" layoutY="225.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
                            <font>
                               <Font name="Helvetica Neue" size="20.0" />
                            </font>
                         </RadioButton>
-                        <Label layoutX="558.0" layoutY="203.0" prefHeight="36.0" prefWidth="163.0" text="Difficulty Level" textFill="#dadada">
+                        <Label layoutX="432.0" layoutY="163.0" prefHeight="36.0" prefWidth="124.0" text="Difficulty Level" textFill="#dadada">
                            <font>
-                              <Font name="Helvetica Neue Light" size="26.0" />
+                              <Font name="Helvetica Neue Light" size="20.0" />
                            </font>
                         </Label>         
-                        <Label layoutX="521.0" layoutY="360.0" prefHeight="34.0" prefWidth="244.0" text="Number of Questions" textFill="#dadada">
+                        <Label layoutX="410.0" layoutY="294.0" prefHeight="34.0" prefWidth="198.0" text="Number of Questions:" textFill="#dadada">
                            <font>
-                              <Font name="Helvetica Neue Light" size="26.0" />
+                              <Font name="Helvetica Neue Light" size="20.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="sNumberOfQuestions" layoutX="467.0" layoutY="418.0" min="1.0" opacity="0.85" prefHeight="30.0" prefWidth="336.0" stylesheets="@Student.css" />
+                        <Slider fx:id="sNumberOfQuestions" layoutX="342.0" layoutY="351.0" min="1.0" opacity="0.85" prefHeight="30.0" prefWidth="336.0" stylesheets="@Student.css" />
                         <Label fx:id="lWarning" alignment="CENTER" layoutX="390.0" layoutY="540.0" prefHeight="139.0" prefWidth="500.0" textAlignment="CENTER" textFill="WHITESMOKE">
                            <font>
                               <Font name="Helvetica Neue Light" size="26.0" />
                            </font>
                         </Label>
-                        <Label layoutX="438.0" layoutY="96.0" prefHeight="36.0" prefWidth="416.0" text="Quiz Settings" textFill="WHITESMOKE">
+                        <Label layoutX="417.0" layoutY="80.0" prefHeight="36.0" prefWidth="153.0" text="Quiz Settings" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Helvetica Neue" size="64.0" />
+                              <Font name="Helvetica Neue" size="25.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lLogout" layoutX="1192.0" layoutY="12.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="81.0" text="Logout" textFill="WHITESMOKE">
+                        <Label fx:id="lLogout" layoutX="863.0" layoutY="1.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="68.0" text="Logout" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Helvetica Neue Light" size="24.0" />
+                              <Font name="Helvetica Neue Light" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="37.0" layoutY="20.0" text="Welcome, Simpson" textFill="WHITESMOKE">
+                        <Label layoutX="7.0" layoutY="4.0" text="Welcome, Simpson" textFill="WHITESMOKE">
                            <font>
-                              <Font name="Helvetica Neue Light" size="40.0" />
+                              <Font name="Helvetica Neue Light" size="30.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ltotalQuestions" layoutX="839.0" layoutY="387.0" prefHeight="39.0" prefWidth="56.0" textFill="#dadada" />
+                        <Label fx:id="ltotalQuestions" layoutX="597.0" layoutY="292.0" prefHeight="39.0" prefWidth="56.0" textFill="#dadada">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
             </content>
@@ -93,7 +97,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
-                        <BarChart>
+                        <BarChart layoutX="52.0" layoutY="80.0" prefHeight="332.0" prefWidth="495.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

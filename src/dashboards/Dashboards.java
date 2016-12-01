@@ -22,7 +22,7 @@ public class Dashboards extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
         
         Scene scene = new Scene(root);
-        
+       
         stage.setScene(scene);
         stage.show();
     }

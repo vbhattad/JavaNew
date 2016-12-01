@@ -116,6 +116,8 @@ public class InstructorController implements Initializable {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/FXMLDocument.fxml"));
             Scene scene = new Scene(page);
             stage.setScene(scene);
+            stage.setWidth(935);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);

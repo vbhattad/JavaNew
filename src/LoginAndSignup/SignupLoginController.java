@@ -143,8 +143,13 @@ public class SignupLoginController implements Initializable {
                         AnchorPane page;
                         try {
                             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Student.fxml"));
+                            
                             Scene scene = new Scene(page);
                             stage.setScene(scene);
+                            
+                            stage.setWidth(935);
+                            stage.setResizable(false);
+                            
                             stage.show();
                         } catch (IOException ex) {
                             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,6 +163,8 @@ public class SignupLoginController implements Initializable {
                         try {
                             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Admin.fxml"));
                             Scene scene = new Scene(page);
+                            stage.setWidth(935);
+                            stage.setResizable(false);
                             stage.setScene(scene);
                             stage.show();
                         } catch (IOException ex) {
@@ -172,6 +179,8 @@ public class SignupLoginController implements Initializable {
                         try {
                             page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
                             Scene scene = new Scene(page);
+                            stage.setWidth(935);
+                            stage.setResizable(false);
                             stage.setScene(scene);
                             stage.show();
                         } catch (IOException ex) {

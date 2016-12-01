@@ -79,6 +79,8 @@ public class StudentController implements Initializable {
         try {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
             Scene scene = new Scene(page);
+            stage.setWidth(935);
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
