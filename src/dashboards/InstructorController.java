@@ -90,7 +90,7 @@ public class InstructorController implements Initializable {
     private Pane Pass;
     @FXML
     private Pane Ave;
-    
+
     @FXML
     private Button chart1Button;
 
@@ -107,14 +107,14 @@ public class InstructorController implements Initializable {
 
     @FXML
     public TextField tfFile;
-    
+
     @FXML
     public Button add;
 
     @FXML
     private void logout() {
         lFile.setText("");
-     //   imgFile.setImage(new Image(""));
+        //   imgFile.setImage(new Image(""));
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         AnchorPane page;
         try {
@@ -144,45 +144,44 @@ public class InstructorController implements Initializable {
             System.out.println("");
         }
         chosenFile = file.getAbsolutePath();
-        
+
         tfFile.setText(file.getParent() + "/" + file.getName());
-        
+
     }
 
     @FXML
     private void addFile() throws FileNotFoundException {
-        
+
         boolean isSuccessful = false;
-        
+
         try {
             QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
-            
+
             isSuccessful = questionsDAO.addQuestions(chosenFile);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (isSuccessful) {
-        lFile.setText("File Added Successfully");
-       // imgFile.setImage(new Image("../Media/File_Added.png"));
+            lFile.setText("File Added Successfully");
+            // imgFile.setImage(new Image("../Media/File_Added.png"));
         } else {
-        
+
             lFile.setText("Error uploading file.");
-           // imgFile.setImage(new Image("../Media/File_Error.png"));
-            
+            // imgFile.setImage(new Image("../Media/File_Error.png"));
+
         }
     }
-  AveScoreC a = new AveScoreC();
-        NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
-        PassAndFailC p = new PassAndFailC();
-        ScoreOverDiffLevelC s = new ScoreOverDiffLevelC();
+    AveScoreC a = new AveScoreC();
+    NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
+    PassAndFailC p = new PassAndFailC();
+    ScoreOverDiffLevelC s = new ScoreOverDiffLevelC();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lFile.setText("");
-      // imgFile.setImage(new Image(""));
-        
-      
+        // imgFile.setImage(new Image(""));
+
         try {
             Ave.getChildren().add(a.getChart());
             Num.getChildren().add(n.getChart());
@@ -200,7 +199,7 @@ public class InstructorController implements Initializable {
     public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
         lFile.setText("");
         //imgFile.setImage(new Image(""));
-        
+
         Image img1 = Ave.snapshot(null, null);
         Image img2 = Num.snapshot(null, null);
         Image img3 = Diff.snapshot(null, null);
@@ -229,45 +228,76 @@ public class InstructorController implements Initializable {
     }
     @FXML
     private BarChart barChart;
-    
+
     @FXML
-    private void showChart1(ActionEvent event) throws SQLException{
+    private void showChart1(ActionEvent event) throws SQLException {
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         series1 = a.getSeries();
-          barChart.getData().clear();
+        barChart.getData().clear();
         barChart.getData().addAll(series1);
-       
-       
+
     }
-    
+
     @FXML
-    private void showChart2(ActionEvent event) throws SQLException{
+    private void showChart2(ActionEvent event) throws SQLException {
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         series1 = n.getSeries();
-          barChart.getData().clear();
+        barChart.getData().clear();
         barChart.getData().addAll(series1);
-       
+
     }
-    
-      @FXML
-    private void showChart3(ActionEvent event) throws SQLException{
+
+    @FXML
+    private void showChart3(ActionEvent event) throws SQLException {
         barChart.setVisible(true);
-       List<XYChart.Series> seriesList = new ArrayList<>();
+        List<XYChart.Series> seriesList = new ArrayList<>();
         seriesList = p.getSeries();
-         barChart.getData().clear();
-        barChart.getData().addAll(seriesList.get(0),seriesList.get(1));
+        barChart.getData().clear();
+        barChart.getData().addAll(seriesList.get(0), seriesList.get(1));
     }
-      @FXML
-    private void showChart4(ActionEvent event) throws SQLException{
+
+    @FXML
+    private void showChart4(ActionEvent event) throws SQLException {
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
         List<XYChart.Series> seriesList = new ArrayList<>();
         seriesList = s.getSeries();
-         barChart.getData().clear();
-        barChart.getData().addAll(seriesList.get(0),seriesList.get(1));
+        barChart.getData().clear();
+        barChart.getData().addAll(seriesList.get(0), seriesList.get(1));
     }
-    
-    
+    @FXML
+    private Pane paneToPDF;
+
+    @FXML
+    private void exportPDF(ActionEvent event) throws FileNotFoundException, IOException {
+
+        Image img4 = paneToPDF.snapshot(null, null);
+        //File file = new File("chart.pdf");
+//         Read the image as BufferedImage object
+
+        ImageData imgData4;
+        com.itextpdf.layout.element.Image pdfImg4;
+//       
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF");
+        File file1 = fileChooser.showSaveDialog(paneToPDF.getScene().getWindow());
+        if (file1 != null) {
+            try {
+                imgData4 = ImageDataFactory.create(SwingFXUtils.fromFXImage(img4, null), null);
+                pdfImg4 = new com.itextpdf.layout.element.Image(imgData4);
+                PdfWriter writer = new PdfWriter(new FileOutputStream(file1));
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                Document doc = new Document(pdfDoc);
+                doc.add(pdfImg4);
+                doc.close();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+    }
+
 }
