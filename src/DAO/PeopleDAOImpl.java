@@ -11,11 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * The People class to Authenticate, Add and Remove Users.
  *
  * @author katha
  */
 public class PeopleDAOImpl extends DAOJDBCImpl {
 
+    /**
+     * Code to create the table.
+     */
     @Override
     public void createTable() {
         try (Statement stmt = con.createStatement()) {
@@ -33,6 +37,12 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
         }
     }
 
+    /**
+     * Authenticate and return the complete user profile to the controller.
+     * @param username
+     * @param password
+     * @return
+     */
     public People authenticateUser(String username, String password) {
         People user = new People();
         System.out.println("Here!" + username);
@@ -41,11 +51,11 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
             //Connection connect = DriverManager.getConnection(url); //Create connection
             Statement statement = con.createStatement(); //Connect to DB
             ResultSet rs = statement.executeQuery(query);
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 System.out.println(rs.getString("password"));
-                if(password.equals(rs.getString("password"))){
-                    
+                if (password.equals(rs.getString("password"))) {
+
                     user.setAndrewId(rs.getString("andrewid"));
                     user.setFirstName(rs.getString("firstname"));
                     user.setLastName(rs.getString("lastname"));
@@ -54,17 +64,22 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
                     System.out.println(user.getAndrewId());
                 }
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("SQL Exception" + e);
         }
-        
+
         return user;
     }
-    
+
+    /**
+     * Add user if not exists.
+     * @param user
+     * @return
+     */
     public boolean addUser(People user) {
     // add user to DB
-    // return true if success; false if user already present
-        
+        // return true if success; false if user already present
+
         String andrewID = user.getAndrewId();
         System.out.println("Here!" + andrewID);
         String query = "SELECT * from quizapp.PEOPLE where andrewid = '" + andrewID + "'";
@@ -72,11 +87,11 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
             //Connection connect = DriverManager.getConnection(url); //Create connection
             Statement statement = con.createStatement(); //Connect to DB
             ResultSet rs = statement.executeQuery(query);
-           if(rs.next()){
-               return false;
-           }else{
-               String firstname = user.getFirstName();
-               String lastname = user.getLastName();
+            if (rs.next()) { //If user already exists, return false
+                return false;
+            } else { //else add the user to the DB.
+                String firstname = user.getFirstName();
+                String lastname = user.getLastName();
                 String password = user.getPassword();
                 char memberType = user.getMemberType();
                 char courseType = user.getCourseType();
@@ -87,9 +102,12 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
         } catch (SQLException e) {
             System.out.println("SQL Exception" + e);
         }
-    return true;
+        return true;
     }
 
+    /**
+     *
+     */
     @Override
     public void dropTable() {
         try (Statement stmt = con.createStatement()) {
@@ -99,23 +117,28 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
             System.out.println(se.toString());
         }
     }
-    
-    public Boolean removeUser(String andrewID){
+
+    /**
+     *
+     * @param andrewID
+     * @return
+     */
+    public Boolean removeUser(String andrewID) {
         String query = "DELETE FROM PEOPLE WHERE andrewid='" + andrewID + "'";
         String test = "SELECT * FROM PEOPLE WHERE andrewid='" + andrewID + "'";
-        
-        try(Statement stmt = con.createStatement()){
+
+        try (Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(test);
-            if(rs.next()){
-            stmt.execute(query);
-            return true;
+            if (rs.next()) { //If user exists, then remove him from the system.
+                stmt.execute(query);
+                return true;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("SQL EXCEPTION : " + e);
         }
-        
+
         return false;
-        
+
     }
 
     @Override

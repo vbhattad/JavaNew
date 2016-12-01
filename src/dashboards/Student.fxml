@@ -110,7 +110,7 @@
                         </Pane>
                         <Pane fx:id="studentLineChartPane" layoutX="14.0" layoutY="88.0" prefHeight="360.0" prefWidth="481.0">
                            <children>
-                              <LineChart fx:id="studentLineChart" layoutX="1.0" prefHeight="360.0" prefWidth="479.0">
+                              <LineChart fx:id="studentLineChart" layoutX="1.0" prefHeight="360.0" prefWidth="479.0" visible="false">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
