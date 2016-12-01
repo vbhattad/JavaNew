@@ -97,6 +97,9 @@ public class InstructorController implements Initializable {
     public Button bStartQuiz;
 
     @FXML
+    public TextField tfFile;
+    
+    @FXML
     public Button add;
 
     @FXML
@@ -126,16 +129,26 @@ public class InstructorController implements Initializable {
             System.out.println("");
         }
         chosenFile = file.getAbsolutePath();
+        
+        tfFile.setText(file.getParent() + "/" + file.getName());
+        
     }
 
     @FXML
     private void addFile() throws FileNotFoundException {
+        
+        boolean isSuccessful;
+        
         try {
             QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
-            questionsDAO.addQuestions(chosenFile);
+            
+            isSuccessful = questionsDAO.addQuestions(chosenFile);
+            
         } catch (IOException ex) {
             Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //file added successfully if isSuccessful = true
     }
 
     @Override

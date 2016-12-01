@@ -8,13 +8,20 @@ package dashboards;
 import DAO.PeopleDAOImpl;
 import LoginAndSignup.UserSignUp;
 import Model.People;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -68,6 +75,19 @@ public class AdminController implements Initializable {
        }
     }
     
+    @FXML
+    private void logout() {
+        Stage stage = (Stage) instructorAddButton.getScene().getWindow();
+        AnchorPane page;
+        try {
+            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -47,7 +47,7 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
         }
     }
 
-    public void addQuestions(String filepath) throws FileNotFoundException, IOException {
+    public boolean addQuestions(String filepath) throws FileNotFoundException, IOException {
         System.out.println("Hello");
         try (Statement stmt = con.createStatement()) {
             Reader in = new FileReader(filepath); //Read from the CSV
@@ -73,8 +73,11 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
             System.out.println("Records inserted successfully!");
         } catch (SQLException e) {
             System.out.println("SQL Exception" + e);
+            return false;
         }
 
+        return true;
+        
     }
 
     public ArrayList<Question> getQuestions(int totalQuestions, String difficultyLevel) {

@@ -6,7 +6,6 @@
 package dashboards;
 
 import LoginAndSignup.SignupLoginController;
-import Model.People;
 import StudentQuizTest.QuizTest;
 import DAO.QuestionDAOImpl;
 
@@ -15,20 +14,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -44,6 +39,7 @@ public class StudentController implements Initializable {
     String choosenDiff = "easy";
     int totalQuestions = 10;
     int availableLimit;
+    
     @FXML
     private Button bStartQuiz;
 
@@ -64,6 +60,9 @@ public class StudentController implements Initializable {
 
     @FXML
     Label lLogout;
+    
+    @FXML
+    Label lLogoutGraph;
 
     @FXML
     Label ltotalQuestions;
@@ -76,9 +75,9 @@ public class StudentController implements Initializable {
     @FXML
     private void logout() {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
-        TabPane page;
+        AnchorPane page;
         try {
-            page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("javanew/HomePage.fxml"));
+            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
             Scene scene = new Scene(page);
             stage.setScene(scene);
             stage.show();

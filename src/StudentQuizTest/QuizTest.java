@@ -96,7 +96,7 @@ public class QuizTest extends Application {
     static Label question = new Label();
     static Label options = new Label();
 
-    static HBox hbox = new HBox(50);
+    static HBox hbox = new HBox(20);
     static VBox vbox;
     static HBox hbButtons;
 
@@ -110,14 +110,17 @@ public class QuizTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        question.setPadding(new Insets(50, 50, 50, 50));
-        options.setPadding(new Insets(50, 50, 50, 50));
+        question.setPadding(new Insets(25,25,25,25));
+        options.setPadding(new Insets(25,25,25,25));
+        
         hbButtons = new HBox(75);
+        
         bPrevious.setMinWidth(hbButtons.getPrefWidth());
         bPrevious.setOnAction(e -> {
             questionNumber--;
             displayQuestion(allQuestions.get(questionNumber));
         });
+        
         bNext.setMinWidth(hbButtons.getPrefWidth());
         bNext.setOnAction(e -> {
             questionNumber++;
@@ -126,6 +129,7 @@ public class QuizTest extends Application {
 
         hbButtons.setAlignment(Pos.CENTER);
         hbButtons.getChildren().addAll(bPrevious, bNext);
+        
         bEndQuiz.setOnAction(e -> {
 
             AnchorPane page;
@@ -149,14 +153,19 @@ public class QuizTest extends Application {
 
         displayQuestion(allQuestions.get(questionNumber));
 
-        vbox = new VBox(25);
+        vbox = new VBox(10);
 
         vbox.setAlignment(Pos.TOP_CENTER);
-        vbox.setPadding(new Insets(50, 50, 50, 50));
+        vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.getChildren().add(endQuizBox);
+        question.setStyle("-fx-background-color: #FFFFFF;");
+        options.setStyle("-fx-background-color: yellow;");
         vbox.getChildren().addAll(question, options);
         vbox.getChildren().add(hbox);
         vbox.getChildren().add(hbButtons);
+        vbox.setPadding(new Insets(50, 50, 50, 50));
+        
+        
         setTimer();
         scene = new Scene(vbox, 1280, 768);
 
@@ -170,7 +179,11 @@ public class QuizTest extends Application {
         enableDisableButton();
         hbox.getChildren().clear();
         hbox.setAlignment(Pos.CENTER);
+        hbox.setPadding(new Insets(20, 20, 20, 20));
+        hbox.setMaxWidth(1000);
+        hbox.setMaxHeight(30);
         question.setText(que.getQuestionDesc());
+        
         char ch = 'a';
         String strOption = "";
         RadioButton radio;

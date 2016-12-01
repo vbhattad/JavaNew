@@ -28,7 +28,7 @@
          <padding>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </padding></PasswordField>
-      <Button fx:id="btLogin" layoutX="890.0" layoutY="535.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="48.0" prefWidth="159.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #35b084;" text="Login" textAlignment="JUSTIFY" textFill="WHITESMOKE">
+      <Button fx:id="btLogin" layoutX="890.0" layoutY="535.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="48.0" prefWidth="159.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2c8e6a;" text="Login" textAlignment="JUSTIFY" textFill="WHITESMOKE">
          <font>
             <Font name="Helvetica Neue" size="20.0" />
          </font></Button>
@@ -44,7 +44,7 @@
       
       <PasswordField fx:id="pfTypePassword" layoutX="85.0" layoutY="410.0" opacity="0.85" prefHeight="50.0" prefWidth="429.0" promptText="Create Password" style="-fx-background-radius: 10 10 10 10;" />
       <PasswordField fx:id="pfReTypePassword" layoutX="84.0" layoutY="493.0" opacity="0.85" prefHeight="50.0" prefWidth="429.0" promptText="Re-type Password" style="-fx-background-radius: 10 10 10 10;" />
-      <Button fx:id="btSignup" layoutX="190.0" layoutY="584.0" mnemonicParsing="false" onAction="#SignupButtonAction" prefHeight="54.0" prefWidth="237.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #35b084;" text="Student Signup" textAlignment="JUSTIFY" textFill="WHITESMOKE">
+      <Button fx:id="btSignup" layoutX="190.0" layoutY="584.0" mnemonicParsing="false" onAction="#SignupButtonAction" prefHeight="54.0" prefWidth="237.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2c8e6a;" text="Student Signup" textAlignment="JUSTIFY" textFill="WHITESMOKE">
          <font>
             <Font name="Helvetica Neue" size="20.0" />
          </font></Button>
