@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.AdminController">
    <children>
-      <ImageView fitHeight="605.0" fitWidth="965.0" layoutX="-4.0" layoutY="-71.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="603.0" fitWidth="965.0" layoutX="-4.0" layoutY="-71.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Media/Instructor.png" />
          </image>
@@ -21,12 +21,12 @@
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="insPassword" layoutX="252.0" layoutY="247.0" opacity="0.9" prefHeight="39.0" prefWidth="446.0" promptText="Password" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d;">
+      <TextField fx:id="insPassword" layoutX="252.0" layoutY="247.0" opacity="0.9" prefHeight="39.0" prefWidth="446.0" promptText="Password" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d; -fx-text-fill: white;">
          <font>
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="removePeopleTextBox" layoutX="248.0" layoutY="432.0" opacity="0.9" prefHeight="39.0" prefWidth="446.0" promptText="Username or Andrew ID" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d;">
+      <TextField fx:id="removePeopleTextBox" layoutX="248.0" layoutY="432.0" opacity="0.9" prefHeight="39.0" prefWidth="446.0" promptText="Username or Andrew ID" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d; -fx-text-fill: white;">
          <font>
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
@@ -46,17 +46,17 @@
             <Font name="Helvetica Neue Light" size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="insAndrewId" layoutX="250.0" layoutY="177.0" opacity="0.9" prefHeight="39.0" prefWidth="447.0" promptText="Andrew ID" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d;">
+      <TextField fx:id="insAndrewId" layoutX="250.0" layoutY="177.0" opacity="0.9" prefHeight="39.0" prefWidth="447.0" promptText="Andrew ID" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d; -fx-text-fill: white;">
          <font>
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="insFirstName" layoutX="252.0" layoutY="105.0" opacity="0.9" prefHeight="10.0" prefWidth="200.0" promptText="First Name" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d;">
+      <TextField fx:id="insFirstName" layoutX="252.0" layoutY="105.0" opacity="0.9" prefHeight="10.0" prefWidth="200.0" promptText="First Name" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d; -fx-text-fill: white;">
          <font>
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="insLastName" layoutX="493.0" layoutY="106.0" opacity="0.9" prefHeight="10.0" prefWidth="200.0" promptText="Last Name" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d;">
+      <TextField fx:id="insLastName" layoutX="493.0" layoutY="106.0" opacity="0.9" prefHeight="10.0" prefWidth="200.0" promptText="Last Name" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #2d2d2d; -fx-text-fill: white;">
          <font>
             <Font name="Helvetica Neue Light" size="20.0" />
          </font>
@@ -66,12 +66,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lAdd" layoutX="411.0" layoutY="358.0" prefHeight="26.0" prefWidth="156.0" text="Added Successfully." textFill="WHITE">
+      <Label fx:id="lAdd" layoutX="411.0" layoutY="358.0" prefHeight="26.0" prefWidth="156.0" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lRemove" layoutX="407.0" layoutY="477.0" prefHeight="26.0" prefWidth="169.0" text="Removed Successfully." textFill="WHITE">
+      <Label fx:id="lRemove" layoutX="407.0" layoutY="477.0" prefHeight="26.0" prefWidth="169.0" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

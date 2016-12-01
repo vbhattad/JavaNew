@@ -102,9 +102,14 @@ public class PeopleDAOImpl extends DAOJDBCImpl {
     
     public Boolean removeUser(String andrewID){
         String query = "DELETE FROM PEOPLE WHERE andrewid='" + andrewID + "'";
+        String test = "SELECT * FROM PEOPLE WHERE andrewid='" + andrewID + "'";
+        
         try(Statement stmt = con.createStatement()){
+            ResultSet rs = stmt.executeQuery(test);
+            if(rs.next()){
             stmt.execute(query);
             return true;
+            }
         }catch(SQLException e){
             System.out.println("SQL EXCEPTION : " + e);
         }

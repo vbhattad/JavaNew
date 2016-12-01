@@ -64,7 +64,7 @@ public class AdminController implements Initializable {
     @FXML
     private void peopleRemove(ActionEvent event){
      PeopleDAOImpl people = new PeopleDAOImpl();
-     if(people.removeUser(removePeopleTextBox.getText())){
+     if(people.removeUser(removePeopleTextBox.getText().toString())){
          lRemove.setText("Removed User");
      }else{
          lRemove.setText("User Doesn't exist");
