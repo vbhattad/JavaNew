@@ -73,6 +73,9 @@ public class StudentController implements Initializable {
     private Label lWarning;
 
     @FXML
+    private Label welcome;
+    
+    @FXML
     private void logout() {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         AnchorPane page;

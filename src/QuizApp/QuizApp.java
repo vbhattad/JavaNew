@@ -8,6 +8,7 @@ package QuizApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class QuizApp extends Application {
         
         AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         Scene scene = new Scene(page);
+         stage.getIcons().add(new Image("Media/icon_quiz.png"));
         stage.setScene(scene);
 
         stage.show();
