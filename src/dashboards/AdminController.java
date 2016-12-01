@@ -64,7 +64,7 @@ public class AdminController implements Initializable {
     @FXML
     private void peopleRemove(ActionEvent event){
      PeopleDAOImpl people = new PeopleDAOImpl();
-     if(people.removeUser(removePeopleTextBox.getText())){
+     if(people.removeUser(removePeopleTextBox.getText().toString())){
          lRemove.setText("Removed User");
      }else{
          lRemove.setText("User Doesn't exist");
@@ -94,7 +94,7 @@ public class AdminController implements Initializable {
         try {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
             Scene scene = new Scene(page);
-            stage.setWidth(935);
+            stage.setWidth(960);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();

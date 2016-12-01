@@ -5,17 +5,21 @@
  */
 package DAO;
 
+import LoginAndSignup.SignupLoginController;
 import Model.Result;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 
 /**
  *
@@ -368,5 +372,77 @@ public class ResultDAOImpl extends DAOJDBCImpl {
          }catch (SQLException e){
              System.out.println("SQL Exception: " +e);
          }
+    }
+
+   
+
+//    public ObservableList<PieChart.Data> getPieData(LocalDate fromDateString, LocalDate toDateString) {
+//
+//    }
+//
+//    public List<XYChart.Series> getBarSeries(LocalDate fromDateString, LocalDate toDateString) {
+//       
+//        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+//        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+//        series1.setName("highest scores over deifficulty level ");
+//        // set column name as easy,medium,hard and mix and pass all the value to it
+//        series1.getData().add(new XYChart.Data<>("Easy", array[0]));
+//        series1.getData().add(new XYChart.Data<>("Medium", array[1]));
+//        series1.getData().add(new XYChart.Data<>("Hard", array[2]));
+//        series1.getData().add(new XYChart.Data<>("Mix", array[3]));
+//        series2.setName("lowest scores over deifficulty level");
+//        series2.getData().add(new XYChart.Data<>("Easy", array[4]));
+//        series2.getData().add(new XYChart.Data<>("Medium", array[5]));
+//        series1.getData().add(new XYChart.Data<>("Hard", array[6]));
+//        series2.getData().add(new XYChart.Data<>("Mix", array[7]));
+//        List<XYChart.Series> seriesList = new ArrayList<>();
+//        seriesList.add(series1);
+//        seriesList.add(series2);
+//        return seriesList;
+//    
+//    }
+
+    public ArrayList getLineSeries(LocalDate fromDateString, LocalDate toDateString){
+        String andrewId = SignupLoginController.user.getAndrewId();
+        ArrayList<Integer> data = new ArrayList<>();
+        String fromDate = fromDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 00:00:00";
+        String toDate = toDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 23:59:59";
+        try(Statement stmt = con.createStatement()){
+            String query = "Select Score from Result where andrewId='" + andrewId + "' and DT > '" + fromDate + "' && DT < '" + toDate + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            int i = 0;
+            while(rs.next()){
+                i++;
+                int score = rs.getInt("Score");
+                data.add(score);
+                
+            }
+        }catch(SQLException e){
+            System.out.println("SQLException " + e);
+        }
+        return data;
+    }
+
+    public int[] getNoPassandFall(LocalDate fromDateString, LocalDate toDateString) {
+        int[] passFail = new int[2];
+            String andrewId = SignupLoginController.user.getAndrewId();
+        ArrayList<Integer> data = new ArrayList<>();
+        String fromDate = fromDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 00:00:00";
+        String toDate = toDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 23:59:59";
+        try(Statement stmt = con.createStatement()){
+            String query = "Select pass from Result where andrewId='" + andrewId + "' and DT > '" + fromDate + "' && DT < '" + toDate + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            int i = 0;
+            while(rs.next()){
+                i++;
+                if(rs.getInt("pass") == 1)
+                    passFail[0]++;
+                else
+                    passFail[1]++;
+            }
+        }catch(SQLException e){
+            System.out.println("SQLException " + e);
+        }
+        return passFail;
     }
 }

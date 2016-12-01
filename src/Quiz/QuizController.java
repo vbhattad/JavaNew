@@ -32,7 +32,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.CheckBox;
@@ -40,12 +40,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author darshanmohan
+ * 
  */
 public class QuizController implements Initializable {
 
@@ -92,9 +93,9 @@ public class QuizController implements Initializable {
     private int questionNumber = 0;
     private int totalNoOfQuestions;
 
-    private HashMap<Integer, ArrayList<CheckBox>> mapCheckBoxes = new HashMap<>();
-    private HashMap<Integer, ArrayList<RadioButton>> mapRadioButtons = new HashMap<>();
-    private HashMap<Integer, String> mapFIB = new HashMap<>();
+    private final HashMap<Integer, ArrayList<CheckBox>> mapCheckBoxes = new HashMap<>();
+    private final HashMap<Integer, ArrayList<RadioButton>> mapRadioButtons = new HashMap<>();
+    private final HashMap<Integer, String> mapFIB = new HashMap<>();
     private final Result quizResult = new Result();
 
     private int secUnit;
@@ -109,10 +110,12 @@ public class QuizController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        // Set the private variables for conducting quiz
         difficultyLevel = QuizTest.difficultyLevel;
         allQuestions = QuizTest.allQuestions;
         totalNoOfQuestions = QuizTest.totalNoOfQuestions;
 
+        // Set actions methods for buttons
         bPrevious.setOnAction(e -> {
             questionNumber--;
             displayQuestion(allQuestions.get(questionNumber));
@@ -126,40 +129,46 @@ public class QuizController implements Initializable {
         bSubmit.setOnAction(e -> {
             endQuiz();
         });
-
-        start();
-    }
-
-    private void start() {
+        
         vbox = new VBox(25);
-        setTimer();
-        displayQuestion(allQuestions.get(questionNumber));
 
+        start(); // Starts the quiz
     }
 
+    /*
+    * Start the Quiz
+    */
+    private void start() {
+        setTimer(); // sets the timer based on number of questions
+        displayQuestion(allQuestions.get(questionNumber)); // displays the questions
+    }
+
+    /*
+    * Display question based on question type
+    */
     private void displayQuestion(Question que) {
-        enableDisableButton();
+        enableDisableButton(); // Enable / Disable previous or next button
         vbox.getChildren().clear();
         pOptions.getChildren().clear();
 
-        lQuestion.setText((questionNumber + 1) + ". " + que.getQuestionDesc());
+        lQuestion.setText((questionNumber + 1) + ". " + que.getQuestionDesc()); // set question description
 
         RadioButton radio;
         ArrayList<CheckBox> MACheckBoxes;
         ArrayList<RadioButton> RadioButtons;
         ToggleGroup togglegroup;
 
-        switch (que.getQuestionType()) {
+        switch (que.getQuestionType()) { // display question based on type
 
-            case "MC":
-                if (que.getIsAnswered()) {
+            case "MC": // Multiple choice
+                if (que.getIsAnswered()) { // if already answered, show with chosen options
                     RadioButtons = mapRadioButtons.get(questionNumber);
                     RadioButtons.stream().forEach(rb -> vbox.getChildren().add(rb));
                     pOptions.getChildren().add(vbox);
                 } else {
                     RadioButtons = new ArrayList<>();
                     togglegroup = new ToggleGroup();
-                    for (AnswerOption option : que.getOptionList()) {
+                    for (AnswerOption option : que.getOptionList()) { // Create options dynamically
                         radio = new RadioButton(option.getOptionDesc());
                         radio.setToggleGroup(togglegroup);
                         radio.setUserData(option.getOptionDesc());
@@ -172,36 +181,36 @@ public class QuizController implements Initializable {
                         vbox.getChildren().add(radio);
                     }
                     pOptions.getChildren().add(vbox);
-                    mapRadioButtons.put(questionNumber, RadioButtons);
+                    mapRadioButtons.put(questionNumber, RadioButtons); // Store the options in hashmaps
                 }
                 break;
 
-            case "MA":
-                if (que.getIsAnswered()) {
+            case "MA": // Multiple Answer
+                if (que.getIsAnswered()) { // if already answered, show with chosen options
                     MACheckBoxes = mapCheckBoxes.get(questionNumber);
                     MACheckBoxes.stream().forEach(cb -> vbox.getChildren().add(cb));
                     pOptions.getChildren().add(vbox);
                 } else {
                     CheckBox check;
                     MACheckBoxes = new ArrayList<>();
-                    for (AnswerOption option : que.getOptionList()) {
+                    for (AnswerOption option : que.getOptionList()) { // Create options dynamically
                         check = new CheckBox(option.getOptionDesc());
                         check.setAllowIndeterminate(false);
                         check.setSelected(false);
                         check.setUserData(option.getOptionDesc());
                         check.selectedProperty().addListener((obs, oldval, newval) -> {
-                            computeCheckBoxAns();
+                            computeCheckBoxAns(); // Check for change of option
                         });
                         MACheckBoxes.add(check);
                         vbox.getChildren().add(check);
                     }
-                    mapCheckBoxes.put(questionNumber, MACheckBoxes);
+                    mapCheckBoxes.put(questionNumber, MACheckBoxes); // Store the options in hashmaps
                     pOptions.getChildren().add(vbox);
                 }
                 break;
 
-            case "TF":
-                if (que.getIsAnswered()) {
+            case "TF": // True or False
+                if (que.getIsAnswered()) { // if already answered, show with chosen options
                     RadioButtons = mapRadioButtons.get(questionNumber);
                     RadioButtons.stream().forEach(rb -> vbox.getChildren().add(rb));
                     pOptions.getChildren().add(vbox);
@@ -214,7 +223,7 @@ public class QuizController implements Initializable {
                     radio.setUserData("True");
                     radio.selectedProperty().addListener((obs, oldval, newval) -> {
                         if (newval) {
-                            computeTF();
+                            computeTF(); // check for change of option
                         }
                     });
                     RadioButtons.add(radio);
@@ -230,27 +239,27 @@ public class QuizController implements Initializable {
                     RadioButtons.add(radio);
                     vbox.getChildren().add(radio);
                     pOptions.getChildren().add(vbox);
-                    mapRadioButtons.put(questionNumber, RadioButtons);
+                    mapRadioButtons.put(questionNumber, RadioButtons); // Store the options in hashmaps
                 }
                 break;
 
-            case "FIB":
+            case "FIB": // Fill in the blank
 
                 TextField tfAnswer = new TextField();
-                tfAnswer.setPadding(new Insets(15, 15, 40, 0));
-
-                tfAnswer.setMinHeight(50);
-                tfAnswer.setMaxHeight(100);
-                tfAnswer.alignmentProperty();
-
-                if (que.getIsAnswered()) {
+                tfAnswer.setPrefSize(150, 20);
+                
+                tfAnswer.setAlignment(Pos.CENTER);
+                Label ans = new Label("Answer: ");
+                HBox ltf = new HBox(20);
+                ltf.getChildren().addAll(ans,tfAnswer);
+                if (que.getIsAnswered()) { // if already answered, show with entered answer
                     tfAnswer.setText(mapFIB.get(questionNumber));
                 }
 
                 tfAnswer.textProperty().addListener((observable, oldValue, newValue) -> {
-                    computeTextAns(newValue);
+                    computeTextAns(newValue); // check for answer correctly or not
                 });
-                vbox.getChildren().add(tfAnswer);
+                vbox.getChildren().add(ltf);
                 pOptions.getChildren().add(vbox);
                 break;
 
@@ -260,6 +269,9 @@ public class QuizController implements Initializable {
         }
     }
 
+    /*
+    * store and compute answers for FIB
+    */
     private void computeTextAns(String inputAnswer) {
         mapFIB.put(questionNumber, inputAnswer);
         Question que = allQuestions.get(questionNumber);
@@ -272,6 +284,9 @@ public class QuizController implements Initializable {
         }
     }
 
+    /*
+    * store and compute answers for MA
+    */
     private void computeCheckBoxAns() {
         Question que = allQuestions.get(questionNumber);
         que.setIsAnswered(true);
@@ -295,6 +310,9 @@ public class QuizController implements Initializable {
         }
     }
 
+    /*
+    * store and compute answers for MC
+    */
     private void computeRadiobtnAns() {
         Question que = allQuestions.get(questionNumber);
         que.setIsAnswered(true);
@@ -302,14 +320,15 @@ public class QuizController implements Initializable {
         mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
             if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
                 allQuestions.get(questionNumber).setIscorrect(true);
-                System.out.println("Radio correct");
             } else {
                 allQuestions.get(questionNumber).setIscorrect(false);
-                System.out.println("Radio InCorrect");
             }
         });
     }
 
+    /*
+    * store and compute answers for True or False
+    */
     private void computeTF() {
         Question que = allQuestions.get(questionNumber);
         que.setIsAnswered(true);
@@ -317,14 +336,15 @@ public class QuizController implements Initializable {
         mapRadioButtons.get(questionNumber).stream().filter((rb) -> (rb.isSelected())).forEach((rb) -> {
             if (correctAns.equalsIgnoreCase(rb.getUserData().toString())) {
                 allQuestions.get(questionNumber).setIscorrect(true);
-                System.out.println("Radio correct");
             } else {
                 allQuestions.get(questionNumber).setIscorrect(false);
-                System.out.println("Radio InCorrect");
             }
         });
     }
 
+    /*
+    * Enable/Disable previous or next button
+    */
     private void enableDisableButton() {
 
         if (questionNumber <= 0) {
@@ -339,6 +359,9 @@ public class QuizController implements Initializable {
         }
     }
 
+    /*
+    * Calcualte grade for the quiz
+    */
     private void calculateGrade() {
         int totalCorrectAns = quizResult.getNoOfCorrectEasy() + quizResult.getNoOfCorrectMedium() + quizResult.getNoOfCorrectHard();
         quizResult.setScore(totalCorrectAns);
@@ -351,6 +374,9 @@ public class QuizController implements Initializable {
         }
     }
 
+    /*
+    * Sets time based on number of questions
+    */
     private void setTimer() {
         secUnit = 9;
         secTens = 5;
@@ -391,6 +417,9 @@ public class QuizController implements Initializable {
         otimer.scheduleAtFixedRate(task, 0, 1000);
     }
 
+    /*
+    * End the quiz
+    */
     private void endQuiz() {
         int totalQuestions = allQuestions.size();
         int totalCorrect = 0;
@@ -435,6 +464,9 @@ public class QuizController implements Initializable {
         showResult();
     }
 
+    /*
+    * show quiz result
+    */
     private void showResult() {
         StudentController.quizPane.getChildren().remove(bNext);
         StudentController.quizPane.getChildren().remove(bPrevious);
@@ -446,6 +478,9 @@ public class QuizController implements Initializable {
         showChart();
     }
 
+    /*
+    * Show grade and score for the quiz
+    */
     public void showGrade() {
         lblGrade = new Label("Grade :");
         lblGrade.setLayoutX(395.0);
@@ -473,6 +508,9 @@ public class QuizController implements Initializable {
 
     }
 
+    /*
+    * Generate chart for the quiz 
+    */
     public void showChart() {
 
         ObservableList<PieChart.Data> pieChartData
@@ -487,6 +525,9 @@ public class QuizController implements Initializable {
         chart.setAnimated(true);
     }
 
+    /*
+    * Changing submit button to home button
+    */
     private void changeBtnFunction() {
         bSubmit.setText("Home");
         bSubmit.setStyle("-fx-background-color: green;");
@@ -495,6 +536,9 @@ public class QuizController implements Initializable {
         });
     }
 
+    /*
+    * Move to Student dashboard
+    */
     private void movetoStudentDashboard() {
 
         try {
