@@ -53,23 +53,19 @@ import javafx.stage.Stage;
 public class InstructorController implements Initializable {
 
     @FXML
-    private Tab Graph;
-    @FXML
-    private AnchorPane GraphScene;
-    @FXML
     private Button ButtonPDF;
     @FXML
     private Label lFile;
 //    @FXML
 //    private ImageView imgFile;
-    @FXML
+    /*@FXML
     private Pane Diff;
     @FXML
     private Pane Num;
     @FXML
     private Pane Pass;
     @FXML
-    private Pane Ave;
+    private Pane Ave;*/
 
     @FXML
     private Button chart1Button;
@@ -173,18 +169,6 @@ public class InstructorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         lFile.setText("");
         // imgFile.setImage(new Image(""));
-
-        try {
-            Ave.getChildren().add(a.getChart());
-            Num.getChildren().add(n.getChart());
-
-            Pass.getChildren().add(p.getChart());
-
-            Diff.getChildren().add(s.getChart());
-
-        } catch (SQLException ex) {
-            Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
