@@ -8,24 +8,40 @@ package dashboards;
 import LoginAndSignup.SignupLoginController;
 import Quiz.QuizTest;
 import DAO.QuestionDAOImpl;
+import DAO.ResultDAOImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -149,6 +165,82 @@ public class StudentController implements Initializable {
                 sNumberOfQuestions.setMax(availableLimit);
             }
         });
+
+    }
+    @FXML
+    private DatePicker fromDatePicker;
+
+    @FXML
+    private DatePicker toDatePicker;
+
+    @FXML
+    private BarChart studentBarChart;
+
+    @FXML
+    private PieChart studentPieChart;
+    
+    
+    @FXML
+    private LineChart<Number, Number> studentLineChart = new LineChart(new NumberAxis(), new NumberAxis()) ;
+
+    @FXML
+    private Pane studentPieChartPane;
+
+    @FXML
+    private Pane studentLineChartPane;
+
+    LocalDate toDateString;
+    LocalDate fromDateString;
+
+    @FXML
+    private void fromDate(ActionEvent event) {
+        fromDateString = fromDatePicker.getValue();
+
+        toDatePicker.setDisable(false);
+
+    }
+
+    @FXML
+    private void toDate(ActionEvent event) {
+        
+        toDateString = toDatePicker.getValue();
+
+        ResultDAOImpl result = new ResultDAOImpl();
+     
+        int[] passFail = result.getNoPassandFall(fromDateString, toDateString);
+        studentPieChart.getData().clear();
+        studentLineChart.getData().clear();
+        studentPieChart.setTitle("Result of all the tests taken over the chosen period");
+        studentLineChart.setTitle("Scores of all the tests taken over the chosen period");
+        ObservableList<PieChart.Data> pieChartData
+                = FXCollections.observableArrayList(
+                        new PieChart.Data("Pass", passFail[0]),
+                        new PieChart.Data("Fail", passFail[1]));
+
+        studentPieChart.setData(pieChartData);
+        studentPieChartPane.getChildren().clear();
+        studentPieChartPane.getChildren().add(studentPieChart);
+        
+   
+       
+        ArrayList<Integer> data = new ArrayList<>();
+        data = result.getLineSeries(fromDateString, toDateString);
+        XYChart.Series series1 = new XYChart.Series();
+   
+         studentLineChart.getXAxis().setLabel("Number of Tests");
+        int x = 0;
+        for (Integer i : data) {
+            x++;
+            series1.getData().add(new XYChart.Data(Integer.toString(x), i));
+        }
+      
+        
+        studentLineChart.getData().addAll(series1);
+
+    }
+
+    @FXML
+    private void studentSaveAsPDF(ActionEvent event) {
 
     }
 
