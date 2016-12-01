@@ -10,18 +10,19 @@ import DAO.PeopleDAOImpl;
 
 /**
  *
- * @author katha
+ * Class helps in connecting DB and UI
  */
 public class UserLogin {
 
     People user;
-    PeopleDAOImpl dao = new PeopleDAOImpl();
+    PeopleDAOImpl dao = new PeopleDAOImpl(); // DB call classs
 
+    /*
+    * Authenticate user
+     */
     public People authenticateUser(String username, String password) {
         user = dao.authenticateUser(username, password); // check DB for user credentials
         return user;
     }
-    
-    
-    
+
 }
