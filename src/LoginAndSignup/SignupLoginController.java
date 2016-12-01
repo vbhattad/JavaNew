@@ -5,7 +5,7 @@
  */
 package LoginAndSignup;
 
-import StudentQuizTest.QuizTest;
+import Quiz.QuizTest;
 
 import LoginAndSignup.UserSignUp;
 import LoginAndSignup.UserLogin;
@@ -147,7 +147,6 @@ public class SignupLoginController implements Initializable {
                             Scene scene = new Scene(page);
                             stage.setScene(scene);
                             
-                            stage.setWidth(935);
                             stage.setResizable(false);
                             
                             stage.show();
@@ -163,7 +162,7 @@ public class SignupLoginController implements Initializable {
                         try {
                             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Admin.fxml"));
                             Scene scene = new Scene(page);
-                            stage.setWidth(935);
+                            
                             stage.setResizable(false);
                             stage.setScene(scene);
                             stage.show();
@@ -179,7 +178,7 @@ public class SignupLoginController implements Initializable {
                         try {
                             page = (TabPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
                             Scene scene = new Scene(page);
-                            stage.setWidth(935);
+                            
                             stage.setResizable(false);
                             stage.setScene(scene);
                             stage.show();
