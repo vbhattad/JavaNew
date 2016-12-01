@@ -5,7 +5,7 @@
  */
 package LoginAndSignup;
 
-import StudentQuizTest.QuizTest;
+import Quiz.QuizTest;
 
 import LoginAndSignup.UserSignUp;
 import LoginAndSignup.UserLogin;
