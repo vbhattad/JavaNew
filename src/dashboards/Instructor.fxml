@@ -96,14 +96,14 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneToPDF" layoutX="238.0" layoutY="72.0" prefHeight="394.0" prefWidth="708.0">
+                  <Pane fx:id="paneToPDF" layoutX="238.0" layoutY="72.0" prefHeight="351.0" prefWidth="708.0">
                      <children>
-                        <BarChart fx:id="barChart" layoutX="-1.0" layoutY="4.0" prefHeight="433.0" prefWidth="735.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent;" visible="false">
+                        <BarChart fx:id="barChart" layoutX="-1.0" layoutY="4.0" prefHeight="347.0" prefWidth="708.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent;" visible="false">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis side="LEFT" />
+                            <NumberAxis prefHeight="304.0" prefWidth="30.0" side="LEFT" />
                           </yAxis>
                         </BarChart>
                      </children>
