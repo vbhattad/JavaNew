@@ -54,6 +54,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -75,7 +76,10 @@ public class InstructorController implements Initializable {
     private AnchorPane GraphScene;
     @FXML
     private Button ButtonPDF;
-
+    @FXML
+    private Label lFile;
+    @FXML
+    private ImageView imgFile;
     @FXML
     private Pane Diff;
     @FXML
@@ -104,6 +108,8 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void logout() {
+        lFile.setText("");
+        imgFile.setImage(new Image(""));
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         AnchorPane page;
         try {
@@ -118,6 +124,7 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void browseFile() {
+        lFile.setText("");imgFile.setImage(new Image(""));
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -137,7 +144,7 @@ public class InstructorController implements Initializable {
     @FXML
     private void addFile() throws FileNotFoundException {
         
-        boolean isSuccessful;
+        boolean isSuccessful = false;
         
         try {
             QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
@@ -147,12 +154,21 @@ public class InstructorController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (isSuccessful) {
+        lFile.setText("File Added Successfully");
+        imgFile.setImage(new Image("../Media/File_Added.png"));
+        } else {
         
-        //file added successfully if isSuccessful = true
+            lFile.setText("Error uploading file.");
+            imgFile.setImage(new Image("../Media/File_Error.png"));
+            
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lFile.setText("");imgFile.setImage(new Image(""));
+        
         AveScoreC a = new AveScoreC();
         NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
         PassAndFailC p = new PassAndFailC();
@@ -173,6 +189,8 @@ public class InstructorController implements Initializable {
 
     @FXML
     public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
+        lFile.setText("");imgFile.setImage(new Image(""));
+        
         Image img1 = Ave.snapshot(null, null);
         Image img2 = Num.snapshot(null, null);
         Image img3 = Diff.snapshot(null, null);

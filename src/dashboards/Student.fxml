@@ -58,7 +58,7 @@
                               <Font name="Helvetica Neue Light" size="26.0" />
                            </font>
                         </Label>         
-                        <Label layoutX="506.0" layoutY="358.0" prefHeight="34.0" prefWidth="272.0" text="Number of Questions: 0" textFill="#dadada">
+                        <Label layoutX="521.0" layoutY="360.0" prefHeight="34.0" prefWidth="244.0" text="Number of Questions" textFill="#dadada">
                            <font>
                               <Font name="Helvetica Neue Light" size="26.0" />
                            </font>

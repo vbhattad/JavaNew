@@ -20,7 +20,7 @@
                         <Image url="@../Media/Instructor.png" />
                      </image>
                   </ImageView>
-                  <TextField layoutX="226.0" layoutY="279.0" opacity="0.71" prefHeight="47.0" prefWidth="842.0" promptText="Supports .csv files" style="-fx-background-radius: 10 10 10 10; -fx-background-color: black;">
+                  <TextField fx:id="tfFile" layoutX="226.0" layoutY="279.0" opacity="0.71" prefHeight="47.0" prefWidth="842.0" promptText="Supports .csv files" style="-fx-background-radius: 10 10 10 10; -fx-background-color: black;">
                      <font>
                         <Font name="Helvetica Neue Light" size="36.0" />
                      </font>
@@ -35,12 +35,12 @@
                         <Font name="Helvetica Neue" size="36.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="428.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgFile" fitHeight="50.0" fitWidth="50.0" layoutX="428.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Media/File_Added.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="510.0" layoutY="555.0" text="File added successfully." textFill="#c9c9c9">
+                  <Label fx:id="lFile" layoutX="510.0" layoutY="555.0" text="File added successfully." textFill="#c9c9c9">
                      <font>
                         <Font name="Helvetica Neue Thin" size="41.0" />
                      </font>

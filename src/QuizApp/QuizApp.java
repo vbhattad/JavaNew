@@ -20,7 +20,7 @@ public class QuizApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("dashboards/Instructor.fxml"));
         Scene scene = new Scene(page);
         stage.setScene(scene);
 

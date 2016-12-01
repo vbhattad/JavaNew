@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -55,12 +56,18 @@ public class AdminController implements Initializable {
     public TextField removePeopleTextBox;
     
     @FXML
+    public Label lAdd;
+    
+    @FXML
+    public Label lRemove;
+    
+    @FXML
     private void peopleRemove(ActionEvent event){
      PeopleDAOImpl people = new PeopleDAOImpl();
      if(people.removeUser(removePeopleTextBox.getText())){
-         System.out.println("Removed User");
+         lRemove.setText("Removed User");
      }else{
-         System.out.println("User Doesn't exist to delete");
+         lRemove.setText("User Doesn't exist");
      }
       
     }
@@ -69,16 +76,21 @@ public class AdminController implements Initializable {
     private void instructorAdd(ActionEvent event){
          UserSignUp addFaculty = new UserSignUp();
        if(addFaculty.addUser(insFirstName.getText(), insLastName.getText(), insPassword.getText(), insAndrewId.getText(), 'F')){
-           System.out.println("Got true");
+           lAdd.setText("Added Successfully.");
        }else{
-           System.out.println("Got False");
+           lAdd.setText("Add unsuccessful.");
        }
     }
     
     @FXML
     private void logout() {
         Stage stage = (Stage) instructorAddButton.getScene().getWindow();
+        
         AnchorPane page;
+        
+        lAdd.setText("");
+        lRemove.setText("");
+        
         try {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
             Scene scene = new Scene(page);
