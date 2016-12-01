@@ -19,26 +19,24 @@ and open the template in the editor.
 
 .tab {
     -fx-background-insets: 0 1 0 1,0,0;
-    -fx-background-color: dimgray;
+    -fx-background-color: #5b5b5b;
     -fx-opacity: 0.8;
-    
 
 }
 
 .tab .tab-label { 
     -fx-text-fill: darkgray;
+    -fx-font-size: 15px;
 }
 
 .tab-pane
 {
     -fx-tab-min-width:605px;
-    -fx-tab-min-height: 600px;
+    -fx-tab-min-height: 70px;
 }
 
 .tab:selected .tab-label {
-    -fx-text-fill: whitesmoke;
-}
-
-.Tab {
+    -fx-text-fill: white;
+    -fx-tab-min-height: 45px;
     
 }
