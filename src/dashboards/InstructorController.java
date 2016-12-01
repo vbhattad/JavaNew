@@ -50,6 +50,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.chart.BubbleChart;
@@ -78,8 +80,8 @@ public class InstructorController implements Initializable {
     private Button ButtonPDF;
     @FXML
     private Label lFile;
-    @FXML
-    private ImageView imgFile;
+//    @FXML
+//    private ImageView imgFile;
     @FXML
     private Pane Diff;
     @FXML
@@ -88,6 +90,9 @@ public class InstructorController implements Initializable {
     private Pane Pass;
     @FXML
     private Pane Ave;
+    
+    @FXML
+    private Button chart1Button;
 
     /**
      * Initializes the controller class.
@@ -109,7 +114,7 @@ public class InstructorController implements Initializable {
     @FXML
     private void logout() {
         lFile.setText("");
-        imgFile.setImage(new Image(""));
+     //   imgFile.setImage(new Image(""));
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         AnchorPane page;
         try {
@@ -126,7 +131,8 @@ public class InstructorController implements Initializable {
 
     @FXML
     private void browseFile() {
-        lFile.setText("");imgFile.setImage(new Image(""));
+        lFile.setText("");
+        //imgFile.setImage(new Image(""));
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -158,24 +164,25 @@ public class InstructorController implements Initializable {
         }
         if (isSuccessful) {
         lFile.setText("File Added Successfully");
-        imgFile.setImage(new Image("../Media/File_Added.png"));
+       // imgFile.setImage(new Image("../Media/File_Added.png"));
         } else {
         
             lFile.setText("Error uploading file.");
-            imgFile.setImage(new Image("../Media/File_Error.png"));
+           // imgFile.setImage(new Image("../Media/File_Error.png"));
             
         }
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        lFile.setText("");imgFile.setImage(new Image(""));
-        
-        AveScoreC a = new AveScoreC();
+  AveScoreC a = new AveScoreC();
         NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
         PassAndFailC p = new PassAndFailC();
         ScoreOverDiffLevelC s = new ScoreOverDiffLevelC();
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        lFile.setText("");
+      // imgFile.setImage(new Image(""));
+        
+      
         try {
             Ave.getChildren().add(a.getChart());
             Num.getChildren().add(n.getChart());
@@ -191,7 +198,8 @@ public class InstructorController implements Initializable {
 
     @FXML
     public void savePDF(ActionEvent event) throws FileNotFoundException, IOException {
-        lFile.setText("");imgFile.setImage(new Image(""));
+        lFile.setText("");
+        //imgFile.setImage(new Image(""));
         
         Image img1 = Ave.snapshot(null, null);
         Image img2 = Num.snapshot(null, null);
@@ -219,4 +227,47 @@ public class InstructorController implements Initializable {
         doc.close();
 
     }
+    @FXML
+    private BarChart barChart;
+    
+    @FXML
+    private void showChart1(ActionEvent event) throws SQLException{
+        barChart.setVisible(true);
+        XYChart.Series series1 = new XYChart.Series();
+        series1 = a.getSeries();
+          barChart.getData().clear();
+        barChart.getData().addAll(series1);
+       
+       
+    }
+    
+    @FXML
+    private void showChart2(ActionEvent event) throws SQLException{
+        barChart.setVisible(true);
+        XYChart.Series series1 = new XYChart.Series();
+        series1 = n.getSeries();
+          barChart.getData().clear();
+        barChart.getData().addAll(series1);
+       
+    }
+    
+      @FXML
+    private void showChart3(ActionEvent event) throws SQLException{
+        barChart.setVisible(true);
+       List<XYChart.Series> seriesList = new ArrayList<>();
+        seriesList = p.getSeries();
+         barChart.getData().clear();
+        barChart.getData().addAll(seriesList.get(0),seriesList.get(1));
+    }
+      @FXML
+    private void showChart4(ActionEvent event) throws SQLException{
+        barChart.setVisible(true);
+        XYChart.Series series1 = new XYChart.Series();
+        List<XYChart.Series> seriesList = new ArrayList<>();
+        seriesList = s.getSeries();
+         barChart.getData().clear();
+        barChart.getData().addAll(seriesList.get(0),seriesList.get(1));
+    }
+    
+    
 }

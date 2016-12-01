@@ -63,11 +63,57 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab fx:id="Graph1" text="Charts">
+         <content>
+            <AnchorPane fx:id="GraphScene1" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1280.0">
+               <children>
+                  <Button fx:id="ButtonPDF1" layoutX="343.0" layoutY="559.0" mnemonicParsing="false" onAction="#savePDF" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save PDF" textFill="WHITESMOKE" />
+                  <Label fx:id="logout" layoutX="869.0" layoutY="22.0" onMouseClicked="#logout" text="Logout" textFill="#282828">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="31.0" layoutY="102.0" prefHeight="436.0" prefWidth="195.0" style="-fx-background-color: Black; -fx-background-radius: 10 10 10 10;">
+                     <children>
+                        <Button fx:id="chart1Button" layoutX="7.0" layoutY="44.0" mnemonicParsing="false" onAction="#showChart1" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 1" textFill="#fcf9f9" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="33.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chart2Button" layoutX="7.0" layoutY="138.0" mnemonicParsing="false" onAction="#showChart2" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 2" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="33.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chart2Button1" layoutX="7.0" layoutY="238.0" mnemonicParsing="false" onAction="#showChart3" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 3" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="33.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chart2Button11" layoutX="7.0" layoutY="333.0" mnemonicParsing="false" onAction="#showChart4" prefHeight="70.0" prefWidth="181.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Chart 4" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="33.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <BarChart fx:id="barChart" layoutX="226.0" layoutY="104.0" prefHeight="433.0" prefWidth="735.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent;" visible="false">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
     <Tab fx:id="Graph" text="Graphs">
       <content>
         <AnchorPane fx:id="GraphScene" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1280.0">
                <children>
-                  <Button fx:id="ButtonPDF" layoutX="592.0" layoutY="619.0" mnemonicParsing="false" onAction="#savePDF" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save PDF" textFill="WHITESMOKE" />
+                  <Button fx:id="ButtonPDF" layoutX="592.0" layoutY="619.0" mnemonicParsing="false" onAction="#savePDF" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save PDF" textFill="WHITESMOKE" />
                   <Pane fx:id="Diff" layoutX="69.0" layoutY="30.0" prefHeight="320.0" prefWidth="500.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="681.0" AnchorPane.topAnchor="30.0" />
                   <Pane fx:id="Num" layoutX="731.0" layoutY="55.0" prefHeight="276.0" prefWidth="469.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
                   <Pane fx:id="Pass" layoutX="780.0" layoutY="379.0" prefHeight="269.0" prefWidth="447.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="380.0" />

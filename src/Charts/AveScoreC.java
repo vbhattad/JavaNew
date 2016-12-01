@@ -33,5 +33,20 @@ public class AveScoreC {
             series.getData().add(new XYChart.Data<>("Last year", array[2]));
         chart.getData().add(series);
         chart.setMaxSize(500, 300);
-        return chart;}
+        return chart;
+        
+        }
+        
+         public XYChart.Series getSeries() throws SQLException{
+      
+        array=resultDao.getAveScore();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        //set the series column names as last month,last quarter and last year and pass the value 
+        series.setName("Average student score over last month, quarter and year");
+         series.getData().add(new XYChart.Data<>("Last month", array[0]));
+            series.getData().add(new XYChart.Data<>("Last quater", array[1]));
+            series.getData().add(new XYChart.Data<>("Last year", array[2]));
+       
+        return series;
+}
 }
