@@ -74,6 +74,9 @@ public class StudentController implements Initializable {
 
     @FXML
     private Label welcome;
+    
+    @FXML 
+    public static AnchorPane quizPane;
 
     @FXML
     private void logout() {
@@ -95,13 +98,13 @@ public class StudentController implements Initializable {
     private void startQuiz(ActionEvent event) {
 
         System.out.println("Number of questiosns: " + sNumberOfQuestions.getValue());
-        AnchorPane page;
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
+        
         try {
             quiz.setAllQuestions(totalQuestions, choosenDiff);
             //quiz.start(stage);
-            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("Quiz/Quiz.fxml"));
-            Scene scene = new Scene(page);
+            quizPane = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("Quiz/Quiz.fxml"));
+            Scene scene = new Scene(quizPane);
             
             stage.setResizable(false);
             stage.setScene(scene);
