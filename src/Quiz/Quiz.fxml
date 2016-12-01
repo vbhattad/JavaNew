@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.PieChart?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Quiz.QuizController">
-   <children>
-      <Button fx:id="bSubmit" alignment="CENTER" layoutX="877.0" layoutY="20.0" mnemonicParsing="false"  style="-fx-background-radius: 10 10 10 10; -fx-background-color: #ff003b;" text="Submit" textFill="WHITE" />
-      <Label fx:id="lQuestion" alignment="CENTER" layoutX="298.0" layoutY="127.0" prefHeight="65.0" prefWidth="616.0" text="sadsdafdsffaf\nsadfa fa fads fdsa fa fa fads fadfafasfafaf afafasfaf" />
-      <Pane fx:id="pOptions" layoutX="480.0" layoutY="201.0" prefHeight="179.0" prefWidth="243.0" style="-fx-background-position: center; -fx-background-color: yellow;" />
-      <Button fx:id="bPrevious" layoutX="515.0" layoutY="405.0" mnemonicParsing="false" prefWidth="75.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: lightgray;" text="Previous" />
-      <Button fx:id="bNext" layoutX="616.0" layoutY="404.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: lightgray;" text="Next" />
-      <Label fx:id="lTime" layoutX="790.0" layoutY="20.0" prefHeight="27.0" prefWidth="76.0" text="00 : 00">
-         <font>
-            <Font name="Helvetica Neue Thin" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="-4.0" layoutY="-1.0" prefHeight="522.0" prefWidth="256.0" style="-fx-background-color: black;" text="Label" />
-      <TextArea fx:id="taNotes" layoutX="24.0" layoutY="70.0" prefHeight="420.0" prefWidth="200.0" />
-      <Label layoutX="87.0" layoutY="19.0" text="NOTES" textFill="WHITESMOKE">
-         <font>
-            <Font name="Helvetica Neue Light" size="25.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane id="aPane" prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Quiz.QuizController">
+    <children>
+        <PieChart fx:id="chart" />
+        <Button fx:id="bSubmit" alignment="CENTER" layoutX="877.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #ff003b;" text="Submit" textFill="WHITE" />
+        <Label fx:id="lQuestion" alignment="CENTER" layoutX="298.0" layoutY="127.0" prefHeight="65.0" prefWidth="616.0" text="sadsdafdsffaf\nsadfa fa fads fdsa fa fa fads fadfafasfafaf afafasfaf" />
+        <Pane fx:id="pOptions" layoutX="480.0" layoutY="201.0" prefHeight="179.0" prefWidth="243.0" style="-fx-background-position: center;" />
+        <Button fx:id="bPrevious" layoutX="515.0" layoutY="405.0" mnemonicParsing="false" prefWidth="75.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: lightgray;" text="Previous" />
+        <Button fx:id="bNext" layoutX="616.0" layoutY="404.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: lightgray;" text="Next" />
+        <Label fx:id="lTime" layoutX="790.0" layoutY="20.0" prefHeight="27.0" prefWidth="76.0" text="00 : 00">
+            <font>
+                <Font name="Helvetica Neue Thin" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="-4.0" layoutY="-1.0" prefHeight="522.0" prefWidth="256.0" style="-fx-background-color: black;" text="Label" />
+        <TextArea fx:id="taNotes" layoutX="24.0" layoutY="70.0" prefHeight="420.0" prefWidth="200.0" />
+        <Label layoutX="87.0" layoutY="19.0" text="NOTES" textFill="WHITESMOKE">
+            <font>
+                <Font name="Helvetica Neue Light" size="25.0" />
+            </font>
+        </Label>
+    </children>
 </AnchorPane>
