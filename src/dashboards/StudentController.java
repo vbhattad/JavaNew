@@ -6,7 +6,7 @@
 package dashboards;
 
 import LoginAndSignup.SignupLoginController;
-import StudentQuizTest.QuizTest;
+import Quiz.QuizTest;
 import DAO.QuestionDAOImpl;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class StudentController implements Initializable {
     String choosenDiff = "easy";
     int totalQuestions = 10;
     int availableLimit;
-    
+
     @FXML
     private Button bStartQuiz;
 
@@ -60,7 +60,7 @@ public class StudentController implements Initializable {
 
     @FXML
     Label lLogout;
-    
+
     @FXML
     Label lLogoutGraph;
 
@@ -74,7 +74,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private Label welcome;
-    
+
     @FXML
     private void logout() {
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
@@ -95,11 +95,17 @@ public class StudentController implements Initializable {
     private void startQuiz(ActionEvent event) {
 
         System.out.println("Number of questiosns: " + sNumberOfQuestions.getValue());
-
+        AnchorPane page;
         Stage stage = (Stage) bStartQuiz.getScene().getWindow();
         try {
             quiz.setAllQuestions(totalQuestions, choosenDiff);
-            quiz.start(stage);
+            //quiz.start(stage);
+            page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("Quiz/Quiz.fxml"));
+            Scene scene = new Scene(page);
+            stage.setWidth(935);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception ex) {
             Logger.getLogger(SignupLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,14 +121,13 @@ public class StudentController implements Initializable {
         rbMixed.setUserData("mixed");
         QuestionDAOImpl dao = new QuestionDAOImpl();
         availableLimit = dao.getTotalNumberOfQuestions(choosenDiff);
-        
+
         sNumberOfQuestions.setMin(5);
         sNumberOfQuestions.setValue(5);
         sNumberOfQuestions.setMax(availableLimit);
-        
+
         ltotalQuestions.setText(Integer.toString(5));
-        
-        
+
         sNumberOfQuestions.setShowTickLabels(true);
         sNumberOfQuestions.setShowTickMarks(true);
         sNumberOfQuestions.setMajorTickUnit(5);
