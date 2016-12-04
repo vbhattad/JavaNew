@@ -104,7 +104,7 @@ public class InstructorController implements Initializable {
     private void logout() {
         lFile.setText("");
         //   imgFile.setImage(new Image(""));
-        Stage stage = (Stage) bStartQuiz.getScene().getWindow();
+        Stage stage = (Stage) browse.getScene().getWindow();
         AnchorPane page;
         try {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
@@ -156,7 +156,7 @@ public class InstructorController implements Initializable {
             // imgFile.setImage(new Image("../Media/File_Added.png"));
         } else {
             
-            lFile.setText("Error uploading file.");
+            lFile.setText("Error uploading file. Check columns");
             // imgFile.setImage(new Image("../Media/File_Error.png"));
 
         }

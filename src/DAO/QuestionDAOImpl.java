@@ -83,7 +83,7 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
                 stmt.execute(query);
             }
             System.out.println("Records inserted successfully!");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("SQL Exception" + e);
             return false; //Return False if not all questions were added
         }

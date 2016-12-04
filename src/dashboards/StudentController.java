@@ -21,7 +21,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
+import java.util.logging.Level; 
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,6 +94,12 @@ public class StudentController implements Initializable {
     
     @FXML
     private Label welcome;
+    
+    @FXML
+    private Button studentSaveAsPDFButton;
+    
+    @FXML
+    private Button bgetResults;
 
     /**
      *
@@ -121,7 +127,7 @@ public class StudentController implements Initializable {
     }
 
     /**
-     * the start Quiz method to get all the Questins
+     * the start Quiz method to get all the Questions
      *
      * @param event
      */
@@ -214,9 +220,7 @@ public class StudentController implements Initializable {
     @FXML
     private void fromDate(ActionEvent event) {
         fromDateString = fromDatePicker.getValue();
-        
         toDatePicker.setDisable(false);
-        
     }
 
     /**
@@ -226,9 +230,11 @@ public class StudentController implements Initializable {
      */
     @FXML
     private void toDate(ActionEvent event) {
-        
         toDateString = toDatePicker.getValue();
-        
+        bgetResults.setDisable(false);
+    }
+    
+    @FXML void getResults(){
         ResultDAOImpl result = new ResultDAOImpl();
         
         int[] passFail = result.getNoPassandFall(fromDateString, toDateString);
@@ -239,7 +245,7 @@ public class StudentController implements Initializable {
         studentLineChart.setTitle("Scores of all the tests taken over the chosen period");
         ObservableList<PieChart.Data> pieChartData
                 = FXCollections.observableArrayList(
-                        new PieChart.Data("Pass", passFail[0]),
+                        new PieChart.Data("Passcms", passFail[0]),
                         new PieChart.Data("Fail", passFail[1]));
         
         studentPieChart.setData(pieChartData);
@@ -258,7 +264,7 @@ public class StudentController implements Initializable {
         }
         
         studentLineChart.getData().addAll(series1);
-        
+        studentSaveAsPDFButton.setDisable(false);
     }
     
     @FXML

@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author katha
+ * getter and setter methods for options
  */
 public class AnswerOption {
 

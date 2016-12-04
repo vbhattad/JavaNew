@@ -40,9 +40,9 @@
                         <Image url="@../Media/File_Added.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lFile" layoutX="510.0" layoutY="555.0" text="File added successfully." textFill="#c9c9c9">
+                  <Label fx:id="lFile" layoutX="362.0" layoutY="396.0" prefHeight="55.0" prefWidth="418.0" text="File added successfully." textFill="#c9c9c9">
                      <font>
-                        <Font name="Helvetica Neue Thin" size="41.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
                   <Button fx:id="add" layoutX="421.0" layoutY="337.0" mnemonicParsing="false" onAction="#addFile" prefHeight="41.0" prefWidth="126.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
