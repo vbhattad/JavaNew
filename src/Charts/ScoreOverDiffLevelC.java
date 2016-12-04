@@ -19,12 +19,15 @@ import javafx.scene.chart.XYChart;
 public class ScoreOverDiffLevelC {
 
     //Creat a new barchart and name it chart
-
     BarChart<String, Number> chart = new BarChart<>(new CategoryAxis(), new NumberAxis());
     //creat a new DAO.resultDAOImpl 
     DAO.ResultDAOImpl resultDao = new DAO.ResultDAOImpl();
     int[] array = new int[8];
 
+    /**
+     *
+     * @return
+     */
     public BarChart<String, Number> getChart() {
         //access to the method getScoreOverDiffLevel via resultDao and return an int array that contains the highest and lowest score for difficulty levels
         array = resultDao.getScoreOverDiffLevel();
@@ -47,8 +50,12 @@ public class ScoreOverDiffLevelC {
         return chart;
     }
 
+    /**
+     * Get all the difficulty based questions
+     * @return
+     */
     public List<XYChart.Series> getSeries() {
-         array = resultDao.getScoreOverDiffLevel();
+        array = resultDao.getScoreOverDiffLevel();
         //creat two series,series1 display highest scores and series2 display lowest scores
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
         XYChart.Series<String, Number> series2 = new XYChart.Series<>();
@@ -67,7 +74,7 @@ public class ScoreOverDiffLevelC {
         seriesList.add(series1);
         seriesList.add(series2);
         return seriesList;
-    
+
     }
 
 }

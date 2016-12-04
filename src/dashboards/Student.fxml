@@ -13,121 +13,131 @@
 <?import javafx.collections.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboards.StudentController">
-   <children>
-      <TabPane layoutX="-3.0" layoutY="-4.0" prefHeight="525.0" prefWidth="964.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Take Quiz">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="623.0" fitWidth="972.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Media/Instructor.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="-2.0" layoutY="-9.0" opacity="0.9" prefHeight="56.0" prefWidth="979.0" style="-fx-background-color: darkslategray;" />
-                        <Button fx:id="bStartQuiz" layoutX="426.0" layoutY="410.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
-                           <font>
-                              <Font name="Helvetica Neue Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <RadioButton fx:id="rbEasy" layoutX="228.0" layoutY="225.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
-                           <font>
-                              <Font name="Helvetica Neue" size="20.0" />
-                           </font>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="difficultyLevel" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="rbMedium" layoutX="377.0" layoutY="226.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-                           <font>
-                              <Font name="Helvetica Neue" size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="rbHard" layoutX="541.0" layoutY="226.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-                           <font>
-                              <Font name="Helvetica Neue" size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="rbMixed" layoutX="676.0" layoutY="225.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
-                           <font>
-                              <Font name="Helvetica Neue" size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Label layoutX="427.0" layoutY="163.0" prefHeight="36.0" prefWidth="147.0" text="Difficulty Level" textFill="#404040">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="20.0" />
-                           </font>
-                        </Label>         
-                        <Label layoutX="401.0" layoutY="296.0" prefHeight="34.0" prefWidth="214.0" text="Number of Questions:" textFill="#404040">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <Slider fx:id="sNumberOfQuestions" layoutX="342.0" layoutY="351.0" min="1.0" opacity="0.81" prefHeight="14.0" prefWidth="336.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10; -fx-text-fill: white;" stylesheets="@Student.css" />
-                        <Label fx:id="lWarning" alignment="CENTER" layoutX="390.0" layoutY="540.0" prefHeight="139.0" prefWidth="500.0" textAlignment="CENTER" textFill="WHITESMOKE">
-                           <font>
-                              <Font name="Helvetica Neue Light" size="26.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="425.0" layoutY="90.0" prefHeight="36.0" prefWidth="153.0" text="Quiz Settings" textFill="WHITESMOKE">
-                           <font>
-                              <Font name="Helvetica Neue" size="25.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lLogout" layoutX="863.0" layoutY="1.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="68.0" text="Logout" textFill="WHITESMOKE">
-                           <font>
-                              <Font name="Helvetica Neue Light" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="7.0" layoutY="4.0" text="Welcome, Simpson" textFill="WHITESMOKE">
-                           <font>
-                              <Font name="Helvetica Neue Light" size="30.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ltotalQuestions" layoutX="621.0" layoutY="293.0" prefHeight="39.0" prefWidth="56.0" textFill="#dadada">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Label>
-                        <Line endX="150.0" layoutX="499.0" layoutY="138.0" startX="-150.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="View Results">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
-                     <children>
-                        <Label fx:id="lLogoutGraph" layoutX="1184.0" layoutY="31.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="81.0" text="Logout">
-                           <font>
-                              <Font name="Helvetica Neue Light" size="24.0" />
-                           </font>
-                        </Label>
-                        <Pane fx:id="studentPieChartPane" layoutX="526.0" layoutY="89.0" prefHeight="359.0" prefWidth="424.0">
-                           <children>
-                              <PieChart fx:id="studentPieChart" layoutX="-2.0" layoutY="1.0" prefHeight="356.0" prefWidth="429.0" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="studentLineChartPane" layoutX="14.0" layoutY="88.0" prefHeight="360.0" prefWidth="481.0">
-                           <children>
-                              <LineChart fx:id="studentLineChart" layoutX="1.0" prefHeight="360.0" prefWidth="479.0">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" />
-                                </yAxis>
-                              </LineChart>
-                           </children>
-                        </Pane>
-                        <DatePicker fx:id="fromDatePicker" layoutX="109.0" layoutY="34.0" onAction="#fromDate" promptText="From" />
-                        <DatePicker fx:id="toDatePicker" disable="true" layoutX="437.0" layoutY="34.0" onAction="#toDate" promptText="To" />
-                        <Button fx:id="studentSaveAsPDFButton" layoutX="726.0" layoutY="34.0" mnemonicParsing="false" onAction="#studentSaveAsPDF" prefHeight="39.0" prefWidth="121.0" text="Save as PDF" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+    <children>
+        <TabPane layoutX="-3.0" layoutY="-4.0" prefHeight="525.0" prefWidth="964.0" stylesheets="@Instructor.css" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Take Quiz">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="623.0" fitWidth="972.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Media/Instructor.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="-2.0" layoutY="-9.0" opacity="0.9" prefHeight="56.0" prefWidth="979.0" style="-fx-background-color: darkslategray;" />
+                                <Button fx:id="bStartQuiz" layoutX="426.0" layoutY="410.0" mnemonicParsing="false" onAction="#startQuiz" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Start Quiz" textAlignment="JUSTIFY" textFill="WHITE">
+                                    <font>
+                                        <Font name="Helvetica Neue Bold" size="20.0" />
+                                    </font>
+                                </Button>
+                                <RadioButton fx:id="rbEasy" layoutX="228.0" layoutY="225.0" mnemonicParsing="false" text="Easy" textFill="#d0d0d0">
+                                    <font>
+                                        <Font name="Helvetica Neue" size="20.0" />
+                                    </font>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="difficultyLevel" />
+                                    </toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="rbMedium" layoutX="377.0" layoutY="226.0" mnemonicParsing="false" text="Medium" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                                    <font>
+                                        <Font name="Helvetica Neue" size="20.0" />
+                                    </font>
+                                </RadioButton>
+                                <RadioButton fx:id="rbHard" layoutX="541.0" layoutY="226.0" mnemonicParsing="false" text="Hard" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                                    <font>
+                                        <Font name="Helvetica Neue" size="20.0" />
+                                    </font>
+                                </RadioButton>
+                                <RadioButton fx:id="rbMixed" layoutX="676.0" layoutY="225.0" mnemonicParsing="false" text="Mixed" textFill="#d0d0d0" toggleGroup="$difficultyLevel">
+                                    <font>
+                                        <Font name="Helvetica Neue" size="20.0" />
+                                    </font>
+                                </RadioButton>
+                                <Label layoutX="427.0" layoutY="163.0" prefHeight="36.0" prefWidth="147.0" text="Difficulty Level" textFill="#404040">
+                                    <font>
+                                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                                    </font>
+                                </Label>         
+                                <Label layoutX="401.0" layoutY="296.0" prefHeight="34.0" prefWidth="214.0" text="Number of Questions:" textFill="#404040">
+                                    <font>
+                                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Slider fx:id="sNumberOfQuestions" layoutX="342.0" layoutY="351.0" min="1.0" opacity="0.81" prefHeight="14.0" prefWidth="336.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10; -fx-text-fill: white;" stylesheets="@Student.css" />
+                                <Label fx:id="lWarning" alignment="CENTER" layoutX="390.0" layoutY="540.0" prefHeight="139.0" prefWidth="500.0" textAlignment="CENTER" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font name="Helvetica Neue Light" size="26.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="425.0" layoutY="90.0" prefHeight="36.0" prefWidth="153.0" text="Quiz Settings" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font name="Helvetica Neue" size="25.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lLogout" layoutX="863.0" layoutY="1.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="68.0" text="Logout" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font name="Helvetica Neue Light" size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lStudent" layoutX="7.0" layoutY="4.0" text="Welcome, Simpson" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font name="Helvetica Neue Light" size="30.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="ltotalQuestions" layoutX="621.0" layoutY="293.0" prefHeight="39.0" prefWidth="56.0" textFill="#dadada">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <Line endX="150.0" layoutX="499.0" layoutY="138.0" startX="-150.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="View Results">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                            <children>
+                                <Label fx:id="lLogoutGraph" layoutX="1184.0" layoutY="31.0" onMouseClicked="#logout" prefHeight="44.0" prefWidth="81.0" text="Logout">
+                                    <font>
+                                        <Font name="Helvetica Neue Light" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Pane fx:id="studentPieChartPane" layoutX="526.0" layoutY="89.0" prefHeight="359.0" prefWidth="424.0">
+                                    <children>
+                                        <PieChart fx:id="studentPieChart" layoutX="-2.0" layoutY="1.0" prefHeight="356.0" prefWidth="429.0" />
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="studentLineChartPane" layoutX="14.0" layoutY="88.0" prefHeight="360.0" prefWidth="481.0">
+                                    <children>
+                                        <LineChart fx:id="studentLineChart" layoutX="1.0" prefHeight="360.0" prefWidth="479.0" visible="false">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                        </LineChart>
+                                    </children>
+                                </Pane>
+                                <DatePicker fx:id="fromDatePicker" layoutX="109.0" layoutY="34.0" onAction="#fromDate" promptText="From" />
+                                <DatePicker fx:id="toDatePicker" disable="true" layoutX="437.0" layoutY="34.0" onAction="#toDate" promptText="To" />
+                                <Button fx:id="studentSaveAsPDFButton" disable="true" layoutX="813.0" layoutY="27.0" mnemonicParsing="false" onAction="#studentSaveAsPDF" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save as PDF" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="bgetResults" disable="true" layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#getResults" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Get Results" textFill="WHITESMOKE">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Button>                            
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>
