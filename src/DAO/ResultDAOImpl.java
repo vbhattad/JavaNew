@@ -22,11 +22,14 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 /**
- *
+ * Class to perform the result related implementation with the Database.
  * @author katha
  */
 public class ResultDAOImpl extends DAOJDBCImpl {
 
+    /**
+     * Code to create the Result Table.
+     */
     @Override
     public void createTable() {
         try (Statement stmt = con.createStatement()) {
@@ -48,6 +51,9 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         }
     }
 
+    /**
+     * Code to Drop th Result Table.
+     */
     @Override
     public void dropTable() {
         try (Statement stmt = con.createStatement()) {
@@ -67,11 +73,17 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         }
     }
 
-    public int[] getRightandWrong(String id,String date) {
+    /**
+     * Get the total number of Correct and Wrong Answers.
+     * @param id
+     * @param date
+     * @return
+     */
+    public int[] getRightandWrong(String id, String date) {
         ResultSet results = null;
         int[] intArray = new int[2];
         try (Statement stmt = con.createStatement()) {
-            String query = "select CorrectEasy,CorrectMedium,CorrectHard,TotalEasy,TotalMedium,TotalHard from Result where andrewid='" + id + "',DT='"+date+"'";
+            String query = "select CorrectEasy,CorrectMedium,CorrectHard,TotalEasy,TotalMedium,TotalHard from Result where andrewid='" + id + "',DT='" + date + "'";
             results = stmt.executeQuery(query);
             if (results.next()) {
                 int CorrectEasy = results.getInt(1);
@@ -82,12 +94,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
                 int wrongHard = results.getInt(6) - CorrectHard;
                 intArray[0] = CorrectEasy + CorrectMedium + CorrectHard;
                 intArray[1] = wrongEasy + wrongMedium + wrongHard;
-                //System.out.println(CorrectEasy);
-                //System.out.println(CorrectMedium);
-                //System.out.println(CorrectHard);
-                // System.out.println(wrongEasy);
-                // System.out.println(wrongMedium);
-                // System.out.println(wrongHard);
+
             }
 
         } catch (Exception se) {
@@ -96,6 +103,10 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return intArray;
     }
 
+    /**
+     *
+     * @return
+     */
     public int[] getPassandFall() {
         String date1 = getDate(1);
         String date2 = getDate(3);
@@ -149,6 +160,12 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         }
         return intArray;
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public int[] getPassandFallForStu(String id) {
         String date1 = getDate(1);
         String date2 = getDate(3);
@@ -203,6 +220,10 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return intArray;
     }
 
+    /**
+     *
+     * @return
+     */
     public int[] getNumOfTestDuringTime() {
         String date1 = getDate(1);
         String date2 = getDate(3);
@@ -235,6 +256,10 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return intArray;
     }
 
+    /**
+     * Getting Average Scores.
+     * @return @throws SQLException
+     */
     public double[] getAveScore() throws SQLException {
         String date1 = getDate(1);
         String date2 = getDate(3);
@@ -284,6 +309,10 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return intArray;
     }
 
+    /**
+     * Get Score over the Difficulty level.
+     * @return
+     */
     public int[] getScoreOverDiffLevel() {
         ResultSet results = null;
 
@@ -331,6 +360,11 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return intArray;
     }
 
+    /**
+     * GEnerate the Date
+     * @param months
+     * @return
+     */
     public String getDate(int months) {
         int pastMonths = months;
         LocalDateTime today = LocalDateTime.now();
@@ -350,97 +384,85 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         return decrementedDate;
     }
 
+    /**
+     * Insert the completed quiz results into the database.
+     * @param quizResult
+     */
     public void insertResults(Result quizResult) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        String insertResult = "INSERT INTO Result VALUES ('" + quizResult.getAndrewId() + "'," +
-                                                                             quizResult.getNoOfCorrectEasy() + "," +
-                                                                             quizResult.getNoOfCorrectMedium() + "," +
-                                                                             quizResult.getNoOfCorrectHard()+ "," +
-                                                                             quizResult.getTotalNoOfEasy() + "," +
-                                                                             quizResult.getTotalNoOfMedium() + "," +
-                                                                             quizResult.getTotalNoOfHard() + ",'" +
-                                                                             timeStamp + "'," +
-                                                                             quizResult.getGrade() + ",'" +
-                                                                             quizResult.getDifficultyLevel() + "'," +
-                                                                             quizResult.getScore() + ")" ;
-        
-       
+        String insertResult = "INSERT INTO Result VALUES ('" + quizResult.getAndrewId() + "',"
+                + quizResult.getNoOfCorrectEasy() + ","
+                + quizResult.getNoOfCorrectMedium() + ","
+                + quizResult.getNoOfCorrectHard() + ","
+                + quizResult.getTotalNoOfEasy() + ","
+                + quizResult.getTotalNoOfMedium() + ","
+                + quizResult.getTotalNoOfHard() + ",'"
+                + timeStamp + "',"
+                + quizResult.getGrade() + ",'"
+                + quizResult.getDifficultyLevel() + "',"
+                + quizResult.getScore() + ")";
+
         try {
-           // Connection connect = DriverManager.getConnection(url); //Create connection
+            // Connection connect = DriverManager.getConnection(url); //Create connection
             Statement statement = con.createStatement(); //Connect to DB
             statement.execute(insertResult);
-         }catch (SQLException e){
-             System.out.println("SQL Exception: " +e);
-         }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e);
+        }
     }
 
-   
-
-//    public ObservableList<PieChart.Data> getPieData(LocalDate fromDateString, LocalDate toDateString) {
-//
-//    }
-//
-//    public List<XYChart.Series> getBarSeries(LocalDate fromDateString, LocalDate toDateString) {
-//       
-//        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-//        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-//        series1.setName("highest scores over deifficulty level ");
-//        // set column name as easy,medium,hard and mix and pass all the value to it
-//        series1.getData().add(new XYChart.Data<>("Easy", array[0]));
-//        series1.getData().add(new XYChart.Data<>("Medium", array[1]));
-//        series1.getData().add(new XYChart.Data<>("Hard", array[2]));
-//        series1.getData().add(new XYChart.Data<>("Mix", array[3]));
-//        series2.setName("lowest scores over deifficulty level");
-//        series2.getData().add(new XYChart.Data<>("Easy", array[4]));
-//        series2.getData().add(new XYChart.Data<>("Medium", array[5]));
-//        series1.getData().add(new XYChart.Data<>("Hard", array[6]));
-//        series2.getData().add(new XYChart.Data<>("Mix", array[7]));
-//        List<XYChart.Series> seriesList = new ArrayList<>();
-//        seriesList.add(series1);
-//        seriesList.add(series2);
-//        return seriesList;
-//    
-//    }
-
-    public ArrayList getLineSeries(LocalDate fromDateString, LocalDate toDateString){
+    /**
+     * Get the Line graph of the student over a period of time
+     * @param fromDateString
+     * @param toDateString
+     * @return
+     */
+    public ArrayList getLineSeries(LocalDate fromDateString, LocalDate toDateString) {
         String andrewId = SignupLoginController.user.getAndrewId();
         ArrayList<Integer> data = new ArrayList<>();
         String fromDate = fromDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 00:00:00";
         String toDate = toDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 23:59:59";
-        try(Statement stmt = con.createStatement()){
+        try (Statement stmt = con.createStatement()) {
             String query = "Select Score from Result where andrewId='" + andrewId + "' and DT > '" + fromDate + "' && DT < '" + toDate + "'";
             ResultSet rs = stmt.executeQuery(query);
             int i = 0;
-            while(rs.next()){
+            while (rs.next()) {
                 i++;
                 int score = rs.getInt("Score");
                 data.add(score);
-                
+
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("SQLException " + e);
         }
         return data;
     }
 
+    /**
+     * Get a PieChart for a period of time with the number of Pass and Fails.
+     * @param fromDateString
+     * @param toDateString
+     * @return
+     */
     public int[] getNoPassandFall(LocalDate fromDateString, LocalDate toDateString) {
         int[] passFail = new int[2];
-            String andrewId = SignupLoginController.user.getAndrewId();
+        String andrewId = SignupLoginController.user.getAndrewId();
         ArrayList<Integer> data = new ArrayList<>();
         String fromDate = fromDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 00:00:00";
         String toDate = toDateString.format(DateTimeFormatter.ISO_DATE).toString() + " 23:59:59";
-        try(Statement stmt = con.createStatement()){
+        try (Statement stmt = con.createStatement()) {
             String query = "Select pass from Result where andrewId='" + andrewId + "' and DT > '" + fromDate + "' && DT < '" + toDate + "'";
             ResultSet rs = stmt.executeQuery(query);
             int i = 0;
-            while(rs.next()){
+            while (rs.next()) {
                 i++;
-                if(rs.getInt("pass") == 1)
+                if (rs.getInt("pass") == 1) {
                     passFail[0]++;
-                else
+                } else {
                     passFail[1]++;
+                }
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("SQLException " + e);
         }
         return passFail;

@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author katha
+ * Getter and setter methods for People class
  */
 public class People {
 

@@ -6,10 +6,18 @@
 package DAO;
 
 /**
- *
+ * Interface to create Table and Drop Table.
  * @author katha
  */
 public interface ICommonDAO extends AutoCloseable{
+
+    /**
+     * 
+     */
     void createTable();
+
+    /**
+     *
+     */
     void dropTable();
 }

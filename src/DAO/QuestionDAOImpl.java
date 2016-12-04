@@ -20,11 +20,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 /**
+ * This class is for the Questions package.
  *
  * @author katha
  */
 public class QuestionDAOImpl extends DAOJDBCImpl {
 
+    /**
+     * Code to create the table.
+     */
     @Override
     public void createTable() {
         try (Statement stmt = con.createStatement()) {
@@ -47,6 +51,14 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
         }
     }
 
+    /**
+     * Get file path from the user and add he questions to the DB.
+     *
+     * @param filepath
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public boolean addQuestions(String filepath) throws FileNotFoundException, IOException {
         System.out.println("Hello");
         try (Statement stmt = con.createStatement()) {
@@ -67,19 +79,26 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
                         + record.get(8) + "' ,'"
                         + record.get(9) + "' ,'"
                         + record.get(10) + "')";;
-                System.out.println(query);
+                // System.out.println(query);
                 stmt.execute(query);
             }
             System.out.println("Records inserted successfully!");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("SQL Exception" + e);
-            return false;
+            return false; //Return False if not all questions were added
         }
 
         return true;
-        
+
     }
 
+    /**
+     * Get the list of all questions for a particular Quiz at random.
+     *
+     * @param totalQuestions
+     * @param difficultyLevel
+     * @return ArrayList of Quiz.
+     */
     public ArrayList<Question> getQuestions(int totalQuestions, String difficultyLevel) {
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<ResultSet> rows = new ArrayList<>();
@@ -124,13 +143,16 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
                 question = new Question(questionType, questionDifficulty, questionDESC, options);
                 questions.add(question);
             }
-            Collections.shuffle(questions);
+            Collections.shuffle(questions); //Shuffle the quiz
         } catch (SQLException e) {
             System.out.println("SQL EXCEPTION" + e);
         }
-        return questions;
+        return questions; //Return all the questions.
     }
 
+    /**
+     * Code to drop the table.
+     */
     @Override
     public void dropTable() {
         try (Statement stmt = con.createStatement()) {
@@ -150,6 +172,13 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
         }
     }
 
+    /**
+     * Method to get the total Number of Questions.
+     *
+     * @param difficulty
+     * @return integer indicating how many questions of that particular
+     * difficulty exist in the database.
+     */
     public int getTotalNumberOfQuestions(String difficulty) {
         int totalQuestions = 0;
         String query = "";
@@ -186,6 +215,6 @@ public class QuestionDAOImpl extends DAOJDBCImpl {
             System.out.println("SQL Exception" + e);
         }
         System.out.println("Total Questions = " + totalQuestions);
-        return totalQuestions;
+        return totalQuestions; //Return Total Number of Questions
     }
 }

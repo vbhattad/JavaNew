@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author katha
+ * Getter and Setter for Result
  */
 public class Result {
 

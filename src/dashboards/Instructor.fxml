@@ -40,9 +40,9 @@
                         <Image url="@../Media/File_Added.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lFile" layoutX="510.0" layoutY="555.0" text="File added successfully." textFill="#c9c9c9">
+                  <Label fx:id="lFile" layoutX="362.0" layoutY="396.0" prefHeight="55.0" prefWidth="418.0" text="File added successfully." textFill="#c9c9c9">
                      <font>
-                        <Font name="Helvetica Neue Thin" size="41.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
                   <Button fx:id="add" layoutX="421.0" layoutY="337.0" mnemonicParsing="false" onAction="#addFile" prefHeight="41.0" prefWidth="126.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Add" textFill="WHITE">
@@ -55,7 +55,7 @@
                         <Font name="Helvetica Neue Light" size="64.0" />
                      </font>
                   </Label>
-                  <Label layoutX="868.0" layoutY="24.0" text="Logout" textFill="#b9b9b9">
+                  <Label fx:id="lLogout" layoutX="868.0" layoutY="24.0" onMouseClicked="#logout" text="Logout" textFill="#b9b9b9">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -67,7 +67,7 @@
          <content>
             <AnchorPane fx:id="GraphScene1" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1280.0">
                <children>
-                  <Label fx:id="logout" layoutX="869.0" layoutY="22.0" onMouseClicked="#logout" text="Logout" textFill="#282828">
+                  <Label fx:id="lrLogout" layoutX="869.0" layoutY="22.0" onMouseClicked="#logout" text="Logout" textFill="#282828">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -108,7 +108,7 @@
                         </BarChart>
                      </children>
                   </Pane>
-                  <Button fx:id="ButtonPDF1" layoutX="241.0" layoutY="20.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="39.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save as PDF" textFill="WHITESMOKE">
+                  <Button fx:id="ButtonPDF1" disable="true" layoutX="241.0" layoutY="20.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="39.0" prefWidth="167.0" style="-fx-background-color: #2c8e6a; -fx-background-radius: 10 10 10 10;" text="Save as PDF" textFill="WHITESMOKE">
                      <font>
                         <Font name="Helvetica Neue Light" size="20.0" />
                      </font>

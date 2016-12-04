@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author katha
+ * Getter and setter for question
  */
 public class Question {
 

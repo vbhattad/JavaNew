@@ -37,30 +37,58 @@ public class AdminController implements Initializable {
     @FXML
     public Button instructorAddButton;
     
+    /**
+     *
+     */
     @FXML
     public Button peopleRemoveButton;
     
+    /**
+     *
+     */
     @FXML
     public TextField insAndrewId;
     
+    /**
+     *
+     */
     @FXML
     public TextField insFirstName;
     
+    /**
+     *
+     */
     @FXML
     public TextField insLastName;
     
+    /**
+     *
+     */
     @FXML
     public TextField insPassword;
     
+    /**
+     *
+     */
     @FXML
     public TextField removePeopleTextBox;
     
+    /**
+     *
+     */
     @FXML
     public Label lAdd;
     
+    /**
+     *
+     */
     @FXML
     public Label lRemove;
     
+    /**
+     * Removing user from the Database
+     * @param event 
+     */
     @FXML
     private void peopleRemove(ActionEvent event){
      PeopleDAOImpl people = new PeopleDAOImpl();
@@ -71,7 +99,10 @@ public class AdminController implements Initializable {
      }
       
     }
-    
+    /**
+     * To add a Instructor to the Database
+     * @param event 
+     */
     @FXML
     private void instructorAdd(ActionEvent event){
          UserSignUp addFaculty = new UserSignUp();
@@ -81,7 +112,9 @@ public class AdminController implements Initializable {
            lAdd.setText("Add unsuccessful.");
        }
     }
-    
+    /**
+     * Implementing the LogOut.
+     */
     @FXML
     private void logout() {
         Stage stage = (Stage) instructorAddButton.getScene().getWindow();
