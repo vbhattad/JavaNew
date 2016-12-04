@@ -6,6 +6,7 @@
 package dashboards;
 
 import DAO.QuestionDAOImpl;
+import DAO.ResultDAOImpl;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,9 +39,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -52,7 +58,7 @@ import javafx.stage.Stage;
  * @author darshanmohan
  */
 public class InstructorController implements Initializable {
-    
+
     @FXML
     private Button ButtonPDF;
     @FXML
@@ -71,7 +77,7 @@ public class InstructorController implements Initializable {
      private Pane Pass;
      @FXML
      private Pane Ave;*/
-    
+
     @FXML
     private Button chart1Button;
 
@@ -92,6 +98,12 @@ public class InstructorController implements Initializable {
     @FXML
     public Button bStartQuiz;
 
+    @FXML
+    public ComboBox studentdropdown;
+
+    @FXML
+    public LineChart insLineChart;
+
     /**
      *
      */
@@ -103,7 +115,9 @@ public class InstructorController implements Initializable {
      */
     @FXML
     public Button add;
-    
+
+    ArrayList<String> allStudents;
+
     @FXML
     private void logout() {
         lFile.setText("");
@@ -114,14 +128,14 @@ public class InstructorController implements Initializable {
             page = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("QuizApp/HomePage.fxml"));
             Scene scene = new Scene(page);
             stage.setScene(scene);
-            
+
             stage.setResizable(false);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void browseFile() {
         lFile.setText("");
@@ -137,21 +151,21 @@ public class InstructorController implements Initializable {
             System.out.println("");
         }
         chosenFile = file.getAbsolutePath();
-        
+
         tfFile.setText(file.getParent() + "/" + file.getName());
-        
+
     }
-    
+
     @FXML
     private void addFile() throws FileNotFoundException {
-        
+
         boolean isSuccessful = false;
-        
+
         try {
             QuestionDAOImpl questionsDAO = new QuestionDAOImpl();
-            
+
             isSuccessful = questionsDAO.addQuestions(chosenFile);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(InstructorController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,7 +173,7 @@ public class InstructorController implements Initializable {
             lFile.setText("File Added Successfully");
             // imgFile.setImage(new Image("../Media/File_Added.png"));
         } else {
-            
+
             lFile.setText("Error uploading file. Check columns");
             // imgFile.setImage(new Image("../Media/File_Error.png"));
 
@@ -169,25 +183,29 @@ public class InstructorController implements Initializable {
     NumOfTestDuringTimeC n = new NumOfTestDuringTimeC();
     PassAndFailC p = new PassAndFailC();
     ScoreOverDiffLevelC s = new ScoreOverDiffLevelC();
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lFile.setText("");
         // imgFile.setImage(new Image(""));
         lProfessor.setText("Welcome, " + SignupLoginController.user.getFirstName());
+        ResultDAOImpl dao = new ResultDAOImpl();
+        allStudents = dao.getUniqueStudents();
     }
-    
+
     @FXML
     private Label lProfessor;
-    
+
     @FXML
     private BarChart barChart;
-    
+
     @FXML
     private Button ButtonPDF1;
-    
+
     @FXML
     private void showChart1(ActionEvent event) throws SQLException {
+        insLineChart.setVisible(false);
+        studentdropdown.setVisible(false);
         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
@@ -196,11 +214,37 @@ public class InstructorController implements Initializable {
         barChart.getData().clear();
         barChart.setAnimated(true);
         barChart.getData().addAll(series1);
-        
+
     }
-    
+
+    @FXML
+    private void showChart5(ActionEvent event) {
+        ResultDAOImpl result = new ResultDAOImpl();
+        barChart.setVisible(false);
+        insLineChart.getData().clear();
+        insLineChart.setVisible(true);
+        insLineChart.setTitle("Scores of all the tests taken for Student: " + studentdropdown.getSelectionModel().getSelectedItem().toString());
+
+        ArrayList<Integer> data = new ArrayList<>();
+        data = result.getNoPassandFallForStudent(studentdropdown.getSelectionModel().getSelectedItem().toString());
+        System.out.println(data);
+        XYChart.Series series1 = new XYChart.Series();
+
+        insLineChart.getXAxis().setLabel("Number of Tests");
+        int x = 0;
+        for (Integer i : data) {
+            x++;
+            series1.getData().add(new XYChart.Data(Integer.toString(x), i));
+        }
+
+        insLineChart.getData().addAll(series1);
+        ButtonPDF1.setDisable(false);
+    }
+
     @FXML
     private void showChart2(ActionEvent event) throws SQLException {
+        insLineChart.setVisible(false);
+        studentdropdown.setVisible(false);
         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
@@ -209,11 +253,13 @@ public class InstructorController implements Initializable {
         barChart.getData().clear();
         barChart.setAnimated(true);
         barChart.getData().addAll(series1);
-        
+
     }
-    
+
     @FXML
     private void showChart3(ActionEvent event) throws SQLException {
+        insLineChart.setVisible(false);
+        studentdropdown.setVisible(false);
         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         List<XYChart.Series> seriesList = new ArrayList<>();
@@ -223,9 +269,11 @@ public class InstructorController implements Initializable {
         barChart.setAnimated(true);
         barChart.getData().addAll(seriesList.get(0), seriesList.get(1));
     }
-    
+
     @FXML
     private void showChart4(ActionEvent event) throws SQLException {
+        insLineChart.setVisible(false);
+        studentdropdown.setVisible(false);
         ButtonPDF1.setDisable(false);
         barChart.setVisible(true);
         XYChart.Series series1 = new XYChart.Series();
@@ -250,7 +298,7 @@ public class InstructorController implements Initializable {
     private void exportPDF(ActionEvent event) throws FileNotFoundException, IOException {
         Image img4 = paneToPDF.snapshot(null, null);
         ImageData imgData4;
-        com.itextpdf.layout.element.Image pdfImg4;        
+        com.itextpdf.layout.element.Image pdfImg4;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save PDF");
         File file1 = fileChooser.showSaveDialog(paneToPDF.getScene().getWindow());
@@ -267,7 +315,17 @@ public class InstructorController implements Initializable {
                 System.out.println(ex.getMessage());
             }
         }
-        
+
     }
-    
+
+    @FXML
+    private void setdropdown(ActionEvent e) {
+        barChart.setVisible(false);
+                studentdropdown.setVisible(true);
+        ObservableList<String> options
+                = FXCollections.observableArrayList(allStudents);
+        studentdropdown.setItems(options);
+
+    }
+
 }
