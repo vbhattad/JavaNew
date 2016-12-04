@@ -23,6 +23,7 @@ import javafx.scene.chart.XYChart;
 
 /**
  * Class to perform the result related implementation with the Database.
+ *
  * @author katha
  */
 public class ResultDAOImpl extends DAOJDBCImpl {
@@ -75,6 +76,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Get the total number of Correct and Wrong Answers.
+     *
      * @param id
      * @param date
      * @return
@@ -258,6 +260,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Getting Average Scores.
+     *
      * @return @throws SQLException
      */
     public double[] getAveScore() throws SQLException {
@@ -311,6 +314,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Get Score over the Difficulty level.
+     *
      * @return
      */
     public int[] getScoreOverDiffLevel() {
@@ -362,6 +366,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * GEnerate the Date
+     *
      * @param months
      * @return
      */
@@ -386,6 +391,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Insert the completed quiz results into the database.
+     *
      * @param quizResult
      */
     public void insertResults(Result quizResult) {
@@ -413,6 +419,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Get the Line graph of the student over a period of time
+     *
      * @param fromDateString
      * @param toDateString
      * @return
@@ -440,6 +447,7 @@ public class ResultDAOImpl extends DAOJDBCImpl {
 
     /**
      * Get a PieChart for a period of time with the number of Pass and Fails.
+     *
      * @param fromDateString
      * @param toDateString
      * @return
@@ -467,4 +475,36 @@ public class ResultDAOImpl extends DAOJDBCImpl {
         }
         return passFail;
     }
+
+    public ArrayList<String> getUniqueStudents() {
+        ArrayList<String> allStudents = new ArrayList<>();
+        try (Statement stmt = con.createStatement()) {
+            String query = "Select distinct andrewid from PEOPLE where membertype ='s' ";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                allStudents.add(rs.getString("andrewid"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException " + e);
+        }
+        return allStudents;
+    }
+
+    public ArrayList<Integer> getNoPassandFallForStudent(String andrewid) {
+        ArrayList<Integer> data = new ArrayList<>();
+        try (Statement stmt = con.createStatement()) {
+            String query = "Select Score from Result where andrewId='" + andrewid + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            int i = 0;
+            while (rs.next()) {
+                i++;
+                int score = rs.getInt("Score");
+                data.add(score);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException " + e);
+        }
+        return data;
+    }
+
 }
