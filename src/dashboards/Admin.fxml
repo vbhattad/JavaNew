@@ -66,12 +66,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="269.0" layoutY="358.0" prefHeight="26.0" prefWidth="441.0" textFill="WHITE">
+      <Label fx:id="lAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="269.0" layoutY="358.0" prefHeight="30.0" prefWidth="441.0" textFill="WHITE" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="474.0" prefHeight="26.0" prefWidth="299.0" textFill="WHITE">
+      <Label fx:id="lRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="474.0" prefHeight="26.0" prefWidth="449.0" textFill="WHITE" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>

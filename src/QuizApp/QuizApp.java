@@ -24,6 +24,8 @@ public class QuizApp extends Application {
         AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         Scene scene = new Scene(page);
         stage.setWidth(960);
+        stage.setHeight(535);
+        stage.setResizable(false);
          stage.getIcons().add(new Image("Media/icon_quiz.png"));
         stage.setScene(scene);
 

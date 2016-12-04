@@ -23,6 +23,10 @@ public class Dashboards extends Application {
         
         Scene scene = new Scene(root);
        
+        stage.setWidth(960);
+        stage.setHeight(535);
+        stage.setResizable(false);
+        
         stage.setScene(scene);
         stage.show();
     }

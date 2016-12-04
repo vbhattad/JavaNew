@@ -54,14 +54,14 @@
                                         <Font name="Helvetica Neue" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <Label layoutX="427.0" layoutY="163.0" prefHeight="36.0" prefWidth="147.0" text="Difficulty Level" textFill="#404040">
+                                <Label layoutX="435.0" layoutY="163.0" prefHeight="36.0" prefWidth="147.0" text="Difficulty Level" textFill="#a8a8a8">
                                     <font>
-                                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                                        <Font name="Helvetica Neue Light" size="20.0" />
                                     </font>
                                 </Label>         
-                                <Label layoutX="401.0" layoutY="296.0" prefHeight="34.0" prefWidth="214.0" text="Number of Questions:" textFill="#404040">
+                                <Label layoutX="401.0" layoutY="296.0" prefHeight="34.0" prefWidth="214.0" text="Number of Questions:" textFill="#a8a8a8">
                                     <font>
-                                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                                        <Font name="Helvetica Neue Light" size="20.0" />
                                     </font>
                                 </Label>
                                 <Slider fx:id="sNumberOfQuestions" layoutX="342.0" layoutY="351.0" min="1.0" opacity="0.81" prefHeight="14.0" prefWidth="336.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 10 10; -fx-text-fill: white;" stylesheets="@Student.css" />
